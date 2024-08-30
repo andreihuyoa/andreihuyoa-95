@@ -1,2 +1,8 @@
 # andreihuyoa-95
- portfolio
+
+portfolio
+
+## Frameworks and Libraries
+
+- React
+- Tailwind CSS
