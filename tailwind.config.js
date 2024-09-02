@@ -16,6 +16,8 @@ export default {
       },
       fontFamily: {
         MS95: ["MSSansSerif", "sans-serif"],
+        MSW98UIRegular: ["MSW98UIRegular", "sans-serif"],
+        MSW98UIBold: ["MSW98UIBold", "sans-serif"],
       },
     },
   },

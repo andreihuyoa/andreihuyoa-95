@@ -6,3 +6,4 @@ portfolio
 
 - React
 - Tailwind CSS
+- Interact js
