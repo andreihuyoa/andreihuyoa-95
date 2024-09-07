@@ -8,11 +8,10 @@ const Biography = () => {
 
   return (
     //   some kind of component to wrap it, preferably a window like component
-    <div className="bg-95-darkgray px-2">
-      <h1>Biography</h1>
+    <div className="bg-95-gray px-12 py-6">
       <div>
         {/* Uncomment nalang, ang laki eh */}
-        {/* <img src={imageKo} alt="Andrei Huyo-a" className="w-full h-auto" /> */}
+        <img src={imageKo} alt="Andrei Huyo-a" className="w-full h-auto" />
         <h2 className="font-MSW98UIBold text-2xl py-5">Carl Andrei H. Del Rosario</h2>
         <h4 className="text-gray-600 font-medium text-xs">
           Computer Science Undergrad @ Adamson University • Lokalista
