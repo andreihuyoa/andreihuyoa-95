@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
-const Window = ({ icon, title, windowId, onClose, children }) => {
+const Window = ({ icon, title, windowId, onClose, onMinimize, children }) => {
   const windowRef = useRef(null);
   const label = useRef(null);
-  const position = useRef({ x: 128, y: 80 }); //initial position
+  const position = useRef({ x: 128, y: 80 }); //initial window position
 
-  const [size, setSize] = useState({ width: 400, height: 400 });
+  const [size, setSize] = useState({ width: 500, height: 800 });
   const [dragging, setIsDragging] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+
   const prevSize = useRef(size);
 
   const handleMaximize = () => {
@@ -23,10 +23,6 @@ const Window = ({ icon, title, windowId, onClose, children }) => {
       position.current = { x: 0, y: 0 };
     }
     setIsMaximized(!isMaximized);
-  };
-
-  const handleMinimize = () => {
-    setIsMinimized(true);
   };
 
   useEffect(() => {
@@ -77,7 +73,7 @@ const Window = ({ icon, title, windowId, onClose, children }) => {
       },
       modifiers: [
         interact.modifiers.restrictSize({
-          min: { width: 400, height: 400 },
+          min: { width: 600, height: 600 },
           max: {
             width: document.getElementById("screen").clientWidth - position.current.x,
             height: document.getElementById("screen").clientHeight - position.current.y,
@@ -86,8 +82,6 @@ const Window = ({ icon, title, windowId, onClose, children }) => {
       ],
     });
   }, [size]);
-
-  if (isMinimized) return null;
 
   const windowStyle = {
     width: `${size.width}px`,
@@ -113,7 +107,7 @@ const Window = ({ icon, title, windowId, onClose, children }) => {
 
         <div className="">
           {/* make this buttons as components later */}
-          <button onClick={handleMinimize} className="text-white text-xs px-2">
+          <button onClick={onMinimize} className="text-white text-xs px-2">
             -
           </button>
           <button onClick={handleMaximize} className="text-white text-xs px-2">
