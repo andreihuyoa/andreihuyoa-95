@@ -121,7 +121,7 @@ const Window = ({
         <div className="">
           {/* make this buttons as components later */}
           <button onClick={onMinimize} className="text-white text-xs px-2">
-            -
+            —
           </button>
           <button onClick={handleMaximize} className="text-white text-xs px-2">
             {isMaximized ? "🗗" : "🗖"}
@@ -131,7 +131,7 @@ const Window = ({
           </button>
         </div>
       </div>
-      <div className="p-2 overflow-auto h-full">{children}</div>
+      <div className="p-1 pb-8 overflow-auto h-full">{children}</div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import InputField from "../components/InputField";
 import WindowHeader from "../components/WindowHeader";
 
 const Mail = () => {
@@ -15,27 +16,29 @@ const Mail = () => {
   };
 
   return (
-    <>
-      <WindowHeader className="mb-2" />
+    <div className="flex flex-col h-full overflow-auto">
+      <WindowHeader className="mb-2" onClick={handleSendEmail} title="Send" />
 
       {/* Fields */}
-      <div className="flex flex-col *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
+      <div className="flex-1 flex p-1 flex-col overflow-auto *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
         {/* Subject Updates */}
-        <div className="text-lg font-bold mb-2 overflow-auto">{subject || "New Message"}</div>
+        <div className="text-xl font-MSW98UIBold tracking-tighter mb-2 overflow-auto">
+          {subject || "New Message"}
+        </div>
 
         {/* To */}
         <div>
-          <label htmlFor="">To:</label>
+          <label>To:</label>
           <p className="bg-95-cyan rounded-md px-1">Andrei Huyo-a</p>
         </div>
 
         {/* Subject */}
         <div className="">
-          <label htmlFor="subject" className="block text-sm">
+          <label htmlFor="Subject" className="">
             Subject:
           </label>
-          <input
-            name="subject"
+          <InputField
+            name="Subject"
             type="text"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
@@ -45,35 +48,30 @@ const Mail = () => {
 
         {/* From */}
         <div>
-          <label htmlFor="" className="block text-sm">
+          <label htmlFor="From" className="text-base">
             From:
           </label>
-          <input
+          <InputField
+            name="From"
             type="text"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
-            placeholder="your email"
+            placeholder="Your email"
           />
         </div>
 
         {/* Message */}
-        <div className="">
-          <label htmlFor="" className="block text-sm">
-            Message:
-          </label>
-          <input
-            type="text"
+        <div className="flex-1 overflow-auto border-none">
+          <InputField
+            name="Message"
+            type="textarea"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="message!"
+            placeholder="Tell me something!"
           />
         </div>
       </div>
-
-      <button onClick={handleSendEmail} className="bg-blue-500 text-white p-2 mt-2">
-        Send Email
-      </button>
-    </>
+    </div>
   );
 };
 
