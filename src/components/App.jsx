@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import "../index.css";
+
 import TaskBar from "./TaskBar";
 import StartButton from "./StartButton";
 import StartMenu from "./StartMenu";
-import Biography from "../views/Biography";
 import DesktopIcon from "./DesktopIcon";
 import Window from "./Window";
+
+import Biography from "../views/Biography";
+import Resume from "../views/Resume";
 
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [openWindows, setOpenWindows] = useState([]);
+  const [zIndexCounter, setZIndexCounter] = useState(1);
 
   const toggleStartMenu = () => {
     setIsStartMenuOpen(!isStartMenuOpen);
@@ -17,12 +21,28 @@ const App = () => {
 
   //Open a window by adding it sa openWindows array if di pa open
   const openWindow = (windowId, label, content) => {
-    if (!openWindows.some((win) => win.windowId === windowId)) {
+    const existingWindow = openWindows.find((win) => win.windowId === windowId);
+
+    if (!existingWindow) {
+      // add new window window with zIndex
       setOpenWindows((prevWindows) => [
         ...prevWindows,
-        { windowId, label, content, minimized: false },
+        { windowId, label, content, zIndex: zIndexCounter, minimized: false },
       ]);
+      setZIndexCounter((prev) => prev + 1);
+    } else {
+      //if window is open just bring it sa front
+      bringToFront(windowId);
     }
+  };
+
+  const bringToFront = (windowId) => {
+    setOpenWindows((prevWindows) =>
+      prevWindows.map((win) =>
+        win.windowId === windowId ? { ...win, zIndex: zIndexCounter } : win
+      )
+    );
+    setZIndexCounter((prev) => prev + 1);
   };
 
   // Close a window by removing it from the openWindows array
@@ -51,11 +71,16 @@ const App = () => {
       {/* Desktop Area */}
       <div className="flex-grow">
         {/* Folder Icons */}
+
         <DesktopIcon
-          label="Biography"
+          label="Resume"
           onDoubleClick={() => openWindow("biography", "Biography", <Biography />)}
         />
-        <DesktopIcon />
+
+        <DesktopIcon
+          label="Biography"
+          onDoubleClick={() => openWindow("resume", "Resume", <Resume />)}
+        />
       </div>
 
       <TaskBar>
@@ -64,6 +89,7 @@ const App = () => {
         {openWindows.map((win) => (
           <button
             key={win.windowId}
+            // onClick={() => bringToFront(win.windowId)}
             onClick={() => toggleMinimizedWindow(win.windowId)}
             className="text-xs text-white px-2"
           >
@@ -77,19 +103,20 @@ const App = () => {
 
       {/* Opened Folders/Windows */}
 
-      {openWindows.map((win) =>
-        !win.minimized ? (
-          <Window
-            key={win.windowId}
-            windowId={win.windowId}
-            title={win.label}
-            onClose={() => closeWindow(win.windowId)}
-            onMinimize={() => minimizeWindow(win.windowId)}
-          >
-            {win.content}
-          </Window>
-        ) : null
-      )}
+      {openWindows.map((win) => (
+        <Window
+          key={win.windowId}
+          windowId={win.windowId}
+          title={win.label}
+          zIndex={win.zIndex}
+          onClose={() => closeWindow(win.windowId)}
+          onMinimize={() => minimizeWindow(win.windowId)}
+          onClick={() => bringToFront(win.windowId)}
+          isMinimized={win.minimized}
+        >
+          {win.content}
+        </Window>
+      ))}
     </div>
   );
 };

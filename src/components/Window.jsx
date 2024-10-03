@@ -1,13 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
-const Window = ({ icon, title, windowId, onClose, onMinimize, children }) => {
+const Window = ({
+  icon,
+  title,
+  windowId,
+  onClose,
+  onClick,
+  onMinimize,
+  isMinimized,
+  children,
+  zIndex,
+}) => {
   const windowRef = useRef(null);
   const label = useRef(null);
   const position = useRef({ x: 128, y: 80 }); //initial window position
 
   const [size, setSize] = useState({ width: 500, height: 800 });
-  const [dragging, setIsDragging] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
 
   const prevSize = useRef(size);
@@ -73,7 +83,7 @@ const Window = ({ icon, title, windowId, onClose, onMinimize, children }) => {
       },
       modifiers: [
         interact.modifiers.restrictSize({
-          min: { width: 600, height: 600 },
+          min: { width: 500, height: 500 },
           max: {
             width: document.getElementById("screen").clientWidth - position.current.x,
             height: document.getElementById("screen").clientHeight - position.current.y,
@@ -87,6 +97,8 @@ const Window = ({ icon, title, windowId, onClose, onMinimize, children }) => {
     width: `${size.width}px`,
     height: `${size.height}px`,
     transform: `translate(${position.current.x}px, ${position.current.y}px)`,
+    zIndex: zIndex,
+    display: isMinimized ? "none" : "block",
   };
 
   return (
@@ -95,6 +107,7 @@ const Window = ({ icon, title, windowId, onClose, onMinimize, children }) => {
       id={windowId}
       style={windowStyle}
       className="absolute overflow-hidden border-2 border-95-white border-r-95-black border-b-95-black bg-95-gray shadow-lg"
+      onClick={onClick} //bringToFront onClick func
     >
       <div
         ref={label}
