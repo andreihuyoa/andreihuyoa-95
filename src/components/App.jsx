@@ -9,6 +9,7 @@ import Window from "./Window";
 
 import Biography from "../views/Biography";
 import Resume from "../views/Resume";
+import Mail from "../views/Mail";
 
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -81,6 +82,8 @@ const App = () => {
           label="Biography"
           onDoubleClick={() => openWindow("resume", "Resume", <Resume />)}
         />
+
+        <DesktopIcon label="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
       </div>
 
       <TaskBar>
@@ -89,7 +92,6 @@ const App = () => {
         {openWindows.map((win) => (
           <button
             key={win.windowId}
-            // onClick={() => bringToFront(win.windowId)}
             onClick={() => toggleMinimizedWindow(win.windowId)}
             className="text-xs text-white px-2"
           >
