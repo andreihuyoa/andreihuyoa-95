@@ -14,12 +14,10 @@ const Window = ({
 }) => {
   const windowRef = useRef(null);
   const label = useRef(null);
-  const position = useRef({ x: 128, y: 80 }); //initial window position
+  const position = useRef({ x: 128, y: 80 }); // initial window position
 
   const [size, setSize] = useState({ width: 500, height: 800 });
-  const [isDragging, setIsDragging] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
-
   const prevSize = useRef(size);
 
   const handleMaximize = () => {
@@ -37,34 +35,49 @@ const Window = ({
 
   useEffect(() => {
     const windowElement = windowRef.current;
+    let offset = { x: 0, y: 0 };
 
     interact(label.current)
       .draggable({
         listeners: {
+          start(event) {
+            // Capture the initial offset between mouse and window
+            const { x, y } = position.current;
+            offset.x = event.clientX - x;
+            offset.y = event.clientY - y;
+          },
           move(event) {
-            position.current.x += event.dx;
-            position.current.y += event.dy;
+            // position based on the mouse movement and offset
+            position.current.x = event.clientX - offset.x;
+            position.current.y = event.clientY - offset.y;
 
+            //apply new pos to the window
+            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          },
+          end(event) {
+            //bounds
             const screenRect = document.getElementById("screen").getBoundingClientRect();
-            const windowRect = windowElement.getBoundingClientRect();
+            const minX = 0;
+            const maxX = screenRect.width - size.width;
+            const minY = 0;
+            const maxY = screenRect.height - size.height;
 
-            // Prevent moving outside left and top boundaries
-            position.current.x = Math.max(position.current.x, 0);
-            position.current.y = Math.max(position.current.y, 0);
-
-            // Prevent moving outside right and bottom boundaries
-            position.current.x = Math.min(position.current.x, screenRect.width - windowRect.width);
-            position.current.y = Math.min(
-              position.current.y,
-              screenRect.height - windowRect.height
-            );
+            //clamp pos within bounds
+            position.current.x = Math.max(minX, Math.min(maxX, position.current.x));
+            position.current.y = Math.max(minY, Math.min(maxY, position.current.y));
 
             windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
         },
+        modifiers: [
+          interact.modifiers.restrict({
+            restriction: "parent", //allows drag but restrict final position on mouseup
+            endOnly: true,
+          }),
+        ],
       })
-      .on("dragstart", () => setIsDragging(true))
-      .on("dragend", () => setIsDragging(false));
+      .on("dragstart", () => windowElement.classList.add("dragging"))
+      .on("dragend", () => windowElement.classList.remove("dragging"));
 
     interact(windowElement).resizable({
       edges: { left: true, right: true, bottom: true, top: false },
@@ -75,6 +88,7 @@ const Window = ({
             height: event.rect.height,
           });
 
+          // Update position based on resizing movement
           position.current.x += event.deltaRect.left;
           position.current.y += event.deltaRect.top;
 
@@ -85,8 +99,8 @@ const Window = ({
         interact.modifiers.restrictSize({
           min: { width: 500, height: 500 },
           max: {
-            width: document.getElementById("screen").clientWidth - position.current.x,
-            height: document.getElementById("screen").clientHeight - position.current.y,
+            width: document.getElementById("screen").clientWidth,
+            height: document.getElementById("screen").clientHeight,
           },
         }),
       ],
@@ -107,7 +121,7 @@ const Window = ({
       id={windowId}
       style={windowStyle}
       className="absolute overflow-hidden border-2 border-95-white border-r-95-black border-b-95-black bg-95-gray shadow-lg"
-      onClick={onClick} //bringToFront onClick func
+      onClick={onClick} // bringToFront onClick func
     >
       <div
         ref={label}
@@ -119,7 +133,6 @@ const Window = ({
         </div>
 
         <div className="">
-          {/* make this buttons as components later */}
           <button onClick={onMinimize} className="text-white text-xs px-2">
             —
           </button>
