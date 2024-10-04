@@ -11,12 +11,14 @@ import Biography from "../views/Biography";
 import Resume from "../views/Resume";
 import Mail from "../views/Mail";
 
+import BiographyIcon from "../assets/WinIcons/workspace.png";
+
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [openWindows, setOpenWindows] = useState([
     {
       windowId: "biography",
-      label: "Biography",
+      title: "Biography",
       content: <Biography />,
       zIndex: 1,
       minimized: false,
@@ -29,14 +31,14 @@ const App = () => {
   };
 
   //Open a window by adding it sa openWindows array if di pa open
-  const openWindow = (windowId, label, content) => {
+  const openWindow = (windowId, title, content) => {
     const existingWindow = openWindows.find((win) => win.windowId === windowId);
 
     if (!existingWindow) {
       // add new window window with zIndex
       setOpenWindows((prevWindows) => [
         ...prevWindows,
-        { windowId, label, content, zIndex: zIndexCounter, minimized: false },
+        { windowId, title, content, zIndex: zIndexCounter, minimized: false },
       ]);
       setZIndexCounter((prev) => prev + 1);
     } else {
@@ -82,16 +84,17 @@ const App = () => {
         {/* Folder Icons */}
 
         <DesktopIcon
-          label="Biography"
+          icon={BiographyIcon}
+          title="Biography"
           onDoubleClick={() => openWindow("biography", "Biography", <Biography />)}
         />
 
         <DesktopIcon
-          label="Résumé"
+          title="Résumé"
           onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />)}
         />
 
-        <DesktopIcon label="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
+        <DesktopIcon title="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
       </div>
 
       <TaskBar>
@@ -103,7 +106,7 @@ const App = () => {
             onClick={() => toggleMinimizedWindow(win.windowId)}
             className="text-xs text-white px-2"
           >
-            {win.label}
+            {win.title}
           </button>
         ))}
       </TaskBar>
@@ -117,7 +120,7 @@ const App = () => {
         <Window
           key={win.windowId}
           windowId={win.windowId}
-          title={win.label}
+          title={win.title}
           zIndex={win.zIndex}
           onClose={() => closeWindow(win.windowId)}
           onMinimize={() => minimizeWindow(win.windowId)}

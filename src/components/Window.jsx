@@ -11,10 +11,11 @@ const Window = ({
   isMinimized,
   children,
   zIndex,
+  initialPos,
 }) => {
   const windowRef = useRef(null);
-  const label = useRef(null);
-  const position = useRef({ x: 128, y: 80 }); // initial window position
+  const title = useRef(null);
+  const position = useRef(initialPos || { x: 128, y: 60 }); // initial window position
 
   const [size, setSize] = useState({ width: 500, height: 800 });
   const [isMaximized, setIsMaximized] = useState(false);
@@ -24,7 +25,7 @@ const Window = ({
     const screenRect = document.getElementById("screen").getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
-      position.current = { x: 128, y: 80 };
+      position.current = initialPos || { x: 128, y: 80 };
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -37,7 +38,7 @@ const Window = ({
     const windowElement = windowRef.current;
     let offset = { x: 0, y: 0 };
 
-    interact(label.current)
+    interact(title.current)
       .draggable({
         listeners: {
           start(event) {
@@ -124,7 +125,7 @@ const Window = ({
       onClick={onClick} // bringToFront onClick func
     >
       <div
-        ref={label}
+        ref={title}
         className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-auto"
       >
         <div>
