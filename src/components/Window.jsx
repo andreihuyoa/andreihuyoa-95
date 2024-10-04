@@ -14,7 +14,7 @@ const Window = ({
   initialPos,
 }) => {
   const windowRef = useRef(null);
-  const title = useRef(null);
+  const label = useRef(null);
   const position = useRef(initialPos || { x: 128, y: 60 }); // initial window position
 
   const [size, setSize] = useState({ width: 500, height: 800 });
@@ -25,6 +25,7 @@ const Window = ({
     const screenRect = document.getElementById("screen").getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
+      //change this to where last dragged instead of default
       position.current = initialPos || { x: 128, y: 80 };
     } else {
       prevSize.current = size;
@@ -38,7 +39,7 @@ const Window = ({
     const windowElement = windowRef.current;
     let offset = { x: 0, y: 0 };
 
-    interact(title.current)
+    interact(label.current)
       .draggable({
         listeners: {
           start(event) {
@@ -125,8 +126,8 @@ const Window = ({
       onClick={onClick} // bringToFront onClick func
     >
       <div
-        ref={title}
-        className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-auto"
+        ref={label}
+        className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
       >
         <div>
           <img src={icon} alt="" />

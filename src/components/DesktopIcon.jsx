@@ -1,10 +1,9 @@
 import React from "react";
 
-const DesktopIcon = ({ icon, title, onClick, onDoubleClick }) => {
+const DesktopIcon = ({ icon, title, onDoubleClick }) => {
   return (
     <div
       className="flex flex-col items-center w-20 p-3 m-4  cursor-pointer"
-      onClick={onClick}
       onDoubleClick={onDoubleClick}
     >
       <img
