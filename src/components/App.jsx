@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
 
 import TaskBar from "./TaskBar";
@@ -13,7 +13,15 @@ import Mail from "../views/Mail";
 
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
-  const [openWindows, setOpenWindows] = useState([]);
+  const [openWindows, setOpenWindows] = useState([
+    {
+      windowId: "biography",
+      label: "Biography",
+      content: <Biography />,
+      zIndex: 1,
+      minimized: false,
+    },
+  ]);
   const [zIndexCounter, setZIndexCounter] = useState(1);
 
   const toggleStartMenu = () => {
@@ -74,13 +82,13 @@ const App = () => {
         {/* Folder Icons */}
 
         <DesktopIcon
-          label="Resume"
+          label="Biography"
           onDoubleClick={() => openWindow("biography", "Biography", <Biography />)}
         />
 
         <DesktopIcon
-          label="Biography"
-          onDoubleClick={() => openWindow("resume", "Resume", <Resume />)}
+          label="Résumé"
+          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />)}
         />
 
         <DesktopIcon label="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
