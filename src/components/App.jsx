@@ -76,7 +76,7 @@ const App = () => {
   };
 
   return (
-    <div id="screen" className="h-screen bg-95-cyan flex flex-col relative">
+    <div id="screen" className="h-screen overflow-hidden bg-95-cyan flex flex-col relative">
       {/* Desktop Area */}
       <div className="flex-grow">
         {/* Folder Icons */}
