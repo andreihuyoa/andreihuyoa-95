@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
+import Header from "./Header";
+
 const Window = ({
   icon,
   title,
@@ -21,7 +23,7 @@ const Window = ({
   const [isMaximized, setIsMaximized] = useState(false);
   const prevSize = useRef(size);
 
-  const handleMaximize = () => {
+  const onMaximize = () => {
     const screenRect = document.getElementById("screen").getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
@@ -29,7 +31,7 @@ const Window = ({
         //change this to where last dragged instead of default
         position.current = initialPos || { x: 128, y: 80 };
         windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-      }, 200); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back
+      }, 300); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -142,7 +144,7 @@ const Window = ({
           <button onClick={onMinimize} className="text-white text-xs px-2">
             —
           </button>
-          <button onClick={handleMaximize} className="text-white text-xs px-2">
+          <button onClick={onMaximize} className="text-white text-xs px-2">
             {isMaximized ? "🗗" : "🗖"}
           </button>
           <button onClick={onClose} className="text-white text-xs px-2">
