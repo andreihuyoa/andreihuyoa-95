@@ -25,11 +25,11 @@ const Window = ({
     const screenRect = document.getElementById("screen").getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
-      setTimeout(() => {
-        //change this to where last dragged instead of default
-        position.current = initialPos || { x: 128, y: 80 };
-        windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-      }, 300); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
+      position.current = initialPos || { x: 128, y: 80 };
+      windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+      // setTimeout(() => {
+      //   //change this to where last dragged instead of default
+      // }, 500); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -118,7 +118,7 @@ const Window = ({
     transform: `translate(${position.current.x}px, ${position.current.y}px)`,
     zIndex: zIndex,
     display: isMinimized ? "none" : "block",
-    transition: "width 0.4s ease, height 0.4s ease",
+    transition: isMaximized ? "width 0.6s ease, height 0.6s ease, transform 0.6s ease" : "none",
   };
 
   return (
