@@ -31,14 +31,14 @@ const App = () => {
   };
 
   //Open a window by adding it sa openWindows array if di pa open
-  const openWindow = (windowId, icon, title, content) => {
+  const openWindow = (windowId, title, content, icon) => {
     const existingWindow = openWindows.find((win) => win.windowId === windowId);
 
     if (!existingWindow) {
       // add new window window with zIndex
       setOpenWindows((prevWindows) => [
         ...prevWindows,
-        { windowId, icon, title, content, zIndex: zIndexCounter, minimized: false },
+        { windowId, title, content, icon, zIndex: zIndexCounter, minimized: false },
       ]);
       setZIndexCounter((prev) => prev + 1);
     } else {
@@ -90,16 +90,11 @@ const App = () => {
         />
 
         <DesktopIcon
-          icon={BiographyIcon}
           title="Résumé"
-          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />, BiographyIcon)}
+          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />)}
         />
 
-        <DesktopIcon
-          icon={BiographyIcon}
-          title="Mail"
-          onDoubleClick={() => openWindow("mail", "Mail", <Mail />, BiographyIcon)}
-        />
+        <DesktopIcon title="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
       </div>
 
       <TaskBar>
@@ -126,6 +121,7 @@ const App = () => {
           key={win.windowId}
           windowId={win.windowId}
           title={win.title}
+          icon={win.icon}
           zIndex={win.zIndex}
           onClose={() => closeWindow(win.windowId)}
           onMinimize={() => minimizeWindow(win.windowId)}

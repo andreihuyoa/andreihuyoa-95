@@ -4,7 +4,7 @@ const DesktopIcon = ({ icon, title, onDoubleClick }) => {
   return (
     <div
       className="flex flex-col items-center w-20 p-3 m-4  cursor-pointer"
-      onDoubleClick={() => onDoubleClick(icon, title)} //passes it inside ondoubleclick
+      onDoubleClick={() => onDoubleClick(icon, title)}
     >
       <img
         src={icon}

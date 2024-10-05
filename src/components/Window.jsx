@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
-import Header from "./Header";
-
 const Window = ({
   icon,
   title,
@@ -31,7 +29,7 @@ const Window = ({
         //change this to where last dragged instead of default
         position.current = initialPos || { x: 128, y: 80 };
         windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-      }, 300); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back
+      }, 200); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -132,23 +130,24 @@ const Window = ({
       onClick={onClick} // bringToFront onClick func
     >
       <div
-        //label is important idk if possible siya gawing component as of the moment
         ref={label}
-        className="bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
+        className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
       >
-        <div className="flex justify-between">
-          {/* Left */}
-          <div className="flex items-center gap-1">
-            <img src={icon} alt={title} className="w-4 h-4" />
-            <span className="text-white text-xs">{title}</span>
-          </div>
+        <div className="flex items-center ">
+          <img src={icon} alt={title} className="w-6 h-6 bg-transparent" />
+          <span className="text-white text-xs">{title}</span>
+        </div>
 
-          {/* Right */}
-          <div className="flex items-center *:text-white *:text-xs *:px-2">
-            <button onClick={onMinimize}>—</button>
-            <button onClick={onMaximize}>{isMaximized ? "🗗" : "🗖"}</button>
-            <button onClick={onClose}>x</button>
-          </div>
+        <div className="">
+          <button onClick={onMinimize} className="text-white text-xs px-2">
+            —
+          </button>
+          <button onClick={onMaximize} className="text-white text-xs px-2">
+            {isMaximized ? "🗗" : "🗖"}
+          </button>
+          <button onClick={onClose} className="text-white text-xs px-2">
+            x
+          </button>
         </div>
       </div>
       <div className="p-1 pb-8 overflow-auto h-full">{children}</div>
