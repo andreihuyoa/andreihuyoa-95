@@ -29,7 +29,7 @@ const Window = ({
         //change this to where last dragged instead of default
         position.current = initialPos || { x: 128, y: 80 };
         windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-      }, 200); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back
+      }, 300); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -85,7 +85,7 @@ const Window = ({
       .on("dragend", () => windowElement.classList.remove("dragging"));
 
     interact(windowElement).resizable({
-      edges: { left: true, right: true, bottom: true, top: false },
+      edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
         move(event) {
           setSize({
@@ -133,8 +133,9 @@ const Window = ({
         ref={label}
         className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
       >
-        <div className="flex items-center ">
-          <img src={icon} alt={title} className="w-6 h-6 bg-transparent" />
+        {/* Header */}
+        <div className="flex items-center gap-1 ">
+          <img src={icon} alt={title} className="w-5 h-5 bg-transparent" />
           <span className="text-white text-xs">{title}</span>
         </div>
 

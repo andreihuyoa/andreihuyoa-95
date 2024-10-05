@@ -12,6 +12,9 @@ import Resume from "../views/Resume";
 import Mail from "../views/Mail";
 
 import BiographyIcon from "../assets/WinIcons/workspace.png";
+import ResumeIcon from "../assets/WinIcons/stardew_valley.png";
+import MailIcon from "../assets/WinIcons/github.png";
+import PaintIcon from "../assets/WinIcons/paint_alt.png";
 
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -20,6 +23,7 @@ const App = () => {
       windowId: "biography",
       title: "Biography",
       content: <Biography />,
+      icon: BiographyIcon,
       zIndex: 1,
       minimized: false,
     },
@@ -90,11 +94,16 @@ const App = () => {
         />
 
         <DesktopIcon
+          icon={ResumeIcon}
           title="Résumé"
-          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />)}
+          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />, ResumeIcon)}
         />
 
-        <DesktopIcon title="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
+        <DesktopIcon
+          icon={MailIcon}
+          title="Mail"
+          onDoubleClick={() => openWindow("mail", "Mail", <Mail />, MailIcon)}
+        />
       </div>
 
       <TaskBar>
