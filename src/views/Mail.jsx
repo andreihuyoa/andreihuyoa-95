@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import InputField from "../components/InputField";
-import WindowHeader from "../components/WindowHeader";
+import SubHeader from "../components/SubHeader";
 
 const Mail = () => {
   const [from, setFrom] = useState("");
@@ -17,7 +17,7 @@ const Mail = () => {
 
   return (
     <div className="flex flex-col h-full overflow-auto">
-      <WindowHeader className="mb-2" onClick={handleSendEmail} title="Send" />
+      <SubHeader className="mb-2" onClick={handleSendEmail} title="Send" />
 
       {/* Fields */}
       <div className="flex-1 flex p-1 flex-col overflow-auto *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
