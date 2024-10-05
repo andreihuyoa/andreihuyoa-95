@@ -31,14 +31,14 @@ const App = () => {
   };
 
   //Open a window by adding it sa openWindows array if di pa open
-  const openWindow = (windowId, title, content) => {
+  const openWindow = (windowId, icon, title, content) => {
     const existingWindow = openWindows.find((win) => win.windowId === windowId);
 
     if (!existingWindow) {
       // add new window window with zIndex
       setOpenWindows((prevWindows) => [
         ...prevWindows,
-        { windowId, title, content, zIndex: zIndexCounter, minimized: false },
+        { windowId, icon, title, content, zIndex: zIndexCounter, minimized: false },
       ]);
       setZIndexCounter((prev) => prev + 1);
     } else {
@@ -86,15 +86,20 @@ const App = () => {
         <DesktopIcon
           icon={BiographyIcon}
           title="Biography"
-          onDoubleClick={() => openWindow("biography", "Biography", <Biography />)}
+          onDoubleClick={() => openWindow("biography", "Biography", <Biography />, BiographyIcon)}
         />
 
         <DesktopIcon
+          icon={BiographyIcon}
           title="Résumé"
-          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />)}
+          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />, BiographyIcon)}
         />
 
-        <DesktopIcon title="Mail" onDoubleClick={() => openWindow("mail", "Mail", <Mail />)} />
+        <DesktopIcon
+          icon={BiographyIcon}
+          title="Mail"
+          onDoubleClick={() => openWindow("mail", "Mail", <Mail />, BiographyIcon)}
+        />
       </div>
 
       <TaskBar>

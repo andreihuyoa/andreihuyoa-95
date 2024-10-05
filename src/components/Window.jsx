@@ -134,16 +134,22 @@ const Window = ({
       <div
         //label is important idk if possible siya gawing component as of the moment
         ref={label}
-        className="flex justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
+        className="bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
       >
-        <Header
-          icon={icon}
-          title={title}
-          onMinimize={onMinimize}
-          onMaximize={onMaximize}
-          onClose={onClose}
-          isMaximized={isMaximized}
-        />
+        <div className="flex justify-between">
+          {/* Left */}
+          <div className="flex items-center gap-1">
+            <img src={icon} alt={title} className="w-4 h-4" />
+            <span className="text-white text-xs">{title}</span>
+          </div>
+
+          {/* Right */}
+          <div className="flex items-center *:text-white *:text-xs *:px-2">
+            <button onClick={onMinimize}>—</button>
+            <button onClick={onMaximize}>{isMaximized ? "🗗" : "🗖"}</button>
+            <button onClick={onClose}>x</button>
+          </div>
+        </div>
       </div>
       <div className="p-1 pb-8 overflow-auto h-full">{children}</div>
     </div>
