@@ -132,25 +132,18 @@ const Window = ({
       onClick={onClick} // bringToFront onClick func
     >
       <div
+        //label is important idk if possible siya gawing component as of the moment
         ref={label}
-        className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
+        className="flex justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
       >
-        <div>
-          <img src={icon} alt="" />
-          <span className="text-white text-xs">{title}</span>
-        </div>
-
-        <div className="">
-          <button onClick={onMinimize} className="text-white text-xs px-2">
-            —
-          </button>
-          <button onClick={onMaximize} className="text-white text-xs px-2">
-            {isMaximized ? "🗗" : "🗖"}
-          </button>
-          <button onClick={onClose} className="text-white text-xs px-2">
-            x
-          </button>
-        </div>
+        <Header
+          icon={icon}
+          title={title}
+          onMinimize={onMinimize}
+          onMaximize={onMaximize}
+          onClose={onClose}
+          isMaximized={isMaximized}
+        />
       </div>
       <div className="p-1 pb-8 overflow-auto h-full">{children}</div>
     </div>
