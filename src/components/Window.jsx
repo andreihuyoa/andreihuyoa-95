@@ -20,6 +20,7 @@ const Window = ({
   const [size, setSize] = useState({ width: 500, height: 800 });
   const [isMaximized, setIsMaximized] = useState(false);
   const prevSize = useRef(size);
+  const [isDragging, setIsDragging] = useState(false);
 
   const onMaximize = () => {
     const screenRect = document.getElementById("screen").getBoundingClientRect();
@@ -46,6 +47,10 @@ const Window = ({
       .draggable({
         listeners: {
           start(event) {
+            //prevent text/object selection when dragging
+            setIsDragging(true);
+            document.body.style.userSelect = "none";
+
             // Capture the initial offset between mouse and window
             const { x, y } = position.current;
             offset.x = event.clientX - x;
@@ -60,6 +65,9 @@ const Window = ({
             windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
           end(event) {
+            setIsDragging(false);
+            document.body.style.userSelect = "";
+
             //bounds
             const screenRect = document.getElementById("screen").getBoundingClientRect();
             const minX = 0;
@@ -84,9 +92,14 @@ const Window = ({
       .on("dragstart", () => windowElement.classList.add("dragging"))
       .on("dragend", () => windowElement.classList.remove("dragging"));
 
+    //resizing ng window
     interact(windowElement).resizable({
       edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
+        start() {
+          setIsDragging(true);
+          document.body.style.userSelect = "none";
+        },
         move(event) {
           setSize({
             width: event.rect.width,
@@ -98,6 +111,10 @@ const Window = ({
           position.current.y += event.deltaRect.top;
 
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+        },
+        end() {
+          setIsDragging(false);
+          document.body.style.userSelect = "";
         },
       },
       modifiers: [
