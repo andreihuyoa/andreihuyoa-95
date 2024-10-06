@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import SubHeader from "../components/SubHeader";
 
+import SendEmail from "../assets/WinIcons/workspace.png"
+
 const Mail = () => {
   const [from, setFrom] = useState("");
   const [subject, setSubject] = useState("");
@@ -17,7 +19,7 @@ const Mail = () => {
 
   return (
     <div className="flex flex-col h-full overflow-auto">
-      <SubHeader className="mb-2" onClick={handleSendEmail} title="Send" />
+      <SubHeader className="mb-2" onClick={handleSendEmail} icon={SendEmail} title="Send" />
 
       {/* Fields */}
       <div className="flex-1 flex p-1 flex-col overflow-auto *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
@@ -61,7 +63,7 @@ const Mail = () => {
         </div>
 
         {/* Message */}
-        <div className="flex-1 overflow-auto border-none">
+        <div className="flex-1 overflow-auto border-none ">
           <InputField
             name="Message"
             type="textarea"
