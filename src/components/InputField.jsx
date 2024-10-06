@@ -7,7 +7,7 @@ const InputField = ({ name, type = "text", placeholder, value, onChange }) => {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      className="w-full h-full p-1 overflow-auto resize-none focus:outline-none focus:rounded-sm focus:border-95-black focus:border-2 bg-transparent text-95-black"
+      className="w-full h-full p-1 overflow-auto text-95-black resize-none focus:outline focus:outline-1 focus:outline-95-darkgray  focus:border-95-white focus:border focus:rounded-sm bg-transparent"
     />
   ) : (
     <input
