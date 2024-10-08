@@ -7,10 +7,8 @@ const Biography = () => {
   const age = calculateAge(birthDate);
 
   return (
-    //   some kind of component to wrap it, preferably a window like component
     <div className="bg-95-gray px-12 py-6">
       <div>
-        {/* Uncomment nalang, ang laki eh */}
         <img
           src={imageKo}
           alt="Andrei Huyo-a"
@@ -35,31 +33,29 @@ const Biography = () => {
           </h3>
           <div className="*:font-thin *:text-sm *:pb-2.5">
             <p>
-              {/* Make this age auto update! */}
-              I&apos;m a {age} year old Computer Science Student who&apos;s a god at day but a gamer
-              at night! Crafting impactful software that serves my community and people around me is
-              my passion
+              I&apos;m a {age} year old Computer Science Student at day and a gamer at night!
+              Creating fun and impactful software that serves me and people around me is my drive
+              and passion.
             </p>
             <p>
-              I thrive on staying updated with the latest tech trends and development frameworks
-              across all platforms. While my heart lies in app design and development, I also excel
-              in cross-platform app and web development, which keeps the bills paid.
+              I love staying up to date with the latest tech trends and development frameworks
+              across all platforms. While I normally dwell in app design and development, I also
+              love development in different platforms.
             </p>
             <p>
-              At 21, I co-founded Lokalista along with my co-student from the Philippines. Since
-              then, it has garnered attention, being featured on our school AduNest (Adamson
-              University Neo Science and Technology Incubation Center), &apos;s annual Incubation
-              Camp, and earning a nomination from Apple&apos;s regional team for their annual design
-              awards.
+              At 21, for our thesis we along with my co-student at Adamson University made
+              Lokalista. It gained the attention of our computer science department, earning an
+              invitation to present and showcase our program at our Adamson University&apos;s Neo
+              Science and Technology Incubation Center (AduNest) annual Incubation Camp.
             </p>
             <p>
-              Having collaborated with diverse companies worldwide, from e-commerce to art and
-              design industries, I&apos;ve honed the ability to manage multiple projects
-              simultaneously across various time zones.
+              I always look forward to collaborate and gain experience with companies, and people in
+              diverse fields, including (but not limited to😹) e-commerce, art, and design
+              industries.
             </p>
             <p>
-              In my spare time, I indulge in scrolling through analog camera listings or admiring my
-              collection, although shooting has taken a backseat due to my various work commitments.
+              In my spare time, I enjoy listening to music and read my books in my room, which helps
+              me to unwind.
             </p>
           </div>
         </div>
