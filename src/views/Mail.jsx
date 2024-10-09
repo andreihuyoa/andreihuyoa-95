@@ -78,7 +78,7 @@ const Mail = () => {
       {/* Fields */}
       <div className="flex-1 flex p-1 flex-col overflow-auto *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
         {/* Subject Updates */}
-        <div className="text-xl font-MSW98UIBold tracking-tighter mb-2 overflow-auto">
+        <div className="text-xl font-MS95 font-bold tracking-tighter mb-2 overflow-auto">
           {subject || "New Message"}
         </div>
 

@@ -3,21 +3,13 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "MSW98UIRegular";
-  src: url("/src/assets/fonts/MSW98UI-REGULAR.TTF") format("truetype");
+  font-family: "msw";
+  src: url("/src/assets/fonts/ms-sans.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
-
 @font-face {
-  font-family: "MSW98UIBold";
-  src: url("/src/assets/fonts/MSW98UI-BOLD.TTF") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "MSSansSerif";
+  font-family: "msdon";
   src: url("/src/assets/fonts/MS-Sans-Serif.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
@@ -25,8 +17,8 @@
 
 :root {
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  font-family: MSW98UIRegular, Inter, system-ui, -apple-system BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: msw, Inter, system-ui, -apple-system BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

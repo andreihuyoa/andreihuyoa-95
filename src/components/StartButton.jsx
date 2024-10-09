@@ -17,7 +17,7 @@ const StartButton = ({ onClick }) => {
           <div className="bg-yellow-500"></div>
         </div>
       </div>
-      <span className="text-95-black text-sm font-MSW98UIRegular">Start</span>
+      <span className="text-95-black text-sm font-MS95">Start</span>
     </button>
   );
 };

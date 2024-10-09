@@ -7,7 +7,7 @@ const StartMenu = ({ isOpen, onClose }) => {
     return null;
   }
   return (
-    <div className="flex text-sm font-MSW98UIRegular absolute bottom-10 left-0 w- overflow-hidden z-[9999] bg-95-gray border-2 border-95-white border-r-95-black border-b-95-black ">
+    <div className="flex text-sm font-MS95 absolute bottom-10 left-0 w- overflow-hidden z-[9999] bg-95-gray border-2 border-95-white border-r-95-black border-b-95-black ">
       {/* Sidebar */}
       <div className="flex-shrink-0">
         <img src={sidebarImage} alt="AndreiHuyoa95" className="w-8 h-auto" />

@@ -1,5 +1,5 @@
 import React from "react";
-import imageKo from "../assets/Biography/mememe.jpg";
+import imagecuzz from "../assets/Biography/mememe.jpg";
 import { calculateAge } from "../assets/utils/birthday";
 
 const Biography = () => {
@@ -8,17 +8,18 @@ const Biography = () => {
 
   return (
     <div className="bg-95-gray px-12 py-6">
-      <div>
+      <div className="flex flex-col gap-1">
         <img
-          src={imageKo}
+          src={imagecuzz}
           alt="Andrei Huyo-a"
           className="w-full h-auto max-w-xs md:max-w-md lg:max-w-lg"
         />
-        <h2 className="font-MSW98UIBold text-2xl py-5">Carl Andrei H. Del Rosario</h2>
-        <h4 className="text-gray-600 font-medium text-xs">
-          Computer Science Undergrad @ Adamson University • Lokalista
-        </h4>
-        <h4 className="">Philippines 📍</h4>
+        <h2 className="font-MS95 font-extrabold text-2xl py-2">Carl Andrei H. Del Rosario</h2>
+        <div className="flex flex-col gap-2 text-gray-700 font-medium text-xs">
+          <h4>Computer Science Undergrad @ Adamson University • Lokalista</h4>
+          <h4>Philippines 📍</h4>
+        </div>
+
         <div className="flex flex-wrap mt-5 gap-2 items-center *:w-auto *:h-5 *:rounded-none *:text-xs ">
           <img alt="Laravel" src="https://img.shields.io/badge/-Laravel-red" />
           <img alt="PHP" src="https://img.shields.io/badge/-PHP-blue" />
@@ -27,11 +28,11 @@ const Biography = () => {
           <img alt="Figma" src="https://img.shields.io/badge/-Figma-8c5aee" />
           <img alt="Git" src="https://img.shields.io/badge/-Git-c29d62" />
         </div>
-        <div className="pt-7">
-          <h3 className="underline underline-offset-2 decoration-dotted   font-MSW98UIBold text-md pb-1">
+        <div className="pt-4">
+          <h3 className="underline underline-offset-2 decoration-dotted font-MS95 font-600 text-lg pb-1">
             About Me
           </h3>
-          <div className="*:font-thin *:text-sm *:pb-2.5">
+          <div className="*:font-light *:text-gray-700 *:text-sm *:pb-2.5">
             <p>
               I&apos;m a {age} year old Computer Science Student at day and a gamer at night!
               Creating fun and impactful software that serves me and people around me is my drive
