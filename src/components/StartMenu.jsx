@@ -1,6 +1,10 @@
 import React from "react";
 import SocialsButton from "./SocialsButton";
+
+import HisResume from "../assets/Resume/CarlAndreiDelRosario.pdf";
+
 import sidebarImage from "../assets/AndreiHuyoa95.png";
+import testicon from "../assets/WinIcons/stardew_valley.png";
 
 const StartMenu = ({ isOpen, onClose }) => {
   if (!isOpen) {
@@ -14,12 +18,20 @@ const StartMenu = ({ isOpen, onClose }) => {
       </div>
       <div className="flex-grow">
         {/* Socials */}
-        <SocialsButton icon="" link="www.instagram.com/unabridgedeeyore" text="Instagram" />
-        <SocialsButton icon="" link="" text="LinkedIn" />
-        <SocialsButton icon="" link="www.github.com/andreihuyoa" text="Github" />
+        <SocialsButton
+          icon={testicon}
+          link="https://www.instagram.com/unabridgedeeyore"
+          text="Instagram"
+        />
+        <SocialsButton
+          icon={testicon}
+          link="https://www.linkedin.com/in/carl-andrei-del-rosario-3bab57257/"
+          text="LinkedIn"
+        />
+        <SocialsButton icon={testicon} link="https://www.github.com/andreihuyoa" text="Github" />
         <div className="my-2 border-t border-gray-500"></div>
-        <SocialsButton icon="" link="" text="Resume" />
-        <SocialsButton icon="" link="" text="Lokalista" />
+        <SocialsButton icon={testicon} link={HisResume} text="Resume" />
+        <SocialsButton icon={testicon} link="" text="Lokalista" />
       </div>
     </div>
   );
