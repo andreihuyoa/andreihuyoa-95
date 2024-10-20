@@ -118,8 +118,9 @@ const Mail = () => {
         </div>
 
         {/* Message */}
-        <div className="flex-1 overflow-auto border-none ">
+        <div className="flex-1 overflow-auto border-none">
           <InputField
+            
             name="Message"
             type="textarea"
             value={message}
