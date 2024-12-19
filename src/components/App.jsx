@@ -106,6 +106,8 @@ const App = () => {
         />
       </div>
 
+      {/* Work in progress lol */}
+      <div>wip</div>
       <TaskBar>
         <StartButton onClick={toggleStartMenu} />
         {/* make this as a component later, para sa mga opened apps in taskbar */}
@@ -119,12 +121,9 @@ const App = () => {
           </button>
         ))}
       </TaskBar>
-
       {/* Start Menu */}
       <StartMenu isOpen={isStartMenuOpen} onClose={() => setIsStartMenuOpen(false)} />
-
       {/* Opened Folders/Windows */}
-
       {openWindows.map((win) => (
         <Window
           key={win.windowId}

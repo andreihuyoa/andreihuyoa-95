@@ -1,6 +1,8 @@
 import React from "react";
 
 const DesktopIcon = ({ icon, title, onDoubleClick }) => {
+
+
   return (
     <div
       className="flex flex-col items-center w-20 p-3 m-4  cursor-pointer text-95-black"

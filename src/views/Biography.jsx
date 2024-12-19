@@ -46,7 +46,7 @@ const Biography = () => {
             <p>
               At 21, for our thesis we along with my co-student at Adamson University made
               Lokalista. It gained the attention of our computer science department, earning an
-              invitation to present and showcase our program at our Adamson University&apos;s Neo
+              invitation to present and showcase our program at Adamson University&apos;s Neo
               Science and Technology Incubation Center (AduNest) annual Incubation Camp.
             </p>
             <p>

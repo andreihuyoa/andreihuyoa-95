@@ -29,7 +29,7 @@ const Window = ({
       position.current = initialPos || { x: 128, y: 80 };
       windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
       // setTimeout(() => {
-      //   //change this to where last dragged instead of default
+      // change this to where last dragged instead of default na babalik sa default position
       // }, 500); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
     } else {
       prevSize.current = size;
@@ -64,7 +64,7 @@ const Window = ({
             //apply new pos to the window
             windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
-          end(event) {
+          end() {
             setIsDragging(false);
             document.body.style.userSelect = "";
 
