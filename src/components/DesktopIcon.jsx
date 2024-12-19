@@ -1,19 +1,17 @@
 import React from "react";
 
 const DesktopIcon = ({ icon, title, onDoubleClick }) => {
-
-
   return (
     <div
-      className="flex flex-col items-center w-20 p-3 m-4  cursor-pointer text-95-black"
+      className="m-4 flex w-20 cursor-pointer flex-col items-center p-3 text-95-black"
       onDoubleClick={() => onDoubleClick(icon, title)}
     >
       <img
         src={icon}
         alt={title}
-        className="w-12 h-12 bg-95-gray flex items-center justify-center bg-transparent mb-2"
+        className="mb-2 flex h-12 w-12 items-center justify-center bg-95-gray bg-transparent"
       />
-      <div className="text-white text-xs text-center">{title}</div>
+      <div className="text-center text-xs text-white">{title}</div>
     </div>
   );
 };

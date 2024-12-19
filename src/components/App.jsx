@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "../index.css";
 
 import TaskBar from "./TaskBar";
@@ -14,7 +14,7 @@ import Mail from "../views/Mail";
 import BiographyIcon from "../assets/WinIcons/workspace.png";
 import ResumeIcon from "../assets/WinIcons/stardew_valley.png";
 import MailIcon from "../assets/WinIcons/github.png";
-import PaintIcon from "../assets/WinIcons/paint_alt.png";
+import { TaskBarButton } from "./TaskBarButton";
 
 const App = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -42,7 +42,14 @@ const App = () => {
       // add new window window with zIndex
       setOpenWindows((prevWindows) => [
         ...prevWindows,
-        { windowId, title, content, icon, zIndex: zIndexCounter, minimized: false },
+        {
+          windowId,
+          title,
+          content,
+          icon,
+          zIndex: zIndexCounter,
+          minimized: false,
+        },
       ]);
       setZIndexCounter((prev) => prev + 1);
     } else {
@@ -54,21 +61,25 @@ const App = () => {
   const bringToFront = (windowId) => {
     setOpenWindows((prevWindows) =>
       prevWindows.map((win) =>
-        win.windowId === windowId ? { ...win, zIndex: zIndexCounter } : win
-      )
+        win.windowId === windowId ? { ...win, zIndex: zIndexCounter } : win,
+      ),
     );
     setZIndexCounter((prev) => prev + 1);
   };
 
   // Close a window by removing it from the openWindows array
   const closeWindow = (windowId) => {
-    setOpenWindows((prevWindows) => prevWindows.filter((win) => win.windowId !== windowId));
+    setOpenWindows((prevWindows) =>
+      prevWindows.filter((win) => win.windowId !== windowId),
+    );
   };
 
   // Minimize a window by updating its minimized state to true
   const minimizeWindow = (windowId) => {
     setOpenWindows((prevWindows) =>
-      prevWindows.map((win) => (win.windowId === windowId ? { ...win, minimized: true } : win))
+      prevWindows.map((win) =>
+        win.windowId === windowId ? { ...win, minimized: true } : win,
+      ),
     );
   };
 
@@ -76,13 +87,16 @@ const App = () => {
   const toggleMinimizedWindow = (windowId) => {
     setOpenWindows((prevWindows) =>
       prevWindows.map((win) =>
-        win.windowId === windowId ? { ...win, minimized: !win.minimized } : win
-      )
+        win.windowId === windowId ? { ...win, minimized: !win.minimized } : win,
+      ),
     );
   };
 
   return (
-    <div id="screen" className="h-screen overflow-hidden bg-95-cyan flex flex-col relative">
+    <div
+      id="screen"
+      className="relative flex h-screen flex-col overflow-hidden bg-95-cyan"
+    >
       {/* Desktop Area */}
       <div className="flex-grow">
         {/* Folder Icons */}
@@ -90,13 +104,17 @@ const App = () => {
         <DesktopIcon
           icon={BiographyIcon}
           title="Biography"
-          onDoubleClick={() => openWindow("biography", "Biography", <Biography />, BiographyIcon)}
+          onDoubleClick={() =>
+            openWindow("biography", "Biography", <Biography />, BiographyIcon)
+          }
         />
 
         <DesktopIcon
           icon={ResumeIcon}
           title="Résumé"
-          onDoubleClick={() => openWindow("Résumé", "Résumé", <Resume />, ResumeIcon)}
+          onDoubleClick={() =>
+            openWindow("Résumé", "Résumé", <Resume />, ResumeIcon)
+          }
         />
 
         <DesktopIcon
@@ -112,17 +130,22 @@ const App = () => {
         <StartButton onClick={toggleStartMenu} />
         {/* make this as a component later, para sa mga opened apps in taskbar */}
         {openWindows.map((win) => (
-          <button
+          <TaskBarButton
             key={win.windowId}
             onClick={() => toggleMinimizedWindow(win.windowId)}
-            className="text-xs text-white px-2"
+            icon={win.icon}
+            title={win.title}
+            className="hover:bg-green-600" //add more stylings
           >
             {win.title}
-          </button>
+          </TaskBarButton>
         ))}
       </TaskBar>
       {/* Start Menu */}
-      <StartMenu isOpen={isStartMenuOpen} onClose={() => setIsStartMenuOpen(false)} />
+      <StartMenu
+        isOpen={isStartMenuOpen}
+        onClose={() => setIsStartMenuOpen(false)}
+      />
       {/* Opened Folders/Windows */}
       {openWindows.map((win) => (
         <Window

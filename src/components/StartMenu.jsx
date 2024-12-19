@@ -15,7 +15,7 @@ const StartMenu = ({ isOpen, onClose }) => {
     return null;
   }
   return (
-    <div className="flex text-sm font-MS95 absolute bottom-10 left-0 overflow-hidden z-[9999] bg-95-gray border-2 border-95-white border-r-95-black border-b-95-black ">
+    <div className="flex text-sm font-MS95 absolute bottom-12 left-0 overflow-hidden z-[9999] bg-95-gray border-2 border-95-white border-r-95-black border-b-95-black ">
       {/* Sidebar */}
       <div className="flex items-stretch">
         <img src={sidebarImage} alt="AndreiHuyoa95" className="w-6 h-auto" />

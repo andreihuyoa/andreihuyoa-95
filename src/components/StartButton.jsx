@@ -1,23 +1,20 @@
-import React from "react";
-
 const StartButton = ({ onClick }) => {
   return (
     <button
       //add shadow din siguro later
-      className="px-2 py-1 bg-95-gray border-2 border-95-white border-r-95-black border-b-95-black active:border-95-black active:border-r-95-white active:border-b-95-white
-      flex items-center space-x-1 focus:outline-none"
+      className="mr-2 flex items-center space-x-1 border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray px-2 py-1 font-semibold focus:outline-none active:border-95-black active:border-b-95-white active:border-r-95-white"
       onClick={onClick}
     >
       {/* Microsoft logo cutesy */}
-      <div className="w-4 h-4 bg-[#008080] flex items-center justify-center">
-        <div className="w-3 h-3 bg-95-gray grid grid-cols-2 grid-rows-2">
+      <div className="flex h-4 w-4 items-center justify-center bg-[#008080]">
+        <div className="grid h-3 w-3 grid-cols-2 grid-rows-2 bg-95-gray">
           <div className="bg-red-500"></div>
           <div className="bg-green-500"></div>
           <div className="bg-blue-500"></div>
           <div className="bg-yellow-500"></div>
         </div>
       </div>
-      <span className="text-95-black text-sm font-MS95">Start</span>
+      <span className="font-MS95 text-sm text-95-black">Start</span>
     </button>
   );
 };
