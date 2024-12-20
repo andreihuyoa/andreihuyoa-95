@@ -15,19 +15,31 @@ const Window = ({
   isMinimized,
   children,
   zIndex,
-  initialPos = { x: window.innerWidth * 0.2, y: window.innerHeight * 0.1 },
+  initialPos = { x: window.innerWidth * 0.1, y: window.innerHeight * 0.1 },
 }) => {
   const windowRef = useRef(null);
   const label = useRef(null);
-  const position = useRef(initialPos || { x: 128, y: 60 }); // initial window position
+  const position = useRef(initialPos); // initial window position
+  const tempPosition = useRef({ x: 0, y: 0 });
+  const [isMaximized, setIsMaximized] = useState(false);
+  const isDragging = false;
 
   const [size, setSize] = useState({
-    width: Math.min(500, window.innerWidth * 0.6),
+    width: Math.min(500, window.innerWidth * 0.9),
     height: Math.min(800, window.innerHeight * 0.8),
   });
-
-  const [isMaximized, setIsMaximized] = useState(false);
   const prevSize = useRef(size);
+
+  // Prevent document scrolling while dragging
+  useEffect(() => {
+    const preventScroll = (e) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("touchmove", preventScroll, { passive: false });
+    return () => document.removeEventListener("touchmove", preventScroll);
+  }, [isDragging]);
 
   const onMaximize = () => {
     const screenRect = document
@@ -35,9 +47,9 @@ const Window = ({
       .getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
-      position.current = initialPos || {
-        x: Math.min(position.current.x, window.innerWidth - size.width),
-        y: Math.min(position.current.y, window.innerHeight - size.height),
+      position.current = {
+        x: tempPosition.current.x,
+        y: tempPosition.current.y,
       };
       // windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
 
@@ -48,8 +60,14 @@ const Window = ({
 
       // change this to where last dragged instead of default na babalik sa default position
     } else {
-      prevSize.current = size;
-      setSize({ width: screenRect.width, height: screenRect.height });
+      tempPosition.current = {
+        x: position.current.x,
+        y: position.current.y,
+      };
+      setSize({
+        width: screenRect.width,
+        height: screenRect.height,
+      });
       position.current = { x: 0, y: 0 };
     }
     setIsMaximized(!isMaximized);
