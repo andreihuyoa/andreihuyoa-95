@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
+import min from "../assets/Buttons/min.svg";
+import max from "../assets/Buttons/max.svg";
+import close from "../assets/Buttons/x.svg";
+
 const Window = ({
   icon,
   title,
@@ -23,7 +27,9 @@ const Window = ({
   const [isDragging, setIsDragging] = useState(false);
 
   const onMaximize = () => {
-    const screenRect = document.getElementById("screen").getBoundingClientRect();
+    const screenRect = document
+      .getElementById("screen")
+      .getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
       position.current = initialPos || { x: 128, y: 80 };
@@ -69,15 +75,23 @@ const Window = ({
             document.body.style.userSelect = "";
 
             //bounds
-            const screenRect = document.getElementById("screen").getBoundingClientRect();
+            const screenRect = document
+              .getElementById("screen")
+              .getBoundingClientRect();
             const minX = 0;
             const maxX = screenRect.width - size.width;
             const minY = 0;
             const maxY = screenRect.height - size.height;
 
             //clamp pos within bounds
-            position.current.x = Math.max(minX, Math.min(maxX, position.current.x));
-            position.current.y = Math.max(minY, Math.min(maxY, position.current.y));
+            position.current.x = Math.max(
+              minX,
+              Math.min(maxX, position.current.x),
+            );
+            position.current.y = Math.max(
+              minY,
+              Math.min(maxY, position.current.y),
+            );
 
             windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
           },
@@ -135,7 +149,9 @@ const Window = ({
     transform: `translate(${position.current.x}px, ${position.current.y}px)`,
     zIndex: zIndex,
     display: isMinimized ? "none" : "block",
-    transition: isMaximized ? "width 0.6s ease, height 0.6s ease, transform 0.6s ease" : "none",
+    transition: isMaximized
+      ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease"
+      : "none",
   };
 
   return (
@@ -143,32 +159,41 @@ const Window = ({
       ref={windowRef}
       id={windowId}
       style={windowStyle}
-      className="absolute overflow-hidden border-2 border-95-white border-r-95-black border-b-95-black bg-95-gray shadow-lg"
+      className="absolute overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg"
       onClick={onClick} // bringToFront onClick func
     >
       <div
         ref={label}
-        className="flex items-center justify-between bg-95-navy p-1 border-b-2 border-95-white border-b-95-black cursor-default"
+        className="flex cursor-default items-center justify-between border-b-2 border-95-white border-b-95-black bg-95-navy p-1"
       >
         {/* Header */}
-        <div className="flex items-center gap-1 ">
-          <img src={icon} alt={title} className="w-5 h-5 bg-transparent" />
-          <span className="text-white text-xs">{title}</span>
+        <div className="flex items-center gap-2">
+          <img src={icon} alt={title} className="h-6 w-6 bg-transparent" />
+          <span className="text-xs text-white">{title}</span>
         </div>
 
-        <div className="">
-          <button onClick={onMinimize} className="text-white text-xs px-2">
-            —
+        <div className="flex *:w-5 *:items-center *:border-2 *:border-95-white *:border-b-95-black *:border-r-95-black *:bg-95-gray *:focus:outline-none">
+          <button
+            onClick={onMinimize}
+            className="mr-1 active:border-95-black active:border-b-95-white active:border-r-95-white"
+          >
+            <img src={min} alt="min" />
           </button>
-          <button onClick={onMaximize} className="text-white text-xs px-2">
-            {isMaximized ? "🗗" : "🗖"}
+          <button
+            onClick={onMaximize}
+            className="mr-1 active:border-95-black active:border-b-95-white active:border-r-95-white"
+          >
+            <img src={max} alt="max" />
           </button>
-          <button onClick={onClose} className="text-white text-xs px-2">
-            x
+          <button
+            onClick={onClose}
+            className="active:border-95-black active:border-b-95-white active:border-r-95-white"
+          >
+            <img src={close} alt="close" />
           </button>
         </div>
       </div>
-      <div className="p-1 pb-8 overflow-auto h-full">{children}</div>
+      <div className="h-full overflow-auto p-1 pb-8">{children}</div>
     </div>
   );
 };

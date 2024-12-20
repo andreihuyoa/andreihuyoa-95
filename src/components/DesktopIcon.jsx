@@ -1,5 +1,3 @@
-import React from "react";
-
 const DesktopIcon = ({ icon, title, onDoubleClick }) => {
   return (
     <div

@@ -98,9 +98,8 @@ const App = () => {
       className="relative flex h-screen flex-col overflow-hidden bg-95-cyan"
     >
       {/* Desktop Area */}
-      <div className="flex-grow">
+      <div className="flex flex-grow flex-col flex-wrap">
         {/* Folder Icons */}
-
         <DesktopIcon
           icon={BiographyIcon}
           title="Biography"

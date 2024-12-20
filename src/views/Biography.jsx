@@ -1,6 +1,6 @@
 import React from "react";
 import imagecuzz from "../assets/Biography/mememe.jpg";
-import { calculateAge } from "../assets/utils/birthday";
+import { calculateAge } from "../utils/birthday";
 
 const Biography = () => {
   const birthDate = new Date(2002, 9, 9); //Year, Month - 1, Day
