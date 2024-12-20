@@ -15,16 +15,19 @@ const Window = ({
   isMinimized,
   children,
   zIndex,
-  initialPos,
+  initialPos = { x: window.innerWidth * 0.2, y: window.innerHeight * 0.1 },
 }) => {
   const windowRef = useRef(null);
   const label = useRef(null);
   const position = useRef(initialPos || { x: 128, y: 60 }); // initial window position
 
-  const [size, setSize] = useState({ width: 500, height: 800 });
+  const [size, setSize] = useState({
+    width: Math.min(500, window.innerWidth * 0.6),
+    height: Math.min(800, window.innerHeight * 0.8),
+  });
+
   const [isMaximized, setIsMaximized] = useState(false);
   const prevSize = useRef(size);
-  const [isDragging, setIsDragging] = useState(false);
 
   const onMaximize = () => {
     const screenRect = document
@@ -32,11 +35,18 @@ const Window = ({
       .getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
-      position.current = initialPos || { x: 128, y: 80 };
-      windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+      position.current = initialPos || {
+        x: Math.min(position.current.x, window.innerWidth - size.width),
+        y: Math.min(position.current.y, window.innerHeight - size.height),
+      };
+      // windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+
       // setTimeout(() => {
+      // }, 500);
+
+      //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
+
       // change this to where last dragged instead of default na babalik sa default position
-      // }, 500); //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
     } else {
       prevSize.current = size;
       setSize({ width: screenRect.width, height: screenRect.height });
@@ -49,75 +59,61 @@ const Window = ({
     const windowElement = windowRef.current;
     let offset = { x: 0, y: 0 };
 
-    interact(label.current)
-      .draggable({
-        listeners: {
-          start(event) {
-            //prevent text/object selection when dragging
-            setIsDragging(true);
-            document.body.style.userSelect = "none";
-
-            // Capture the initial offset between mouse and window
-            const { x, y } = position.current;
-            offset.x = event.clientX - x;
-            offset.y = event.clientY - y;
-          },
-          move(event) {
-            // position based on the mouse movement and offset
-            position.current.x = event.clientX - offset.x;
-            position.current.y = event.clientY - offset.y;
-
-            //apply new pos to the window
-            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-          },
-          end() {
-            setIsDragging(false);
-            document.body.style.userSelect = "";
-
-            //bounds
-            const screenRect = document
-              .getElementById("screen")
-              .getBoundingClientRect();
-            const minX = 0;
-            const maxX = screenRect.width - size.width;
-            const minY = 0;
-            const maxY = screenRect.height - size.height;
-
-            //clamp pos within bounds
-            position.current.x = Math.max(
-              minX,
-              Math.min(maxX, position.current.x),
-            );
-            position.current.y = Math.max(
-              minY,
-              Math.min(maxY, position.current.y),
-            );
-
-            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-          },
+    interact(label.current).draggable({
+      listeners: {
+        start(event) {
+          // Capture the initial offset between mouse and window
+          const { x, y } = position.current;
+          offset.x = event.clientX - x;
+          offset.y = event.clientY - y;
         },
-        modifiers: [
-          interact.modifiers.restrict({
-            restriction: "parent", //allows drag but restrict final position on mouseup
-            endOnly: true,
-          }),
-        ],
-      })
-      .on("dragstart", () => windowElement.classList.add("dragging"))
-      .on("dragend", () => windowElement.classList.remove("dragging"));
+        move(event) {
+          // position based on the mouse movement and offset
+          position.current.x = event.clientX - offset.x;
+          position.current.y = event.clientY - offset.y;
 
-    //resizing ng window
+          //apply new pos to the window
+          windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+        },
+        end() {
+          //bounds
+          const screenRect = document
+            .getElementById("screen")
+            .getBoundingClientRect();
+          const minX = 0;
+          const maxX = screenRect.width - size.width;
+          const minY = 0;
+          const maxY = screenRect.height - size.height;
+
+          //clamp pos within bounds
+          position.current.x = Math.max(
+            minX,
+            Math.min(maxX, position.current.x),
+          );
+          position.current.y = Math.max(
+            minY,
+            Math.min(maxY, position.current.y),
+          );
+
+          windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+        },
+      },
+      modifiers: [
+        interact.modifiers.restrict({
+          restriction: "parent", //allows drag but restrict final position on mouseup
+          endOnly: true,
+        }),
+      ],
+    });
+
+    // Resize ng window
     interact(windowElement).resizable({
       edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
-        start() {
-          setIsDragging(true);
-          document.body.style.userSelect = "none";
-        },
         move(event) {
           setSize({
             width: event.rect.width,
-            height: event.rect.height,
+            height: event.rect.width,
           });
 
           // Update position based on resizing movement
@@ -126,17 +122,13 @@ const Window = ({
 
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
         },
-        end() {
-          setIsDragging(false);
-          document.body.style.userSelect = "";
-        },
       },
       modifiers: [
         interact.modifiers.restrictSize({
-          min: { width: 500, height: 500 },
+          min: { width: 600, height: 700 },
           max: {
-            width: document.getElementById("screen").clientWidth,
-            height: document.getElementById("screen").clientHeight,
+            width: window.innerWidth,
+            height: window.innerHeight,
           },
         }),
       ],
@@ -151,7 +143,7 @@ const Window = ({
     display: isMinimized ? "none" : "block",
     transition: isMaximized
       ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease"
-      : "none",
+      : "none", // ! when added transform 0.3s all may delay yung drag ng window fix this
   };
 
   return (
@@ -161,6 +153,7 @@ const Window = ({
       style={windowStyle}
       className="absolute overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg"
       onClick={onClick} // bringToFront onClick func
+      onDoubleClick={onMaximize}
     >
       <div
         ref={label}

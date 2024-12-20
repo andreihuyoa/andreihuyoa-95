@@ -28,6 +28,7 @@ const App = () => {
       minimized: false,
     },
   ]);
+
   const [zIndexCounter, setZIndexCounter] = useState(1);
 
   const toggleStartMenu = () => {
@@ -95,10 +96,10 @@ const App = () => {
   return (
     <div
       id="screen"
-      className="relative flex h-screen flex-col overflow-hidden bg-95-cyan"
+      className="relative flex h-screen flex-col overflow-hidden"
     >
       {/* Desktop Area */}
-      <div className="flex flex-grow flex-col flex-wrap">
+      <div className="flex flex-grow flex-col flex-wrap px-3 py-1">
         {/* Folder Icons */}
         <DesktopIcon
           icon={BiographyIcon}
@@ -134,7 +135,6 @@ const App = () => {
             onClick={() => toggleMinimizedWindow(win.windowId)}
             icon={win.icon}
             title={win.title}
-            className="hover:bg-green-600" //add more stylings
           >
             {win.title}
           </TaskBarButton>
