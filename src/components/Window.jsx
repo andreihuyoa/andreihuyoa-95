@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
 import min from "../assets/Buttons/min.svg";
@@ -22,7 +22,7 @@ const Window = ({
   const position = useRef(initialPos); // initial window position
   const tempPosition = useRef({ x: 0, y: 0 });
   const [isMaximized, setIsMaximized] = useState(false);
-  const isDragging = false;
+  let isDragging = false;
 
   const [size, setSize] = useState({
     width: Math.min(500, window.innerWidth * 0.9),
@@ -75,29 +75,29 @@ const Window = ({
 
   useEffect(() => {
     const windowElement = windowRef.current;
-    let offset = { x: 0, y: 0 };
 
     interact(label.current).draggable({
       listeners: {
-        start(event) {
-          // Capture the initial offset between mouse and window
-          const { x, y } = position.current;
-          offset.x = event.clientX - x;
-          offset.y = event.clientY - y;
+        start() {
+          isDragging = true;
+          document.body.style.userSelect = "none"; //prevent text/object selection when dragging
+          onClick(); // Set as active window
         },
         move(event) {
-          // position based on the mouse movement and offset
-          position.current.x = event.clientX - offset.x;
-          position.current.y = event.clientY - offset.y;
-
+          position.current.x += event.dx;
+          position.current.y += event.dy;
           //apply new pos to the window
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
         },
         end() {
-          //bounds
+          isDragging = false;
+          document.body.style.userSelect = "";
+
           const screenRect = document
             .getElementById("screen")
             .getBoundingClientRect();
+
+          //Clamp pos within bounds
           const minX = 0;
           const maxX = screenRect.width - size.width;
           const minY = 0;
@@ -124,7 +124,7 @@ const Window = ({
       ],
     });
 
-    // Resize ng window
+    // Resize window
     interact(windowElement).resizable({
       edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
@@ -133,25 +133,27 @@ const Window = ({
             width: event.rect.width,
             height: event.rect.width,
           });
-
           // Update position based on resizing movement
           position.current.x += event.deltaRect.left;
           position.current.y += event.deltaRect.top;
-
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
         },
       },
       modifiers: [
         interact.modifiers.restrictSize({
-          min: { width: 600, height: 700 },
+          min: { width: 500, height: 700 },
           max: {
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width:
+              document.getElementById("screen").clientWidth -
+              position.current.x,
+            height:
+              document.getElementById("screen").clientHeight -
+              position.current.y,
           },
         }),
       ],
     });
-  }, [size]);
+  }, [size, onClick]);
 
   const windowStyle = {
     width: `${size.width}px`,
@@ -161,7 +163,7 @@ const Window = ({
     display: isMinimized ? "none" : "block",
     transition: isMaximized
       ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease"
-      : "none", // ! when added transform 0.3s all may delay yung drag ng window fix this
+      : "none",
   };
 
   return (
@@ -169,13 +171,13 @@ const Window = ({
       ref={windowRef}
       id={windowId}
       style={windowStyle}
-      className="absolute overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg"
-      onClick={onClick} // bringToFront onClick func
-      onDoubleClick={onMaximize}
+      className={`absolute touch-none overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg ${isMaximized ? "fullscreen" : ""}`}
+      onClick={onClick}
     >
       <div
         ref={label}
-        className="flex cursor-default items-center justify-between border-b-2 border-95-white border-b-95-black bg-95-navy p-1"
+        className="flex items-center justify-between border-b-2 border-95-white border-b-95-black bg-95-navy p-1"
+        onDoubleClick={onMaximize}
       >
         {/* Header */}
         <div className="flex items-center gap-2">
