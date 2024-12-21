@@ -22,7 +22,7 @@ const Window = ({
   const position = useRef(initialPos); // initial window position
   const tempPosition = useRef({ x: 0, y: 0 });
   const [isMaximized, setIsMaximized] = useState(false);
-  let isDragging = false;
+  const [isDragging, setIsDragging] = useState(false);
 
   const [size, setSize] = useState({
     width: Math.min(500, window.innerWidth * 0.9),
@@ -32,13 +32,32 @@ const Window = ({
 
   // Prevent document scrolling while dragging
   useEffect(() => {
-    const preventScroll = (e) => {
+    const headerEl = label.current;
+
+    const handleTouchStart = (e) => {
       if (isDragging) {
         e.preventDefault();
       }
     };
-    document.addEventListener("touchmove", preventScroll, { passive: false });
-    return () => document.removeEventListener("touchmove", preventScroll);
+
+    const handleTouchMove = (e) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    };
+
+    if (headerEl) {
+      headerEl.addEventListener("touchstart", handleTouchStart, {
+        passive: false,
+      });
+      document.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+    }
+    return () => {
+      headerEl.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [isDragging]);
 
   const onMaximize = () => {
@@ -51,14 +70,6 @@ const Window = ({
         x: tempPosition.current.x,
         y: tempPosition.current.y,
       };
-      // windowRef.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
-
-      // setTimeout(() => {
-      // }, 500);
-
-      //this set time out adds yung pag return ng max to min ng transition, wo this it snaps back, may bug rin na pag masyado ka mabilis mag minmax nababaliw siya
-
-      // change this to where last dragged instead of default na babalik sa default position
     } else {
       tempPosition.current = {
         x: position.current.x,
@@ -79,7 +90,7 @@ const Window = ({
     interact(label.current).draggable({
       listeners: {
         start() {
-          isDragging = true;
+          setIsDragging(true);
           document.body.style.userSelect = "none"; //prevent text/object selection when dragging
           onClick(); // Set as active window
         },
@@ -90,7 +101,7 @@ const Window = ({
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
         },
         end() {
-          isDragging = false;
+          setIsDragging(false);
           document.body.style.userSelect = "";
 
           const screenRect = document
@@ -128,15 +139,21 @@ const Window = ({
     interact(windowElement).resizable({
       edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
+        start() {
+          setIsDragging(true);
+        },
         move(event) {
           setSize({
             width: event.rect.width,
-            height: event.rect.width,
+            height: event.rect.height,
           });
           // Update position based on resizing movement
           position.current.x += event.deltaRect.left;
           position.current.y += event.deltaRect.top;
           windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+        },
+        end() {
+          setIsDragging(false);
         },
       },
       modifiers: [
@@ -171,7 +188,7 @@ const Window = ({
       ref={windowRef}
       id={windowId}
       style={windowStyle}
-      className={`absolute touch-none overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg ${isMaximized ? "fullscreen" : ""}`}
+      className={`absolute overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg ${isMaximized ? "fullscreen" : ""}`}
       onClick={onClick}
     >
       <div
