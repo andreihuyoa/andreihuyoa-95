@@ -96,7 +96,7 @@ const App = () => {
   return (
     <div id="screen" className="flex h-screen flex-col overflow-hidden">
       {/* Desktop Area */}
-      <div className="flex min-h-0 flex-1 flex-grow flex-col overflow-hidden px-3 py-1">
+      <div className="flex h-screen flex-col overflow-hidden px-3 py-1">
         {/* Folder Icons */}
         <DesktopIcon
           icon={BiographyIcon}
