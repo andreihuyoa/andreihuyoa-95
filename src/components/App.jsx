@@ -119,9 +119,6 @@ const App = () => {
         />
       </div>
 
-      {/* Work in progress lol */}
-      <div>wip</div>
-
       <TaskBar>
         <StartButton onClick={toggleStartMenu} />
         {/* make this as a component later, para sa mga opened apps in taskbar */}
