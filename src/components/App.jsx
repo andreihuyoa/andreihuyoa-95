@@ -94,12 +94,9 @@ const App = () => {
   };
 
   return (
-    <div
-      id="screen"
-      className="relative flex h-screen flex-col overflow-hidden"
-    >
+    <div id="screen" className="flex h-screen flex-col overflow-hidden">
       {/* Desktop Area */}
-      <div className="flex flex-grow flex-col flex-wrap px-3 py-1">
+      <div className="flex min-h-0 flex-1 flex-grow flex-col overflow-hidden px-3 py-1">
         {/* Folder Icons */}
         <DesktopIcon
           icon={BiographyIcon}
@@ -108,7 +105,6 @@ const App = () => {
             openWindow("biography", "Biography", <Biography />, BiographyIcon)
           }
         />
-
         <DesktopIcon
           icon={ResumeIcon}
           title="Résumé"
@@ -116,7 +112,6 @@ const App = () => {
             openWindow("Résumé", "Résumé", <Resume />, ResumeIcon)
           }
         />
-
         <DesktopIcon
           icon={MailIcon}
           title="Mail"
@@ -126,6 +121,7 @@ const App = () => {
 
       {/* Work in progress lol */}
       <div>wip</div>
+
       <TaskBar>
         <StartButton onClick={toggleStartMenu} />
         {/* make this as a component later, para sa mga opened apps in taskbar */}
