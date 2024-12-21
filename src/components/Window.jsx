@@ -23,6 +23,7 @@ const Window = ({
   const tempPosition = useRef({ x: 0, y: 0 });
   const [isMaximized, setIsMaximized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const [size, setSize] = useState({
     width: Math.min(500, window.innerWidth * 0.9),
@@ -55,12 +56,15 @@ const Window = ({
       });
     }
     return () => {
-      headerEl.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchmove", handleTouchMove);
+      if (headerEl) {
+        headerEl.removeEventListener("touchstart", handleTouchStart);
+        document.removeEventListener("touchmove", handleTouchMove);
+      }
     };
   }, [isDragging]);
 
   const onMaximize = () => {
+    setIsTransitioning(true);
     const screenRect = document
       .getElementById("screen")
       .getBoundingClientRect();
@@ -82,6 +86,9 @@ const Window = ({
       position.current = { x: 0, y: 0 };
     }
     setIsMaximized(!isMaximized);
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
   };
 
   useEffect(() => {
@@ -90,15 +97,19 @@ const Window = ({
     interact(label.current).draggable({
       listeners: {
         start() {
-          setIsDragging(true);
-          document.body.style.userSelect = "none"; //prevent text/object selection when dragging
-          onClick(); // Set as active window
+          if (!isTransitioning) {
+            setIsDragging(true);
+            document.body.style.userSelect = "none"; //prevent text/object selection when dragging
+            onClick(); // Set as active window
+          }
         },
         move(event) {
-          position.current.x += event.dx;
-          position.current.y += event.dy;
-          //apply new pos to the window
-          windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          if (!isTransitioning) {
+            position.current.x += event.dx;
+            position.current.y += event.dy;
+            //apply new pos to the window
+            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          }
         },
         end() {
           setIsDragging(false);
@@ -140,17 +151,21 @@ const Window = ({
       edges: { left: true, right: true, bottom: true, top: true },
       listeners: {
         start() {
-          setIsDragging(true);
+          if (!isTransitioning) {
+            setIsDragging(true);
+          }
         },
         move(event) {
-          setSize({
-            width: event.rect.width,
-            height: event.rect.height,
-          });
-          // Update position based on resizing movement
-          position.current.x += event.deltaRect.left;
-          position.current.y += event.deltaRect.top;
-          windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          if (!isTransitioning) {
+            setSize({
+              width: event.rect.width,
+              height: event.rect.height,
+            });
+            // Update position based on resizing movement
+            position.current.x += event.deltaRect.left;
+            position.current.y += event.deltaRect.top;
+            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          }
         },
         end() {
           setIsDragging(false);
@@ -170,7 +185,7 @@ const Window = ({
         }),
       ],
     });
-  }, [size, onClick]);
+  }, [size, onClick, isTransitioning]);
 
   const windowStyle = {
     width: `${size.width}px`,
@@ -178,8 +193,8 @@ const Window = ({
     transform: `translate(${position.current.x}px, ${position.current.y}px)`,
     zIndex: zIndex,
     display: isMinimized ? "none" : "block",
-    transition: isMaximized
-      ? "width 0.3s ease, height 0.3s ease, transform 0.3s ease"
+    transition: isTransitioning
+      ? "width 0.3s ease-in-out, height 0.3s ease-in-out, transform 0.3s ease-in-out"
       : "none",
   };
 
