@@ -71,11 +71,6 @@ const Mail = () => {
           //replace it with onClickSendEmail pag nakapag setup na ng backend eg. express
           // tho mas okay with library eg. email.js, formspree, smtp.js(best?)
           { icon: SendEmailIcon, title: "Send", onClick: onClickUseDiffApp },
-          {
-            icon: SendEmailIcon,
-            title: "Use Different App",
-            onClickUseDiffApp,
-          },
         ]}
       />
 
