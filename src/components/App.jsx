@@ -17,6 +17,25 @@ const MailIcon = "/assets/WinIcons/github.png";
 import { TaskBarButton } from "./TaskBarButton";
 
 const App = () => {
+  const getBiographyPosition = () => {
+    return {
+      x: window.innerWidth * 0.1,
+      y: window.innerHeight * 0.1,
+    };
+  };
+
+  const getRandomPosition = () => {
+    const biographyPos = getBiographyPosition();
+
+    const offsetX = Math.floor(Math.random() * 200) + 1;
+    const offsetY = Math.floor(Math.random() * 50) + 1;
+
+    return {
+      x: biographyPos.x + offsetX,
+      y: biographyPos.y + offsetY,
+    };
+  };
+
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [openWindows, setOpenWindows] = useState([
     {
@@ -26,6 +45,7 @@ const App = () => {
       icon: BiographyIcon,
       zIndex: 1,
       minimized: false,
+      position: getBiographyPosition(),
     },
   ]);
 
@@ -40,7 +60,9 @@ const App = () => {
     const existingWindow = openWindows.find((win) => win.windowId === windowId);
 
     if (!existingWindow) {
-      // add new window window with zIndex
+      const position =
+        windowId === "biography" ? getBiographyPosition() : getRandomPosition();
+
       setOpenWindows((prevWindows) => [
         ...prevWindows,
         {
@@ -50,6 +72,7 @@ const App = () => {
           icon,
           zIndex: zIndexCounter,
           minimized: false,
+          position,
         },
       ]);
       setZIndexCounter((prev) => prev + 1);
@@ -150,6 +173,7 @@ const App = () => {
           onMinimize={() => minimizeWindow(win.windowId)}
           onClick={() => bringToFront(win.windowId)}
           isMinimized={win.minimized}
+          initialPos={win.position}
         >
           {win.content}
         </Window>
