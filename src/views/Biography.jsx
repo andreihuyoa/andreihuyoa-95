@@ -76,11 +76,14 @@ const Biography = () => {
               present it at Adamson&apos;s AduNest Incubation Camp.
             </p>
             <p>
-              I also worked on a healthcare recommendation system for my thesis,
-              combining content-based filtering with neural networks and
-              geospatial algorithms. That project taught me a lot about
-              performance optimization and building APIs that need to respond
-              quickly under load.
+              I also worked on a healthcare recommendation system that I built
+              for my thesis, developing the frontend, backend, and neural model
+              from scratch. The system recommends facilities based on
+              users&apos; location and medical service preferences, combining
+              content-based filtering with neural networks and geospatial
+              algorithms. The system achieved a Mean Average Precision (MAP) of
+              0.65 and 80.7% Recall@5, meeting the required recommendation
+              quality metrics for the project.
             </p>
             <p>
               When I&apos;m not coding, I enjoy reading and listening to music.
