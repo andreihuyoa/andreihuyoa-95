@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import SubHeader from "../components/SubHeader";
 
-import SendEmailIcon from "../assets/WinIcons/workspace.png";
+const SendEmailIcon = "/assets/WinIcons/workspace.png";
 
 const Mail = () => {
   const [from, setFrom] = useState("");
@@ -57,35 +57,39 @@ const Mail = () => {
     setError("");
 
     const mailToLink = `mailto:andrei.huyoa.me@gmail.com?subject=${encodeURIComponent(
-      subject
+      subject,
     )}&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(from)}`;
 
     window.location.href = mailToLink;
   };
 
   return (
-    <div className="flex flex-col h-full overflow-auto">
+    <div className="flex h-full flex-col overflow-auto">
       <SubHeader
         className="mb-2"
         buttons={[
           //replace it with onClickSendEmail pag nakapag setup na ng backend eg. express
           // tho mas okay with library eg. email.js, formspree, smtp.js(best?)
           { icon: SendEmailIcon, title: "Send", onClick: onClickUseDiffApp },
-          { icon: SendEmailIcon, title: "Use Different App", onClickUseDiffApp },
+          {
+            icon: SendEmailIcon,
+            title: "Use Different App",
+            onClickUseDiffApp,
+          },
         ]}
       />
 
       {/* Fields */}
-      <div className="flex-1 flex p-1 flex-col overflow-auto *:flex *:items-center *:gap-1 *:py-1 *:mb-1 *:border-b">
+      <div className="flex flex-1 flex-col overflow-auto p-1 *:mb-1 *:flex *:items-center *:gap-1 *:border-b *:py-1">
         {/* Subject Updates */}
-        <div className="text-xl font-MS95 font-bold tracking-tighter mb-2 overflow-auto">
+        <div className="mb-2 overflow-auto font-MS95 text-xl font-bold tracking-tighter">
           {subject || "New Message"}
         </div>
 
         {/* To */}
         <div>
           <label>To:</label>
-          <p className="bg-95-cyan rounded-md px-1">Andrei Huyo-a</p>
+          <p className="rounded-md bg-95-cyan px-1">Andrei Huyo-a</p>
         </div>
 
         {/* Subject */}
@@ -114,13 +118,12 @@ const Mail = () => {
             onChange={(e) => setFrom(e.target.value)}
             placeholder="Your email"
           />
-          {error && <p className="text-red-500 text-xs">{error}</p>}
+          {error && <p className="text-xs text-red-500">{error}</p>}
         </div>
 
         {/* Message */}
         <div className="flex-1 overflow-auto border-none">
           <InputField
-            
             name="Message"
             type="textarea"
             value={message}
@@ -129,7 +132,7 @@ const Mail = () => {
           />
 
           {/* Status Message */}
-          {status && <p className="text-sm text-green-500 mt-2">{status}</p>}
+          {status && <p className="mt-2 text-sm text-green-500">{status}</p>}
         </div>
       </div>
     </div>

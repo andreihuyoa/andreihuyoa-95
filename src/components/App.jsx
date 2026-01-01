@@ -11,9 +11,9 @@ import Biography from "../views/Biography";
 import Resume from "../views/Resume";
 import Mail from "../views/Mail";
 
-import BiographyIcon from "../assets/WinIcons/workspace.png";
-import ResumeIcon from "../assets/WinIcons/stardew_valley.png";
-import MailIcon from "../assets/WinIcons/github.png";
+const BiographyIcon = "/assets/WinIcons/workspace.png";
+const ResumeIcon = "/assets/WinIcons/stardew_valley.png";
+const MailIcon = "/assets/WinIcons/github.png";
 import { TaskBarButton } from "./TaskBarButton";
 
 const App = () => {

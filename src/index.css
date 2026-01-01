@@ -4,13 +4,13 @@
 
 @font-face {
   font-family: "msw";
-  src: url("/src/assets/fonts/ms-sans.otf") format("opentype");
+  src: url("/assets/fonts/ms-sans.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "msdon";
-  src: url("/src/assets/fonts/MS-Sans-Serif.ttf") format("truetype");
+  src: url("/assets/fonts/MS-Sans-Serif.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }

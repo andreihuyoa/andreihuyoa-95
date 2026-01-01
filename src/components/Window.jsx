@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
 
-import min from "../assets/Buttons/min.svg";
-import max from "../assets/Buttons/max.svg";
-import close from "../assets/Buttons/x.svg";
+const min = "/assets/Buttons/min.svg";
+const max = "/assets/Buttons/max.svg";
+const close = "/assets/Buttons/x.svg";
 
 const Window = ({
   icon,

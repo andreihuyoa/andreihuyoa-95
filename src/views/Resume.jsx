@@ -1,37 +1,39 @@
 import React from "react";
 import SubHeader from "../components/SubHeader";
 
-import HisResume from "../assets/Resume/CarlAndreiDelRosario.pdf";
+const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";
 
-import DownloadIcon from "../assets/WinIcons/stardew_valley.png";
+const DownloadIcon = "/assets/WinIcons/stardew_valley.png";
 
 const Resume = () => {
-  const onClickOpenInNewTab = () => {
-    window.open(HisResume, "_blank");
-  };
+  // const onClickOpenInNewTab = () => {
+  //   window.open(HisResume, "_blank");
+  // };
 
   const onClickDownload = () => {
     const link = document.createElement("a");
     link.href = HisResume;
-    link.download = "Carl Andrei Del Rosario - Resume.pdf";
+    link.download = HisResume.split("/").pop();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
   return (
-    <div className="flex flex-col h-full overflow-auto">
+    <div className="flex h-full flex-col overflow-auto">
       <SubHeader
         className="mb-2"
         buttons={[
-          //download
-          { icon: DownloadIcon, title: "Open In New Tab", onClick: onClickOpenInNewTab },
-          //open in new tab
+          // {
+          //   icon: DownloadIcon,
+          //   title: "Open In New Tab",
+          //   onClick: onClickOpenInNewTab,
+          // },
           { icon: DownloadIcon, title: "Download", onClick: onClickDownload },
         ]}
       />
 
       {/* Resume */}
-      <iframe src={HisResume} className="w-full h-full"></iframe>
+      <iframe src={HisResume} className="h-full w-full"></iframe>
     </div>
   );
 };
