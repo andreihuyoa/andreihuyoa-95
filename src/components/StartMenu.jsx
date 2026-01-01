@@ -1,7 +1,7 @@
 import React from "react";
 import SocialsButton from "./SocialsButton";
 
-const HisResume = "/assets/Resume/CarlAndreiDelRosario.pdf";
+const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";
 
 const sidebarImage = "/assets/AndreiHuyoa95.png";
 const ig = "/assets/StartMenu/Instagram.svg";
