@@ -55,7 +55,7 @@ const Biography = () => {
               Science student at Adamson University. I recently worked at Shinka
               Studios, where I built and maintained features for production
               applications using Next.js and Go, and I&apos;m now focusing on
-              finishing my degree while transitioning toward cloud engineering.
+              finishing my degree.
             </p>
             <p>
               My focus these days is shifting toward cloud engineering.
