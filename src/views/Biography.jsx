@@ -53,14 +53,14 @@ const Biography = () => {
             <p>
               I&apos;m a {age}-year-old full stack developer and Computer
               Science student at Adamson University. I recently worked at Shinka
-              Studios, where I built and maintained features for production
-              applications using Next.js and Go, and I&apos;m now focusing on
+              Studios, where I built and maintained features for a land sales
+              web application using Next.js and Go, and I&apos;m now focusing on
               finishing my degree.
             </p>
             <p>
               My focus these days is shifting toward cloud engineering.
               I&apos;ve been working with AWS services and containerization
-              tools like Docker, and I&apos;m actively learning more about
+              tools like Docker, and I&apos;m actively learning more about its
               infrastructure, scalability, and cloud-native architectures. I
               find the challenge of designing systems that can handle scale and
               reliability really engaging.
