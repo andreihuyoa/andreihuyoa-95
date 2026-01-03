@@ -1,4 +1,3 @@
-import React from "react";
 import SocialsButton from "./SocialsButton";
 
 const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";
@@ -8,20 +7,26 @@ const ig = "/assets/StartMenu/Instagram.svg";
 const git = "/assets/StartMenu/Github.svg";
 const linkedin = "/assets/StartMenu/Linkedin.svg";
 const file = "/assets/StartMenu/Attachment.svg";
-const project1 = "/assets/StartMenu/Lokalista.svg";
+// const project1 = "/assets/StartMenu/Lokalista.svg";
 
+// eslint-disable-next-line no-unused-vars
 const StartMenu = ({ isOpen, onClose }) => {
   if (!isOpen) {
     return null;
   }
   return (
     <div className="absolute bottom-12 left-0 z-[9999] flex overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray font-MS95 text-sm">
-      {/* Sidebar */}
+      {/* Sidebar Image*/}
       <div className="flex items-stretch">
-        <img src={sidebarImage} alt="AndreiHuyoa95" className="h-auto w-6" />
+        <img
+          src={sidebarImage}
+          alt="Carl Andrei Del Rosario"
+          className="h-auto w-6"
+        />
       </div>
-      <div className="flex-grow justify-between">
-        {/* Socials */}
+
+      {/* Socials */}
+      <div className="flex flex-col justify-center">
         <SocialsButton
           icon={ig}
           link="https://www.instagram.com/unabridgedeeyore"
@@ -37,9 +42,10 @@ const StartMenu = ({ isOpen, onClose }) => {
           link="https://www.github.com/andreihuyoa"
           text="Github"
         />
-        <div className="my-2 border-t border-gray-500"></div>
+
+        <div className="mx-2 my-2 border-t border-gray-500" />
         <SocialsButton icon={file} link={HisResume} text="Resume" />
-        <SocialsButton icon={project1} link="" text="Lokalista" />
+        {/* <SocialsButton icon={project1} link="" text="Lokalista" /> */}
       </div>
     </div>
   );
