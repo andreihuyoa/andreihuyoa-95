@@ -8,11 +8,13 @@ const Biography = () => {
   return (
     <div className="bg-95-gray px-12 py-6">
       <div className="flex flex-col gap-1">
-        <img
-          src={imagecuzz}
-          alt="Andrei Huyo-a"
-          className="h-auto w-full max-w-xs md:max-w-md lg:max-w-lg"
-        />
+        <div className="flex justify-center">
+          <img
+            src={imagecuzz}
+            alt="Andrei Huyo-a"
+            className="h-auto w-full max-w-xs md:max-w-md lg:max-w-lg"
+          />
+        </div>
         <h2 className="py-2 font-MS95 text-2xl font-extrabold">
           Carl Andrei H. Del Rosario
         </h2>
@@ -21,7 +23,7 @@ const Biography = () => {
           <h4>Philippines 📍</h4>
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2 *:h-5 *:w-auto *:rounded-none *:text-xs">
+        <div className="mt-2 flex flex-wrap items-center gap-2 *:h-5 *:w-auto *:rounded-none *:text-xs">
           <img
             alt="TypeScript"
             src="https://img.shields.io/badge/-TypeScript-blue"

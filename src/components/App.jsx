@@ -10,10 +10,12 @@ import Window from "./Window";
 import Biography from "../views/Biography";
 import Resume from "../views/Resume";
 import Mail from "../views/Mail";
+import NotFound from "../views/projects/404notfound";
 
 const BiographyIcon = "/assets/WinIcons/workspace.png";
 const ResumeIcon = "/assets/WinIcons/stardew_valley.png";
 const MailIcon = "/assets/WinIcons/github.png";
+const NotFoundIcon = "/assets/WinIcons/workspace.png";
 import { TaskBarButton } from "./TaskBarButton";
 
 const App = () => {
@@ -139,6 +141,13 @@ const App = () => {
           icon={MailIcon}
           title="Mail"
           onDoubleClick={() => openWindow("mail", "Mail", <Mail />, MailIcon)}
+        />
+        <DesktopIcon
+          icon={NotFoundIcon}
+          title="404"
+          onDoubleClick={() =>
+            openWindow("notfound", "404", <NotFound />, NotFoundIcon)
+          }
         />
       </div>
 
