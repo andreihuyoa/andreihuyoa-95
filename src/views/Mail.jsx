@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import InputField from "../components/InputField";
 import SubHeader from "../components/SubHeader";
@@ -12,7 +12,7 @@ const Mail = () => {
   const [error, setError] = useState("");
 
   //requires backend kakatamad
-  const [status, setStatus] = useState("");
+  const [status] = useState("");
 
   const validateEmail = (email) => {
     return email.includes("@");

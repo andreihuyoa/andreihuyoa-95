@@ -1,4 +1,4 @@
-import React from "react";
+
 import SubHeader from "../components/SubHeader";
 
 const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";

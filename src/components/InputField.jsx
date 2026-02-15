@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputField = ({ name, type = "text", placeholder, value, onChange }) => {
   return type === "textarea" ? (
     <textarea
@@ -8,7 +6,7 @@ const InputField = ({ name, type = "text", placeholder, value, onChange }) => {
       placeholder={placeholder}
       onChange={onChange}
       spellCheck={false}
-      className="w-full h-full p-1 overflow-auto text-95-black resize-none focus:outline focus:outline-1 focus:outline-95-darkgray focus:border-95-white focus:border focus:rounded-sm bg-transparent spellcheck"
+      className="text-95-black focus:outline-95-darkgray focus:border-95-white spellcheck h-full w-full resize-none overflow-auto bg-transparent p-1 focus:rounded-sm focus:border focus:outline focus:outline-1"
     />
   ) : (
     <input
@@ -16,7 +14,7 @@ const InputField = ({ name, type = "text", placeholder, value, onChange }) => {
       type={type}
       value={value}
       placeholder={placeholder}
-      className="w-full text-95-black bg-transparent focus:outline-none focus:ring-0"
+      className="text-95-black w-full bg-transparent focus:ring-0 focus:outline-none"
       onChange={onChange}
     />
   );
