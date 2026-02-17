@@ -1,13 +1,13 @@
-const DesktopIcon = ({ icon, title, onDoubleClick }) => {
+const DesktopIcon = ({ icon, title, onDoubleClick, size = "w-12 h-12" }) => {
   return (
     <div
-      className="my-2 flex h-12 w-12 cursor-pointer flex-col items-center p-2 text-95-black md:my-4 md:h-14 md:w-14"
+      className="text-95-black my-2 flex h-12 w-12 cursor-pointer flex-col items-center p-2 md:my-4 md:h-14 md:w-14"
       onDoubleClick={() => onDoubleClick(icon, title)}
     >
       <img
         src={icon}
         alt={title}
-        className="mb-2 flex items-center bg-95-gray bg-transparent"
+        className={`mb-2 flex items-center bg-transparent ${size}`}
       />
       <div className="text-center text-xs tracking-wider text-white md:text-sm">
         {title}

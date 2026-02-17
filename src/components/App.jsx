@@ -12,10 +12,11 @@ import Resume from "../views/Resume";
 import Mail from "../views/Mail";
 import NotFound from "../views/projects/404notfound";
 
-const BiographyIcon = "/assets/WinIcons/workspace.png";
-const ResumeIcon = "/assets/WinIcons/stardew_valley.png";
-const MailIcon = "/assets/WinIcons/github.png";
-const NotFoundIcon = "/assets/WinIcons/workspace.png";
+const BiographyIcon = "/assets/WinIcons/computer.png";
+const ResumeIcon = "/assets/WinIcons/folder.png";
+const MailIcon = "/assets/WinIcons/mail.png";
+const NotFoundIcon = "/assets/WinIcons/world.png";
+
 import { TaskBarButton } from "./TaskBarButton";
 
 const App = () => {

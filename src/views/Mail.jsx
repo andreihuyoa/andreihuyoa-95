@@ -77,14 +77,14 @@ const Mail = () => {
       {/* Fields */}
       <div className="flex flex-1 flex-col overflow-auto p-1 *:mb-1 *:flex *:items-center *:gap-1 *:border-b *:py-1">
         {/* Subject Updates */}
-        <div className="mb-2 overflow-auto font-MS95 text-xl font-bold tracking-tighter">
+        <div className="font-MS95 mb-2 overflow-auto text-xl font-bold tracking-tighter">
           {subject || "New Message"}
         </div>
 
         {/* To */}
         <div>
           <label>To:</label>
-          <p className="rounded-md bg-95-cyan px-1">Andrei Huyo-a</p>
+          <p className="bg-95-cyan rounded-md px-1">Andrei Huyo-a</p>
         </div>
 
         {/* Subject */}
@@ -107,7 +107,7 @@ const Mail = () => {
             From:
           </label>
           <InputField
-            name="From"
+            name="From" 
             type="text"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
