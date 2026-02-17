@@ -3,7 +3,7 @@ import { useState } from "react";
 import InputField from "../components/InputField";
 import SubHeader from "../components/SubHeader";
 
-const SendEmailIcon = "/assets/WinIcons/workspace.png";
+const SendEmailIcon = "/assets/WinIcons/mail.png";
 
 const Mail = () => {
   const [from, setFrom] = useState("");
@@ -107,7 +107,7 @@ const Mail = () => {
             From:
           </label>
           <InputField
-            name="From" 
+            name="From"
             type="text"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
