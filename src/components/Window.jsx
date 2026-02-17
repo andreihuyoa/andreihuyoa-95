@@ -24,6 +24,12 @@ const Window = ({
   const [isMaximized, setIsMaximized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const sizeRef = useRef({
+    width: Math.min(500, window.innerWidth * 0.9),
+    height: Math.min(800, window.innerHeight * 0.8),
+  });
+  const onClickRef = useRef(onClick);
+  const isTransitioningRef = useRef(isTransitioning);
 
   const [size, setSize] = useState({
     width: Math.min(500, window.innerWidth * 0.9),
@@ -63,6 +69,18 @@ const Window = ({
     };
   }, [isDragging]);
 
+  useEffect(() => {
+    sizeRef.current = size;
+  }, [size]);
+
+  useEffect(() => {
+    onClickRef.current = onClick;
+  }, [onClick]);
+
+  useEffect(() => {
+    isTransitioningRef.current = isTransitioning;
+  }, [isTransitioning]);
+
   const onMaximize = () => {
     setIsTransitioning(true);
     const screenRect = document
@@ -93,18 +111,23 @@ const Window = ({
 
   useEffect(() => {
     const windowElement = windowRef.current;
+    const headerElement = label.current;
 
-    interact(label.current).draggable({
+    if (!windowElement || !headerElement) return undefined;
+
+    const headerInteractable = interact(headerElement);
+    headerInteractable.styleCursor(false).draggable({
+      cursorChecker: () => "default",
       listeners: {
         start() {
-          if (!isTransitioning) {
+          if (!isTransitioningRef.current) {
             setIsDragging(true);
             document.body.style.userSelect = "none"; //prevent text/object selection when dragging
-            onClick(); // Set as active window
+            onClickRef.current(); // Set as active window
           }
         },
         move(event) {
-          if (!isTransitioning) {
+          if (!isTransitioningRef.current) {
             position.current.x += event.dx;
             position.current.y += event.dy;
             //apply new pos to the window
@@ -121,9 +144,9 @@ const Window = ({
 
           //Clamp pos within bounds
           const minX = 0;
-          const maxX = screenRect.width - size.width;
+          const maxX = screenRect.width - sizeRef.current.width;
           const minY = 0;
-          const maxY = screenRect.height - size.height;
+          const maxY = screenRect.height - sizeRef.current.height;
 
           //clamp pos within bounds
           position.current.x = Math.max(
@@ -147,16 +170,18 @@ const Window = ({
     });
 
     // Resize window
-    interact(windowElement).resizable({
+    const windowInteractable = interact(windowElement);
+    windowInteractable.styleCursor(false).resizable({
       edges: { left: true, right: true, bottom: true, top: true },
+      cursorChecker: () => "default",
       listeners: {
         start() {
-          if (!isTransitioning) {
+          if (!isTransitioningRef.current) {
             setIsDragging(true);
           }
         },
         move(event) {
-          if (!isTransitioning) {
+          if (!isTransitioningRef.current) {
             setSize({
               width: event.rect.width,
               height: event.rect.height,
@@ -185,7 +210,12 @@ const Window = ({
         }),
       ],
     });
-  }, [size, onClick, isTransitioning]);
+
+    return () => {
+      headerInteractable.unset();
+      windowInteractable.unset();
+    };
+  }, []);
 
   const windowStyle = {
     width: `${size.width}px`,
@@ -203,30 +233,30 @@ const Window = ({
       ref={windowRef}
       id={windowId}
       style={windowStyle}
-      className={`absolute overflow-hidden border-2 border-95-white border-b-95-black border-r-95-black bg-95-gray shadow-lg ${isMaximized ? "fullscreen" : ""}`}
+      className={`border-95-white border-b-95-black border-r-95-black bg-95-gray absolute overflow-hidden border-2 shadow-lg ${isMaximized ? "fullscreen" : ""}`}
       onClick={onClick}
     >
       <div
         ref={label}
-        className="flex items-center justify-between border-b-2 border-95-white border-b-95-black bg-95-navy p-1"
+        className="border-95-white border-b-95-black bg-95-navy flex cursor-default items-center justify-between border-b-2 p-1"
         onDoubleClick={onMaximize}
       >
         {/* Header */}
-        <div className="flex items-center gap-2">
+        <div className="flex cursor-default items-center gap-2">
           <img src={icon} alt={title} className="h-6 w-6 bg-transparent" />
           <span className="text-xs text-white">{title}</span>
         </div>
 
-        <div className="flex *:w-5 *:items-center *:border-2 *:border-95-white *:border-b-95-black *:border-r-95-black *:bg-95-gray *:focus:outline-none">
+        <div className="*:border-95-white *:border-b-95-black *:border-r-95-black *:bg-95-gray flex *:w-5 *:cursor-pointer *:items-center *:border-2 *:focus:outline-none">
           <button
             onClick={onMinimize}
-            className="mr-1 active:border-95-black active:border-b-95-white active:border-r-95-white"
+            className="active:border-95-black active:border-b-95-white active:border-r-95-white mr-1"
           >
             <img src={min} alt="min" />
           </button>
           <button
             onClick={onMaximize}
-            className="mr-1 active:border-95-black active:border-b-95-white active:border-r-95-white"
+            className="active:border-95-black active:border-b-95-white active:border-r-95-white mr-1"
           >
             <img src={max} alt="max" />
           </button>
