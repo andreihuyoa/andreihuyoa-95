@@ -1,4 +1,6 @@
-const NotFound = () => {
+import type { ReactElement } from "react";
+
+const NotFound = (): ReactElement => {
   return (
     <div className="items-center justify-center px-12 py-6">
       <div className="flex flex-col gap-1">

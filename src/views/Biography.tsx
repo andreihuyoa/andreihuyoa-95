@@ -1,7 +1,8 @@
 const imagecuzz = "/assets/Biography/mememe.jpg";
+import type { ReactElement } from "react";
 import { calculateAge } from "../utils/birthday";
 
-const Biography = () => {
+const Biography = (): ReactElement => {
   const birthDate = new Date(2002, 9, 9); //Year, Month - 1, Day
   const age = calculateAge(birthDate);
 

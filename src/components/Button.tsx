@@ -1,4 +1,16 @@
-const Button = ({ children, onClick, className = "" }) => {
+import type { MouseEventHandler, ReactNode } from "react";
+
+interface ButtonProps {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+}
+
+const Button = ({
+  children,
+  onClick,
+  className = "",
+}: ButtonProps): ReactNode => {
   return (
     <button
       // font weight bold might create a different component since eto yung start button

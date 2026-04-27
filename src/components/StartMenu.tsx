@@ -1,4 +1,5 @@
 import SocialsButton from "./SocialsButton";
+import type { ReactNode } from "react";
 
 const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";
 
@@ -9,8 +10,12 @@ const linkedin = "/assets/StartMenu/Linkedin.svg";
 const file = "/assets/StartMenu/Attachment.svg";
 // const project1 = "/assets/StartMenu/Lokalista.svg";
 
-// eslint-disable-next-line no-unused-vars
-const StartMenu = ({ isOpen, onClose }) => {
+interface StartMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const StartMenu = ({ isOpen }: StartMenuProps): ReactNode => {
   if (!isOpen) {
     return null;
   }

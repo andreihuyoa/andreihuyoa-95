@@ -1,4 +1,4 @@
-export const calculateAge = (birthDate) => {
+export const calculateAge = (birthDate: Date): number => {
   const today = new Date();
   const birthYear = birthDate.getFullYear();
   const birthMonth = birthDate.getMonth();

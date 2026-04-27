@@ -1,6 +1,21 @@
 import Button from "./Button";
+import type { ReactNode } from "react";
 
-const SubHeader = ({ className = "", buttons = [] }) => {
+export interface SubHeaderButton {
+  icon?: string;
+  title: string;
+  onClick: () => void;
+}
+
+interface SubHeaderProps {
+  className?: string;
+  buttons?: SubHeaderButton[];
+}
+
+const SubHeader = ({
+  className = "",
+  buttons = [],
+}: SubHeaderProps): ReactNode => {
   return (
     <div
       className={`border-95-white outline-95-darkgray flex gap-1 border px-1 py-0.5 text-sm font-bold text-black outline-1 ${className}`}

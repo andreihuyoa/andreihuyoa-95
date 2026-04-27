@@ -1,4 +1,18 @@
-export const TaskBarButton = ({ children, onClick, icon, title }) => {
+import type { MouseEventHandler, ReactNode } from "react";
+
+interface TaskBarButtonProps {
+  children: ReactNode;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  icon: string;
+  title: string;
+}
+
+export const TaskBarButton = ({
+  children,
+  onClick,
+  icon,
+  title,
+}: TaskBarButtonProps): ReactNode => {
   return (
     <button
       onClick={onClick}

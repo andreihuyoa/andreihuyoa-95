@@ -1,4 +1,10 @@
-const StartButton = ({ onClick }) => {
+import type { MouseEventHandler, ReactNode } from "react";
+
+interface StartButtonProps {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+const StartButton = ({ onClick }: StartButtonProps): ReactNode => {
   return (
     <button
       //add shadow din siguro later

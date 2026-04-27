@@ -1,9 +1,55 @@
 import { useEffect, useRef, useState } from "react";
 import interact from "interactjs";
+import type { CSSProperties, ReactElement, ReactNode } from "react";
+import type { InteractEvent } from "@interactjs/core/InteractEvent";
+import type { ResizeEvent } from "@interactjs/actions/resize/plugin";
 
 const min = "/assets/Buttons/min.svg";
 const max = "/assets/Buttons/max.svg";
 const close = "/assets/Buttons/x.svg";
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface WindowSize {
+  width: number;
+  height: number;
+}
+
+interface WindowProps {
+  icon: string;
+  title: string;
+  windowId: string;
+  onClose: () => void;
+  onClick: () => void;
+  onMinimize: () => void;
+  isMinimized: boolean;
+  children: ReactNode;
+  zIndex: number;
+  initialPos?: Position;
+}
+
+const getDefaultPosition = (): Position => ({
+  x: window.innerWidth * 0.1,
+  y: window.innerHeight * 0.1,
+});
+
+const getDefaultSize = (): WindowSize => ({
+  width: Math.min(500, window.innerWidth * 0.9),
+  height: Math.min(800, window.innerHeight * 0.8),
+});
+
+const getScreenElement = (): HTMLElement => {
+  const screen = document.getElementById("screen");
+
+  if (!screen) {
+    throw new Error("Screen element not found");
+  }
+
+  return screen;
+};
 
 const Window = ({
   icon,
@@ -15,39 +61,34 @@ const Window = ({
   isMinimized,
   children,
   zIndex,
-  initialPos = { x: window.innerWidth * 0.1, y: window.innerHeight * 0.1 },
-}) => {
-  const windowRef = useRef(null);
-  const label = useRef(null);
-  const position = useRef(initialPos); // initial window position
+  initialPos = getDefaultPosition(),
+}: WindowProps): ReactElement => {
+  const windowRef = useRef<HTMLDivElement | null>(null);
+  const label = useRef<HTMLDivElement | null>(null);
+  const positionRef = useRef(initialPos); // initial window position
+  const [position, setPosition] = useState(initialPos);
   const tempPosition = useRef({ x: 0, y: 0 });
   const [isMaximized, setIsMaximized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const sizeRef = useRef({
-    width: Math.min(500, window.innerWidth * 0.9),
-    height: Math.min(800, window.innerHeight * 0.8),
-  });
+  const sizeRef = useRef<WindowSize>(getDefaultSize());
   const onClickRef = useRef(onClick);
   const isTransitioningRef = useRef(isTransitioning);
 
-  const [size, setSize] = useState({
-    width: Math.min(500, window.innerWidth * 0.9),
-    height: Math.min(800, window.innerHeight * 0.8),
-  });
+  const [size, setSize] = useState<WindowSize>(getDefaultSize());
   const prevSize = useRef(size);
 
   // Prevent document scrolling while dragging
   useEffect(() => {
     const headerEl = label.current;
 
-    const handleTouchStart = (e) => {
+    const handleTouchStart = (e: globalThis.TouchEvent): void => {
       if (isDragging) {
         e.preventDefault();
       }
     };
 
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: globalThis.TouchEvent): void => {
       if (isDragging) {
         e.preventDefault();
       }
@@ -81,27 +122,27 @@ const Window = ({
     isTransitioningRef.current = isTransitioning;
   }, [isTransitioning]);
 
-  const onMaximize = () => {
+  const onMaximize = (): void => {
     setIsTransitioning(true);
-    const screenRect = document
-      .getElementById("screen")
-      .getBoundingClientRect();
+    const screenRect = getScreenElement().getBoundingClientRect();
     if (isMaximized) {
       setSize(prevSize.current);
-      position.current = {
+      positionRef.current = {
         x: tempPosition.current.x,
         y: tempPosition.current.y,
       };
+      setPosition({ ...positionRef.current });
     } else {
       tempPosition.current = {
-        x: position.current.x,
-        y: position.current.y,
+        x: positionRef.current.x,
+        y: positionRef.current.y,
       };
       setSize({
         width: screenRect.width,
         height: screenRect.height,
       });
-      position.current = { x: 0, y: 0 };
+      positionRef.current = { x: 0, y: 0 };
+      setPosition({ ...positionRef.current });
     }
     setIsMaximized(!isMaximized);
     setTimeout(() => {
@@ -119,28 +160,26 @@ const Window = ({
     headerInteractable.styleCursor(false).draggable({
       cursorChecker: () => "default",
       listeners: {
-        start() {
+        start(): void {
           if (!isTransitioningRef.current) {
             setIsDragging(true);
             document.body.style.userSelect = "none"; //prevent text/object selection when dragging
             onClickRef.current(); // Set as active window
           }
         },
-        move(event) {
+        move(event: InteractEvent<"drag", "move">): void {
           if (!isTransitioningRef.current) {
-            position.current.x += event.dx;
-            position.current.y += event.dy;
+            positionRef.current.x += event.dx;
+            positionRef.current.y += event.dy;
             //apply new pos to the window
-            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+            windowElement.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`;
           }
         },
-        end() {
+        end(): void {
           setIsDragging(false);
           document.body.style.userSelect = "";
 
-          const screenRect = document
-            .getElementById("screen")
-            .getBoundingClientRect();
+          const screenRect = getScreenElement().getBoundingClientRect();
 
           //Clamp pos within bounds
           const minX = 0;
@@ -149,16 +188,17 @@ const Window = ({
           const maxY = screenRect.height - sizeRef.current.height;
 
           //clamp pos within bounds
-          position.current.x = Math.max(
+          positionRef.current.x = Math.max(
             minX,
-            Math.min(maxX, position.current.x),
+            Math.min(maxX, positionRef.current.x),
           );
-          position.current.y = Math.max(
+          positionRef.current.y = Math.max(
             minY,
-            Math.min(maxY, position.current.y),
+            Math.min(maxY, positionRef.current.y),
           );
 
-          windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+          setPosition({ ...positionRef.current });
+          windowElement.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`;
         },
       },
       modifiers: [
@@ -175,24 +215,31 @@ const Window = ({
       edges: { left: true, right: true, bottom: true, top: true },
       cursorChecker: () => "default",
       listeners: {
-        start() {
+        start(): void {
           if (!isTransitioningRef.current) {
             setIsDragging(true);
           }
         },
-        move(event) {
+        move(event: ResizeEvent<"move">): void {
           if (!isTransitioningRef.current) {
+            const deltaRect = event.deltaRect;
+
+            if (!deltaRect) {
+              return;
+            }
+
             setSize({
               width: event.rect.width,
               height: event.rect.height,
             });
             // Update position based on resizing movement
-            position.current.x += event.deltaRect.left;
-            position.current.y += event.deltaRect.top;
-            windowElement.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+            positionRef.current.x += deltaRect.left;
+            positionRef.current.y += deltaRect.top;
+            setPosition({ ...positionRef.current });
+            windowElement.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`;
           }
         },
-        end() {
+        end(): void {
           setIsDragging(false);
         },
       },
@@ -201,11 +248,9 @@ const Window = ({
           min: { width: 500, height: 700 },
           max: {
             width:
-              document.getElementById("screen").clientWidth -
-              position.current.x,
+              getScreenElement().clientWidth - positionRef.current.x,
             height:
-              document.getElementById("screen").clientHeight -
-              position.current.y,
+              getScreenElement().clientHeight - positionRef.current.y,
           },
         }),
       ],
@@ -217,10 +262,10 @@ const Window = ({
     };
   }, []);
 
-  const windowStyle = {
+  const windowStyle: CSSProperties = {
     width: `${size.width}px`,
     height: `${size.height}px`,
-    transform: `translate(${position.current.x}px, ${position.current.y}px)`,
+    transform: `translate(${position.x}px, ${position.y}px)`,
     zIndex: zIndex,
     display: isMinimized ? "none" : "block",
     transition: isTransitioning

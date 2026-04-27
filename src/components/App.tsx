@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ReactElement } from "react";
 import "../index.css";
 
 import TaskBar from "./TaskBar";
@@ -19,15 +20,30 @@ const NotFoundIcon = "/assets/WinIcons/world.png";
 
 import { TaskBarButton } from "./TaskBarButton";
 
-const App = () => {
-  const getBiographyPosition = () => {
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface OpenWindow {
+  windowId: string;
+  title: string;
+  content: ReactElement;
+  icon: string;
+  zIndex: number;
+  minimized: boolean;
+  position: Position;
+}
+
+const App = (): ReactElement => {
+  const getBiographyPosition = (): Position => {
     return {
       x: window.innerWidth * 0.1,
       y: window.innerHeight * 0.1,
     };
   };
 
-  const getRandomPosition = () => {
+  const getRandomPosition = (): Position => {
     const biographyPos = getBiographyPosition();
 
     const offsetX = Math.floor(Math.random() * 200) + 1;
@@ -40,7 +56,7 @@ const App = () => {
   };
 
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
-  const [openWindows, setOpenWindows] = useState([
+  const [openWindows, setOpenWindows] = useState<OpenWindow[]>([
     {
       windowId: "biography",
       title: "Biography",
@@ -54,12 +70,17 @@ const App = () => {
 
   const [zIndexCounter, setZIndexCounter] = useState(1);
 
-  const toggleStartMenu = () => {
+  const toggleStartMenu = (): void => {
     setIsStartMenuOpen(!isStartMenuOpen);
   };
 
   //Open a window by adding it sa openWindows array if di pa open
-  const openWindow = (windowId, title, content, icon) => {
+  const openWindow = (
+    windowId: string,
+    title: string,
+    content: ReactElement,
+    icon: string,
+  ): void => {
     const existingWindow = openWindows.find((win) => win.windowId === windowId);
 
     if (!existingWindow) {
@@ -85,7 +106,7 @@ const App = () => {
     }
   };
 
-  const bringToFront = (windowId) => {
+  const bringToFront = (windowId: string): void => {
     setOpenWindows((prevWindows) =>
       prevWindows.map((win) =>
         win.windowId === windowId ? { ...win, zIndex: zIndexCounter } : win,
@@ -95,14 +116,14 @@ const App = () => {
   };
 
   // Close a window by removing it from the openWindows array
-  const closeWindow = (windowId) => {
+  const closeWindow = (windowId: string): void => {
     setOpenWindows((prevWindows) =>
       prevWindows.filter((win) => win.windowId !== windowId),
     );
   };
 
   // Minimize a window by updating its minimized state to true
-  const minimizeWindow = (windowId) => {
+  const minimizeWindow = (windowId: string): void => {
     setOpenWindows((prevWindows) =>
       prevWindows.map((win) =>
         win.windowId === windowId ? { ...win, minimized: true } : win,
@@ -111,7 +132,7 @@ const App = () => {
   };
 
   // Toggle minimized state when the taskbar button is clicked
-  const toggleMinimizedWindow = (windowId) => {
+  const toggleMinimizedWindow = (windowId: string): void => {
     setOpenWindows((prevWindows) =>
       prevWindows.map((win) =>
         win.windowId === windowId ? { ...win, minimized: !win.minimized } : win,

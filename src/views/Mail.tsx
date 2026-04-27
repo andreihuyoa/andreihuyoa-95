@@ -1,11 +1,12 @@
 import { useState } from "react";
+import type { ReactElement } from "react";
 
 import InputField from "../components/InputField";
 import SubHeader from "../components/SubHeader";
 
 const SendEmailIcon = "/assets/WinIcons/mail.png";
 
-const Mail = () => {
+const Mail = (): ReactElement => {
   const [from, setFrom] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -14,7 +15,7 @@ const Mail = () => {
   //requires backend kakatamad
   const [status] = useState("");
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string): boolean => {
     return email.includes("@");
   };
 
@@ -49,7 +50,7 @@ const Mail = () => {
   //   }
   // };
 
-  const onClickUseDiffApp = () => {
+  const onClickUseDiffApp = (): void => {
     if (!validateEmail(from)) {
       setError("Enter a valid email address");
       return;
