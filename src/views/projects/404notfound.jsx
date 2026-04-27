@@ -9,7 +9,7 @@ const NotFound = () => {
             className="h-auto w-48 max-w-xs md:max-w-md lg:max-w-md"
           />
         </div>
-        <h2 className="py-2 font-MS95 text-2xl font-extrabold">
+        <h2 className="font-MS95 py-2 text-2xl font-extrabold">
           Healthcare Recommendation API Model
         </h2>
         <p className="text-sm text-gray-700"> </p>
@@ -27,15 +27,21 @@ const NotFound = () => {
           <img alt="Docker" src="https://img.shields.io/badge/-Docker-2496ED" />
         </div>
         <div className="pt-4">
-          <h3 className="font-600 pb-1 font-MS95 text-lg underline decoration-dotted underline-offset-2">
+          <h3 className="font-600 font-MS95 pb-1 text-lg underline decoration-dotted underline-offset-2">
             About This Project
           </h3>
           <div className="*:pb-2.5 *:text-sm *:font-light *:text-gray-700">
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-              labore architecto, eaque ea laborum ad officia ducimus unde.
-              Beatae consequuntur id sed cum quaerat, quisquam culpa a
-              architecto inventore similique!
+              As the lead developer for our thesis project, I built the CSRP
+              Hospital Recommendation API, a recommendation model that
+              recommends nearby hospitals based on user coordinates, required
+              medical services, and facility features. It combines content-based
+              filtering, distance scoring, and a neural-network ranking model to
+              return the most relevant hospitals while continuously improving
+              through user feedback. The project includes a production-ready
+              Flask API, a model training pipeline (synthetic + real interaction
+              data), and Dockerized deployment, live at
+              https://four04found-model.onrender.com/.
             </p>
           </div>
         </div>
