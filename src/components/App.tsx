@@ -7,6 +7,8 @@ import StartButton from "./StartButton";
 import StartMenu from "./StartMenu";
 import DesktopIcon from "./DesktopIcon";
 import Window from "./Window";
+import { useDesignMode } from "./mode/use-design-mode";
+import WebsiteMode from "../views/WebsiteMode";
 
 import Biography from "../views/Biography";
 import Resume from "../views/Resume";
@@ -17,6 +19,7 @@ const BiographyIcon = "/assets/WinIcons/computer.png";
 const ResumeIcon = "/assets/WinIcons/folder.png";
 const MailIcon = "/assets/WinIcons/mail.png";
 const NotFoundIcon = "/assets/WinIcons/world.png";
+const WebsiteIcon = "/assets/WinIcons/world.png";
 
 import { TaskBarButton } from "./TaskBarButton";
 
@@ -36,6 +39,8 @@ interface OpenWindow {
 }
 
 const App = (): ReactElement => {
+  const { mode, setMode } = useDesignMode();
+
   const getBiographyPosition = (): Position => {
     return {
       x: window.innerWidth * 0.1,
@@ -140,6 +145,10 @@ const App = (): ReactElement => {
     );
   };
 
+  if (mode === "website") {
+    return <WebsiteMode />;
+  }
+
   return (
     <div id="screen" className="flex h-screen flex-col overflow-hidden">
       {/* Desktop Area */}
@@ -170,6 +179,11 @@ const App = (): ReactElement => {
           onDoubleClick={() =>
             openWindow("notfound", "404", <NotFound />, NotFoundIcon)
           }
+        />
+        <DesktopIcon
+          icon={WebsiteIcon}
+          title="Website"
+          onDoubleClick={() => setMode("website")}
         />
       </div>
 

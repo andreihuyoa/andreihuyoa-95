@@ -42,6 +42,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root[data-mode="os"] {
+  color: #000000;
+  background-color: #018281;
+}
+
+:root[data-mode="website"] {
+  --website-text: #2f332f;
+  --website-text-muted: #747870;
+  --website-text-soft: #5b6058;
+  --website-background: #f7f2e9;
+  --website-surface: #fffaf2;
+  --website-surface-muted: #ece5d9;
+  --website-surface-soft: #fbf7f0;
+  --website-border: #d7d2c8;
+  --website-border-strong: #b8b3aa;
+  --website-green: #31463a;
+  --website-green-dot: #5f7d67;
+  --website-green-soft: #e4efda;
+  --website-orange: #ee9b1a;
+  --website-shadow: rgba(72, 64, 48, 0.18);
+
+  color: var(--website-text);
+  background-color: var(--website-background);
+}
+
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -55,4 +80,14 @@ textarea {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+
+@layer components {
+  .website-panel {
+    @apply border border-website-border bg-website-surface;
+  }
+
+  .website-label {
+    @apply font-mono text-[11px] font-bold uppercase tracking-[0.12em];
+  }
 }
