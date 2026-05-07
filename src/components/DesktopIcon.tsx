@@ -11,11 +11,11 @@ const DesktopIcon = ({
   icon,
   title,
   onDoubleClick,
-  size = "w-12 h-12",
+  size = "h-14 w-14 md:h-16 md:w-16",
 }: DesktopIconProps): ReactNode => {
   return (
     <div
-      className="text-95-black my-2 flex h-12 w-12 cursor-pointer flex-col items-center p-2 md:my-4 md:h-14 md:w-14"
+      className="text-95-black flex h-20 w-20 cursor-pointer flex-col items-center md:h-24 md:w-24"
       onDoubleClick={() => onDoubleClick(icon, title)}
     >
       <img

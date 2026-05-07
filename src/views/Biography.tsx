@@ -16,7 +16,7 @@ const Biography = (): ReactElement => {
             className="h-auto w-full max-w-xs md:max-w-md lg:max-w-lg"
           />
         </div>
-        <h2 className="py-2 font-MS95 text-2xl font-extrabold">
+        <h2 className="font-MS95 py-2 text-2xl font-extrabold">
           Carl Andrei H. Del Rosario
         </h2>
         <div className="flex flex-col gap-2 text-xs font-medium text-gray-700">
@@ -27,36 +27,32 @@ const Biography = (): ReactElement => {
         <div className="mt-2 flex flex-wrap items-center gap-2 *:h-5 *:w-auto *:rounded-none *:text-xs">
           <img
             alt="TypeScript"
-            src="https://img.shields.io/badge/-TypeScript-blue"
+            src="https://img.shields.io/badge/-TypeScript-3B82F6"
           />
-          <img
-            alt="JavaScript"
-            src="https://img.shields.io/badge/-JavaScript-yellow"
-          />
-          <img alt="Go" src="https://img.shields.io/badge/-Go-00ADD8" />
-          <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB" />
+          <img alt="Go" src="https://img.shields.io/badge/-Go-60A5FA" />
+          <img alt="Python" src="https://img.shields.io/badge/-Python-3B82F6" />
           <img
             alt="Next.js"
-            src="https://img.shields.io/badge/-Next.js-black"
+            src="https://img.shields.io/badge/-Next.js-2563EB"
           />
-          <img alt="React" src="https://img.shields.io/badge/-React-61DAFB" />
-          <img alt="AWS" src="https://img.shields.io/badge/-AWS-232F3E" />
-          <img alt="Docker" src="https://img.shields.io/badge/-Docker-2496ED" />
-          <img alt="MySQL" src="https://img.shields.io/badge/-MySQL-4479A1" />
+          <img alt="React" src="https://img.shields.io/badge/-React-1D4ED8" />
+          <img alt="AWS" src="https://img.shields.io/badge/-AWS-1E40AF" />
+          <img alt="Docker" src="https://img.shields.io/badge/-Docker-1E3A8A" />
+          <img alt="MySQL" src="https://img.shields.io/badge/-MySQL-172554" />
           <img
             alt="PostgreSQL"
-            src="https://img.shields.io/badge/-PostgreSQL-336791"
+            src="https://img.shields.io/badge/-PostgreSQL-0F172A"
           />
         </div>
         <div className="pt-4">
-          <h3 className="font-600 pb-1 font-MS95 text-lg underline decoration-dotted underline-offset-2">
+          <h3 className="font-600 font-MS95 pb-1 text-lg underline decoration-dotted underline-offset-2">
             About Me
           </h3>
           <div className="*:pb-2.5 *:text-sm *:font-light *:text-gray-700">
             <p>
               I&apos;m a {age}-year-old full stack developer and Computer
-              Science student at Adamson University. I&apos;m currently working at
-              Shinka Studios, where I build and maintain features for a land
+              Science student at Adamson University. I&apos;m currently working
+              at Shinka Studios, where I build and maintain features for a land
               sales web application using Next.js and Go, while also doing my
               internship at Strastan Solutions Corp.
             </p>
@@ -79,8 +75,8 @@ const Biography = (): ReactElement => {
               internship at Strastan Solutions Corp is strengthening my
               day-to-day practices in a professional engineering environment.
               Before these roles, I built the backend for a Healthcare Facility
-              Recommender System (CSRP) that suggests hospitals and clinics based
-              on required medical services and user location. The project
+              Recommender System (CSRP) that suggests hospitals and clinics
+              based on required medical services and user location. The project
               combined content-based filtering with geospatial ranking (via
               distance calculations) and used a validated dataset of healthcare
               facilities in Ermita, Manila, alongside synthetic interaction data
