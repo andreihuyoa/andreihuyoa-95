@@ -34,16 +34,30 @@ const NotFound = (): ReactElement => {
           </h3>
           <div className="*:pb-2.5 *:text-sm *:font-light *:text-gray-700">
             <p>
-              As the lead developer for our thesis project, I built the CSRP
-              Hospital Recommendation API, a recommendation model that
-              recommends nearby hospitals based on user coordinates, required
-              medical services, and facility features. It combines content-based
-              filtering, distance scoring, and a neural-network ranking model to
-              return the most relevant hospitals while continuously improving
-              through user feedback. The project includes a production-ready
-              Flask API, a model training pipeline (synthetic + real interaction
-              data), and Dockerized deployment, live at
-              https://four04found-model.onrender.com/.
+              As part of our thesis, I built the backend for CSRP (Healthcare
+              Facility Recommender System), which recommends hospitals and
+              clinics based on a user&apos;s required medical services and their
+              approximate location. The system combines content-based matching
+              (service availability and facility attributes) with geospatial
+              ranking using distance calculations (Haversine) to prioritize
+              nearby, relevant options.
+            </p>
+            <p>
+              The dataset was curated and validated for healthcare facilities in
+              Ermita, Manila, and we generated synthetic interaction records to
+              train and evaluate the ranking model. In our experiments, the
+              recommender achieved a Mean Average Precision (MAP) of 0.67 and
+              produced results with ~70ms average latency. The project was
+              packaged as a Flask API and deployed via Docker, available at{" "}
+              <a
+                href="https://csrp.andreihuyoa.dev/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-dotted underline-offset-2"
+              >
+                csrp.andreihuyoa.dev
+              </a>
+              .
             </p>
           </div>
         </div>
