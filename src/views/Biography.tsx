@@ -74,8 +74,8 @@ const Biography = (): ReactElement => {
               correctness, maintainability, and performance. In parallel, my
               internship at Strastan Solutions Corp is strengthening my
               day-to-day practices in a professional engineering environment.
-              Before these roles, I built the backend for a Healthcare Facility
-              Recommender System (CSRP) that suggests hospitals and clinics
+              Before these roles, I built the backend for Hilom, a Healthcare
+              Facility Recommender System that suggests hospitals and clinics
               based on required medical services and user location. The project
               combined content-based filtering with geospatial ranking (via
               distance calculations) and used a validated dataset of healthcare

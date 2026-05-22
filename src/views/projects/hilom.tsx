@@ -1,20 +1,38 @@
 import type { ReactElement } from "react";
 
-const NotFound = (): ReactElement => {
+const HILOM_SHOWCASE = "/assets/Projects/Hilom/hilom-mobile-3.png";
+const HILOM_LIVE_URL = "https://csrp.andreihuyoa.dev";
+
+const Hilom = (): ReactElement => {
   return (
-    <div className="items-center justify-center px-12 py-6">
-      <div className="flex flex-col gap-1">
-        <div className="flex justify-center">
+    <div className="px-4 py-4 sm:px-8 sm:py-6 md:px-12">
+      <div className="flex w-full min-w-0 flex-col gap-1">
+        <figure className="mx-auto w-full max-w-full">
           <img
-            src="/assets/Projects/web-ss-replace-frontend-later.png"
-            alt="404"
-            className="h-auto w-48 max-w-xs md:max-w-md lg:max-w-md"
+            src={HILOM_SHOWCASE}
+            alt="Hilom mobile app — service selection and facility map"
+            className="mx-auto block h-auto w-full max-w-2xl object-contain"
+            loading="lazy"
+            decoding="async"
           />
-        </div>
-        <h2 className="font-MS95 py-2 text-2xl font-extrabold">
-          Healthcare Recommendation API Model
+        </figure>
+        <h2 className="font-MS95 py-2 text-xl font-extrabold sm:text-2xl">
+          Hilom
         </h2>
-        <p className="text-sm text-gray-700"> </p>
+        <p className="text-sm text-gray-700">
+          Ermita Healthcare Facility Finder — thesis project
+        </p>
+        <p className="text-sm text-cyan-800">
+          📍{" "}
+          <a
+            href={HILOM_LIVE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-dotted underline-offset-2"
+          >
+            Link to the website
+          </a>
+        </p>
         <div className="flex flex-wrap items-center gap-2 *:h-5 *:w-auto *:rounded-none *:text-xs">
           <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB" />
           <img
@@ -34,7 +52,7 @@ const NotFound = (): ReactElement => {
           </h3>
           <div className="*:pb-2.5 *:text-sm *:font-light *:text-gray-700">
             <p>
-              As part of our thesis, I built the backend for CSRP (Healthcare
+              As part of our thesis, I built the backend for Hilom (Healthcare
               Facility Recommender System), which recommends hospitals and
               clinics based on a user&apos;s required medical services and their
               approximate location. The system combines content-based matching
@@ -47,15 +65,16 @@ const NotFound = (): ReactElement => {
               Ermita, Manila, and we generated synthetic interaction records to
               train and evaluate the ranking model. In our experiments, the
               recommender achieved a Mean Average Precision (MAP) of 0.67 and
-              produced results with ~70ms average latency. The project was
-              packaged as a Flask API and deployed via Docker, available at{" "}
+              produced results with ~70ms average latency. The ranking API was
+              packaged with Flask and Docker; the mobile-friendly finder UI is
+              live at{" "}
               <a
-                href="https://csrp.andreihuyoa.dev/"
+                href={HILOM_LIVE_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="underline decoration-dotted underline-offset-2"
+                className="text-cyan-800 underline decoration-dotted underline-offset-2"
               >
-                csrp.andreihuyoa.dev
+                this website
               </a>
               .
             </p>
@@ -66,4 +85,4 @@ const NotFound = (): ReactElement => {
   );
 };
 
-export default NotFound;
+export default Hilom;

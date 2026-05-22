@@ -15,7 +15,7 @@ const skills = ["TypeScript", "React", "Next.js", "Go", "Python", "AWS"];
 const projectLinks = [
   {
     href: "#project-healthcare",
-    label: "Healthcare Recommendation API Model",
+    label: "Hilom",
   },
   { href: "#project-lokalista", label: "Lokalista" },
 ];
@@ -182,10 +182,11 @@ const WebsiteMode = (): ReactElement => {
               <Row
                 id="project-healthcare"
                 label="Thesis"
-                title="Healthcare Recommendation API Model"
+                title="Hilom"
               >
-                Flask API and ranking model recommending hospitals from
-                location, services, facility data, and feedback.
+                Ermita healthcare facility finder — Flask ranking API and
+                mobile-friendly UI for matching hospitals by services and
+                location.
               </Row>
               <Row id="project-lokalista" label="Platform" title="Lokalista">
                 Freelancer management platform with payment workflows and admin

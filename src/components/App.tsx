@@ -13,7 +13,7 @@ import WebsiteMode from "../views/WebsiteMode";
 import Biography from "../views/Biography";
 import Resume from "../views/Resume";
 import Mail from "../views/Mail";
-import NotFound from "../views/projects/404notfound";
+import Hilom from "../views/projects/hilom";
 
 const BiographyIcon = "/assets/WinIcons/computer.png";
 const ResumeIcon = "/assets/WinIcons/folder.png";
@@ -175,9 +175,9 @@ const App = (): ReactElement => {
         />
         <DesktopIcon
           icon={NotFoundIcon}
-          title="404"
+          title="Hilom"
           onDoubleClick={() =>
-            openWindow("notfound", "404", <NotFound />, NotFoundIcon)
+            openWindow("hilom", "Hilom", <Hilom />, NotFoundIcon)
           }
         />
         <DesktopIcon
