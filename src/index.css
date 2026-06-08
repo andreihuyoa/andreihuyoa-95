@@ -15,20 +15,7 @@
 }
 
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  font-family:
-    msw,
-    Inter,
-    system-ui,
-    -apple-system BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+  font-family: msw, system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -70,6 +57,17 @@
 
   color: var(--website-text);
   background-color: var(--website-background);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 
   --scrollbar-thumb: rgba(47, 51, 47, 0.28);
   --scrollbar-thumb-hover: rgba(47, 51, 47, 0.42);
