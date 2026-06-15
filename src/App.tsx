@@ -1,19 +1,19 @@
 import { useState } from "react";
 import type { ReactElement } from "react";
-import "../index.css";
+import "./index.css";
 
-import TaskBar from "./TaskBar";
-import StartButton from "./StartButton";
-import StartMenu from "./StartMenu";
-import DesktopIcon from "./DesktopIcon";
-import Window from "./Window";
-import { useDesignMode } from "./mode/use-design-mode";
-import WebsiteMode from "../views/WebsiteMode";
+import TaskBar from "./components/TaskBar";
+import StartButton from "./components/StartButton";
+import StartMenu from "./components/StartMenu";
+import DesktopIcon from "./components/DesktopIcon";
+import Window from "./components/Window";
+import { useDesignMode } from "./components/mode/use-design-mode";
+import WebsiteMode from "./views/WebsiteMode";
 
-import Biography from "../views/Biography";
-import Resume from "../views/Resume";
-import Mail from "../views/Mail";
-import Hilom from "../views/projects/hilom";
+import Biography from "./views/Biography";
+import Resume from "./views/Resume";
+import Mail from "./views/Mail";
+import Hilom from "./views/projects/hilom";
 
 const BiographyIcon = "/assets/WinIcons/computer.png";
 const ResumeIcon = "/assets/WinIcons/folder.png";
@@ -21,7 +21,7 @@ const MailIcon = "/assets/WinIcons/mail.png";
 const NotFoundIcon = "/assets/WinIcons/world.png";
 const WebsiteIcon = "/assets/WinIcons/world.png";
 
-import { TaskBarButton } from "./TaskBarButton";
+import { TaskBarButton } from "./components/TaskBarButton";
 
 interface Position {
   x: number;
