@@ -19,7 +19,7 @@ const BiographyIcon = "/assets/WinIcons/computer.png";
 const ResumeIcon = "/assets/WinIcons/folder.png";
 const MailIcon = "/assets/WinIcons/mail.png";
 const NotFoundIcon = "/assets/WinIcons/world.png";
-const WebsiteIcon = "/assets/WinIcons/world.png";
+const SwitchIcon = "/assets/WinIcons/switch.png";
 
 import { TaskBarButton } from "./components/TaskBarButton";
 
@@ -150,9 +150,12 @@ const App = (): ReactElement => {
   }
 
   return (
-    <div id="screen" className="flex h-screen flex-col overflow-hidden">
+    <div className="flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden">
       {/* Desktop Area */}
-      <div className="flex h-[calc(100vh-3rem)] flex-col overflow-hidden px-3 py-1">
+      <div
+        id="screen"
+        className="relative flex h-[calc(100dvh-3rem)] max-h-[calc(100dvh-3rem)] flex-col overflow-hidden px-3 py-4"
+      >
         {/* Folder Icons */}
         <DesktopIcon
           icon={BiographyIcon}
@@ -163,9 +166,9 @@ const App = (): ReactElement => {
         />
         <DesktopIcon
           icon={ResumeIcon}
-          title="Résumé"
+          title="Resume"
           onDoubleClick={() =>
-            openWindow("Résumé", "Résumé", <Resume />, ResumeIcon)
+            openWindow("resume", "Resume", <Resume />, ResumeIcon)
           }
         />
         <DesktopIcon
@@ -181,10 +184,27 @@ const App = (): ReactElement => {
           }
         />
         <DesktopIcon
-          icon={WebsiteIcon}
+          icon={SwitchIcon}
           title="Website"
           onDoubleClick={() => setMode("website")}
         />
+        {/* Opened Folders/Windows */}
+        {openWindows.map((win) => (
+          <Window
+            key={win.windowId}
+            windowId={win.windowId}
+            title={win.title}
+            icon={win.icon}
+            zIndex={win.zIndex}
+            onClose={() => closeWindow(win.windowId)}
+            onMinimize={() => minimizeWindow(win.windowId)}
+            onClick={() => bringToFront(win.windowId)}
+            isMinimized={win.minimized}
+            initialPos={win.position}
+          >
+            {win.content}
+          </Window>
+        ))}
       </div>
 
       <TaskBar>
@@ -206,23 +226,6 @@ const App = (): ReactElement => {
         isOpen={isStartMenuOpen}
         onClose={() => setIsStartMenuOpen(false)}
       />
-      {/* Opened Folders/Windows */}
-      {openWindows.map((win) => (
-        <Window
-          key={win.windowId}
-          windowId={win.windowId}
-          title={win.title}
-          icon={win.icon}
-          zIndex={win.zIndex}
-          onClose={() => closeWindow(win.windowId)}
-          onMinimize={() => minimizeWindow(win.windowId)}
-          onClick={() => bringToFront(win.windowId)}
-          isMinimized={win.minimized}
-          initialPos={win.position}
-        >
-          {win.content}
-        </Window>
-      ))}
     </div>
   );
 };

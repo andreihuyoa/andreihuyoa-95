@@ -247,10 +247,8 @@ const Window = ({
         interact.modifiers.restrictSize({
           min: { width: 500, height: 700 },
           max: {
-            width:
-              getScreenElement().clientWidth - positionRef.current.x,
-            height:
-              getScreenElement().clientHeight - positionRef.current.y,
+            width: getScreenElement().clientWidth - positionRef.current.x,
+            height: getScreenElement().clientHeight - positionRef.current.y,
           },
         }),
       ],
@@ -278,7 +276,7 @@ const Window = ({
       ref={windowRef}
       id={windowId}
       style={windowStyle}
-      className={`border-95-white border-b-95-black border-r-95-black bg-95-gray absolute overflow-hidden border-2 shadow-lg ${isMaximized ? "fullscreen" : ""}`}
+      className={`border-95-white border-b-95-black border-r-95-black bg-95-gray absolute top-0 left-0 overflow-hidden border-2 shadow-lg ${isMaximized ? "fullscreen" : ""}`}
       onClick={onClick}
     >
       <div
