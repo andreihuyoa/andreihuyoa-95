@@ -19,7 +19,6 @@ const BiographyIcon = "/assets/WinIcons/computer.png";
 const ResumeIcon = "/assets/WinIcons/folder.png";
 const MailIcon = "/assets/WinIcons/mail.png";
 const NotFoundIcon = "/assets/WinIcons/world.png";
-const SwitchIcon = "/assets/WinIcons/switch.png";
 
 import { TaskBarButton } from "./components/TaskBarButton";
 
@@ -183,11 +182,6 @@ const App = (): ReactElement => {
             openWindow("hilom", "Hilom", <Hilom />, NotFoundIcon)
           }
         />
-        <DesktopIcon
-          icon={SwitchIcon}
-          title="Website"
-          onDoubleClick={() => setMode("website")}
-        />
         {/* Opened Folders/Windows */}
         {openWindows.map((win) => (
           <Window
@@ -225,6 +219,7 @@ const App = (): ReactElement => {
       <StartMenu
         isOpen={isStartMenuOpen}
         onClose={() => setIsStartMenuOpen(false)}
+        onWebsiteClick={() => setMode("website")}
       />
     </div>
   );

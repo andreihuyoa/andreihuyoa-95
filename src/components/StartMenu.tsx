@@ -1,21 +1,24 @@
 import SocialsButton from "./SocialsButton";
 import type { ReactNode } from "react";
 
-const HisResume = "/assets/Resume/Carl Andrei Del Rosario - Resume.pdf";
-
 const sidebarImage = "/assets/AndreiHuyoa95.png";
 const ig = "/assets/StartMenu/Instagram.svg";
 const git = "/assets/StartMenu/Github.svg";
 const linkedin = "/assets/StartMenu/Linkedin.svg";
-const file = "/assets/StartMenu/Attachment.svg";
+const website = "/assets/WinIcons/switch.png";
 // const project1 = "/assets/StartMenu/Lokalista.svg";
 
 interface StartMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  onWebsiteClick: () => void;
 }
 
-const StartMenu = ({ isOpen }: StartMenuProps): ReactNode => {
+const StartMenu = ({
+  isOpen,
+  onClose,
+  onWebsiteClick,
+}: StartMenuProps): ReactNode => {
   if (!isOpen) {
     return null;
   }
@@ -49,7 +52,21 @@ const StartMenu = ({ isOpen }: StartMenuProps): ReactNode => {
         />
 
         <div className="mx-2 my-2 border-t border-gray-500" />
-        <SocialsButton icon={file} link={HisResume} text="Resume" />
+        <button
+          type="button"
+          className="hover:bg-95-navy hover:text-95-white flex cursor-pointer items-center px-2 py-3 text-left"
+          onClick={() => {
+            onWebsiteClick();
+            onClose();
+          }}
+        >
+          <img
+            src={website}
+            alt="Website"
+            className="mr-2 h-6 w-6 scale-200 object-contain"
+          />
+          <span className="first-letter:underline">Website</span>
+        </button>
         {/* <SocialsButton icon={project1} link="" text="Lokalista" /> */}
       </div>
     </div>
