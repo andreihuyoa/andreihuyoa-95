@@ -6,14 +6,10 @@ interface SocialsButtonProps {
   text: string;
 }
 
-const SocialsButton = ({
-  icon,
-  link,
-  text,
-}: SocialsButtonProps): ReactNode => {
+const SocialsButton = ({ icon, link, text }: SocialsButtonProps): ReactNode => {
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
-      <div className="flex cursor-pointer items-center px-2 py-3 hover:bg-95-navy hover:text-95-white">
+      <div className="hover:bg-95-navy hover:text-95-white flex cursor-pointer items-center px-2 py-3">
         <img src={icon} alt={text} className="mr-2 h-6 w-6" />
         <span className="first-letter:underline">{text}</span>
       </div>

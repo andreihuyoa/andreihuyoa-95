@@ -23,14 +23,14 @@ type InputFieldProps = TextareaInputFieldProps | TextInputFieldProps;
 const InputField = (props: InputFieldProps): ReactNode => {
   if (props.type === "textarea") {
     return (
-    <textarea
-      name={props.name}
-      value={props.value}
-      placeholder={props.placeholder}
-      onChange={props.onChange}
-      spellCheck={false}
-      className="text-95-black focus:outline-95-darkgray focus:border-95-white spellcheck h-full w-full resize-none overflow-auto bg-transparent p-1 focus:rounded-sm focus:border focus:outline focus:outline-1"
-    />
+      <textarea
+        name={props.name}
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        spellCheck={false}
+        className="text-95-black focus:outline-95-darkgray focus:border-95-white spellcheck h-full w-full resize-none overflow-auto bg-transparent p-1 focus:rounded-sm focus:border focus:outline focus:outline-1"
+      />
     );
   }
 

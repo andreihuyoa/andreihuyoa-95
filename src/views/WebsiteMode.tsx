@@ -1,11 +1,6 @@
 import type { ReactElement } from "react";
 import { useDesignMode } from "../components/mode/use-design-mode";
-import {
-  Badge,
-  ButtonLink,
-  Panel,
-  Row,
-} from "../components/website";
+import { Badge, ButtonLink, Panel, Row } from "../components/website";
 
 const Logo = "/assets/a.svg";
 const Portrait = "/assets/Biography/mememe.jpg";
@@ -179,11 +174,7 @@ const WebsiteMode = (): ReactElement => {
           <Panel title="Projects" className="scroll-mt-20">
             <div id="projects" className="-mt-3" />
             <div className="flex flex-col gap-2">
-              <Row
-                id="project-healthcare"
-                label="Thesis"
-                title="Hilom"
-              >
+              <Row id="project-healthcare" label="Thesis" title="Hilom">
                 Ermita healthcare facility finder — Flask ranking API and
                 mobile-friendly UI for matching hospitals by services and
                 location.
