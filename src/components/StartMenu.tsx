@@ -23,7 +23,7 @@ const StartMenu = ({
     return null;
   }
   return (
-    <div className="border-95-white border-b-95-black border-r-95-black bg-95-gray font-MS95 absolute bottom-12 left-0 z-9999 flex overflow-hidden border-2 text-sm">
+    <div className="border-95-white border-b-95-black border-r-95-black bg-95-gray font-MS95 absolute bottom-12 left-0 z-9999 flex overflow-hidden border-2 text-sm hover:cursor-pointer focus:outline-none">
       {/* Sidebar Image*/}
       <div className="flex items-stretch">
         <img
