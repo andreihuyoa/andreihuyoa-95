@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ReactElement } from "react";
 import "./index.css";
 
@@ -7,7 +7,6 @@ import StartButton from "./components/StartButton";
 import StartMenu from "./components/StartMenu";
 import DesktopIcon from "./components/DesktopIcon";
 import Window from "./components/Window";
-import { useDesignMode } from "./components/mode/use-design-mode";
 import WebsiteMode from "./views/WebsiteMode";
 
 import Biography from "./views/Biography";
@@ -37,8 +36,14 @@ interface OpenWindow {
   position: Position;
 }
 
+type ViewMode = "os" | "website";
+
 const App = (): ReactElement => {
-  const { mode, setMode } = useDesignMode();
+  const [mode, setMode] = useState<ViewMode>("os");
+
+  useEffect(() => {
+    document.documentElement.dataset.mode = mode;
+  }, [mode]);
 
   const getBiographyPosition = (): Position => {
     return {
@@ -145,7 +150,7 @@ const App = (): ReactElement => {
   };
 
   if (mode === "website") {
-    return <WebsiteMode />;
+    return <WebsiteMode onOpenDesktop={() => setMode("os")} />;
   }
 
   return (
