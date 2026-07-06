@@ -5,19 +5,18 @@ interface DesktopIconProps {
   title: string;
   onDoubleClick: (icon: string, title: string) => void;
   size?: string;
+  className?: string;
 }
 
 const DesktopIcon = ({
   icon,
   title,
   onDoubleClick,
-  size = "h-14 w-14 md:h-16 md:w-16",
+  size = "h-14 w-14 md:h-16 md:w-16 lg:h-20 lg:w-20",
+  className = "text-95-black flex cursor-pointer flex-col items-center md:h-24 md:w-24",
 }: DesktopIconProps): ReactNode => {
   return (
-    <div
-      className="text-95-black flex h-20 w-20 cursor-pointer flex-col items-center md:h-24 md:w-24"
-      onDoubleClick={() => onDoubleClick(icon, title)}
-    >
+    <div className={className} onDoubleClick={() => onDoubleClick(icon, title)}>
       <img
         src={icon}
         alt={title}

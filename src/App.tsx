@@ -167,39 +167,41 @@ const App = (): ReactElement => {
   }
 
   return (
-    <div className="flex h-[100dvh] max-h-[100dvh] flex-col overflow-hidden">
+    <div className="flex h-dvh max-h-dvh flex-col overflow-hidden">
       {/* Desktop Area */}
       <div
         id="screen"
         className="relative flex h-[calc(100dvh-3rem)] max-h-[calc(100dvh-3rem)] flex-col overflow-hidden px-3 py-4"
       >
-        {/* Folder Icons */}
-        <DesktopIcon
-          icon={BiographyIcon}
-          title="Biography"
-          onDoubleClick={() =>
-            openWindow("biography", "Biography", <Biography />, BiographyIcon)
-          }
-        />
-        <DesktopIcon
-          icon={ResumeIcon}
-          title="Resume"
-          onDoubleClick={() =>
-            openWindow("resume", "Resume", <Resume />, ResumeIcon)
-          }
-        />
-        <DesktopIcon
-          icon={MailIcon}
-          title="Mail"
-          onDoubleClick={() => openWindow("mail", "Mail", <Mail />, MailIcon)}
-        />
-        <DesktopIcon
-          icon={NotFoundIcon}
-          title="Hilom"
-          onDoubleClick={() =>
-            openWindow("hilom", "Hilom", <Hilom />, NotFoundIcon)
-          }
-        />
+        <div className="flex h-full w-fit flex-col flex-wrap gap-4">
+          {/* Folder Icons */}
+          <DesktopIcon
+            icon={BiographyIcon}
+            title="Biography"
+            onDoubleClick={() =>
+              openWindow("biography", "Biography", <Biography />, BiographyIcon)
+            }
+          />
+          <DesktopIcon
+            icon={ResumeIcon}
+            title="Resume"
+            onDoubleClick={() =>
+              openWindow("resume", "Resume", <Resume />, ResumeIcon)
+            }
+          />
+          <DesktopIcon
+            icon={MailIcon}
+            title="Mail"
+            onDoubleClick={() => openWindow("mail", "Mail", <Mail />, MailIcon)}
+          />
+          <DesktopIcon
+            icon={NotFoundIcon}
+            title="Hilom"
+            onDoubleClick={() =>
+              openWindow("hilom", "Hilom", <Hilom />, NotFoundIcon)
+            }
+          />
+        </div>
         {/* Opened Folders/Windows */}
         {openWindows.map((win) => (
           <Window
