@@ -20,7 +20,9 @@ export const Row = ({
     className={`border-website-border border-t py-3 first:border-t-0 ${className}`}
   >
     <div className="website-label text-website-text-muted">{label}</div>
-    <h3 className="mt-1 text-lg leading-tight font-extrabold">{title}</h3>
+    <h3 className="font-website-display mt-1 text-lg leading-tight font-extrabold">
+      {title}
+    </h3>
     <p className="text-website-text-soft mt-1 text-sm leading-6">{children}</p>
   </article>
 );
