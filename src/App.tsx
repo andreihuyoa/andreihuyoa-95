@@ -38,11 +38,24 @@ interface OpenWindow {
 
 type ViewMode = "os" | "website";
 
+const DESIGN_MODE_KEY = "design-mode";
+
+const isViewMode = (value: string | null): value is ViewMode => {
+  return value === "os" || value === "website";
+};
+
+const getInitialMode = (): ViewMode => {
+  const savedMode = window.localStorage.getItem(DESIGN_MODE_KEY);
+
+  return isViewMode(savedMode) ? savedMode : "os";
+};
+
 const App = (): ReactElement => {
-  const [mode, setMode] = useState<ViewMode>("os");
+  const [mode, setMode] = useState<ViewMode>(getInitialMode);
 
   useEffect(() => {
     document.documentElement.dataset.mode = mode;
+    window.localStorage.setItem(DESIGN_MODE_KEY, mode);
   }, [mode]);
 
   const getBiographyPosition = (): Position => {
