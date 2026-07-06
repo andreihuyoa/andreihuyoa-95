@@ -41,6 +41,15 @@ body,
   overflow: hidden;
 }
 
+:root[data-mode="website"],
+:root[data-mode="website"] body,
+:root[data-mode="website"] #root {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 body {
   margin: 0;
 }
