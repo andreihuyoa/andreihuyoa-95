@@ -48,22 +48,22 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
             </a>
           </nav>
 
-          <button
-            type="button"
-            onClick={onOpenDesktop}
-            aria-label="Switch to OS Mode"
-            className="border-website-border-strong bg-website-surface-soft min-h-10 border px-3 py-2 text-sm font-bold hover:bg-(--website-green-soft) focus:outline-2 focus:outline-offset-2 focus:outline-(--website-green)"
-          >
-            Open Desktop
-          </button>
-
           <a
-            className="flex items-center gap-2 text-sm font-extrabold no-underline"
+            className="flex items-center justify-center gap-2 text-sm font-extrabold no-underline"
             href="#top"
             aria-label="Andrei Huyo-a home"
           >
             <img src={BrandLogo} alt="Brand Logo" className="w-18" />
           </a>
+
+          <button
+            type="button"
+            onClick={onOpenDesktop}
+            aria-label="Switch to OS Mode"
+            className="border-website-border-strong bg-website-surface-soft hover:bg-website-orange/20 shadow-website min-h-10 rounded-xs border-2 border-dashed p-2 text-sm font-bold transition-[transform,box-shadow,background-color] duration-75 hover:cursor-pointer active:translate-y-0.5 active:scale-[0.98] active:shadow-none"
+          >
+            Open Desktop
+          </button>
         </header>
 
         <div
