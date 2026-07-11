@@ -33,11 +33,21 @@ const experienceStacks = {
   freelance: ["Figma", "HTML", "CSS"],
 };
 
+const formatCurrentDate = (): string =>
+  new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date());
+
 interface WebsiteModeProps {
   onOpenDesktop: () => void;
 }
 
 const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
+  const currentDate = formatCurrentDate();
+
   useEffect(() => {
     loadWebsiteFonts();
   }, []);
@@ -138,7 +148,7 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
           <div className="border-website-border space-y-4 border-b p-4 lg:border-r lg:border-b-0">
             <section className="website-panel">
               <div className="border-website-border bg-website-surface-muted grid grid-cols-1 items-center gap-3 border-b px-4 py-4 text-sm lg:grid-cols-[1fr_auto_1fr]">
-                <span>Sunday, July 12, 2026</span>
+                <span>{currentDate}</span>
                 <h1 className="font-website-display m-0 text-left text-4xl leading-none font-extrabold tracking-[0.015em] lg:text-center">
                   Portfolio News
                 </h1>
