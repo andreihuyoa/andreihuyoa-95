@@ -4,6 +4,7 @@ interface RowProps {
   id?: string;
   label: string;
   title: string;
+  meta?: ReactNode;
   children: ReactNode;
   className?: string;
 }
@@ -12,6 +13,7 @@ export const Row = ({
   id,
   label,
   title,
+  meta,
   children,
   className = "",
 }: RowProps): ReactElement => (
@@ -20,9 +22,10 @@ export const Row = ({
     className={`border-website-border border-t py-3 first:border-t-0 ${className}`}
   >
     <div className="website-label text-website-text-muted">{label}</div>
-    <h3 className="font-website-display mt-1 text-lg leading-tight font-extrabold">
+    <h3 className="font-website-display mt-1 text-lg leading-tight font-extrabold tracking-[0.015em]">
       {title}
     </h3>
+    {meta ? <div className="mt-2">{meta}</div> : null}
     <p className="text-website-text-soft mt-1 text-sm leading-6">{children}</p>
   </article>
 );

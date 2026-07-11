@@ -36,7 +36,7 @@ export default {
         MS95: ["msw", "sans-serif"],
         msdonchia: ["msdon", "sans-serif"],
         "website-sans": [
-          "Inter",
+          '"Noto Serif"',
           "ui-sans-serif",
           "system-ui",
           "-apple-system",

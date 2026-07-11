@@ -60,16 +60,16 @@ body {
 }
 
 :root[data-mode="website"] {
-  --website-text: #2f332f;
-  --website-text-muted: #747870;
-  --website-text-soft: #5b6058;
+  --website-text: #1f221f;
+  --website-text-muted: #565b54;
+  --website-text-soft: #3f443e;
   --website-background: #f7f2e9;
   --website-surface: #fffaf2;
   --website-surface-muted: #ece5d9;
   --website-surface-soft: #fbf7f0;
-  --website-border: #d7d2c8;
-  --website-border-strong: #b8b3aa;
-  --website-green: #31463a;
+  --website-border: #c5c0b6;
+  --website-border-strong: #98938a;
+  --website-green: #24382d;
   --website-green-dot: #5f7d67;
   --website-green-soft: #e4efda;
   --website-orange: #ee9b1a;
@@ -78,7 +78,7 @@ body {
   color: var(--website-text);
   background-color: var(--website-background);
   font-family:
-    Inter,
+    "Noto Serif",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -91,6 +91,11 @@ body {
 
   --scrollbar-thumb: rgba(47, 51, 47, 0.28);
   --scrollbar-thumb-hover: rgba(47, 51, 47, 0.42);
+}
+
+:root[data-mode="website"] .font-website-display {
+  font-weight: 800;
+  letter-spacing: 0.025em;
 }
 
 * {
