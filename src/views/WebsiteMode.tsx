@@ -115,7 +115,10 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
 
             <Panel title="Status">
               <div className="font-website-sans flex items-center gap-2 text-sm font-normal">
-                <span className="h-2 w-2 rounded-full bg-(--website-green-dot)" />
+                <span aria-hidden="true" className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-(--website-green-dot) opacity-50 motion-safe:animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-(--website-green-dot) motion-safe:animate-pulse" />
+                </span>
                 Available for work
               </div>
             </Panel>
