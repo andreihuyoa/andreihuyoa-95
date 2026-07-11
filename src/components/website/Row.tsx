@@ -26,6 +26,8 @@ export const Row = ({
       {title}
     </h3>
     {meta ? <div className="mt-2">{meta}</div> : null}
-    <p className="text-website-text-soft mt-1 text-sm leading-6">{children}</p>
+    <p className="text-website-text-soft mt-1 text-justify text-sm leading-6">
+      {children}
+    </p>
   </article>
 );

@@ -50,9 +50,9 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
       />
 
       <div className="relative z-10">
-        <header className="border-website-border bg-website-surface/20 font-website-sans sticky top-0 z-20 grid min-h-13 grid-cols-[auto_1fr_auto] items-center gap-4 border-b px-4 py-2 backdrop-blur-md max-md:grid-cols-1 max-md:justify-items-start">
+        <header className="border-website-border bg-website-surface/20 font-website-sans sticky top-0 z-20 grid min-h-13 grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 border-b px-4 py-2 backdrop-blur-md lg:grid-cols-[auto_1fr_auto] lg:gap-4">
           <nav
-            className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm font-bold max-md:justify-start"
+            className="border-website-border order-3 col-span-2 flex w-full flex-wrap justify-between gap-x-4 gap-y-2 border-t pt-2 text-sm font-bold lg:order-1 lg:col-span-1 lg:justify-center lg:border-t-0 lg:pt-0"
             aria-label="Website sections"
           >
             <a className="hover:underline" href="#work">
@@ -67,7 +67,7 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
           </nav>
 
           <a
-            className="flex items-center justify-center gap-2 text-sm font-extrabold no-underline"
+            className="order-1 flex items-center justify-start gap-2 text-sm font-extrabold no-underline lg:order-2 lg:justify-center"
             href="#top"
             aria-label="Andrei Huyo-a home"
           >
@@ -78,7 +78,7 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
             type="button"
             onClick={onOpenDesktop}
             aria-label="Switch to OS Mode"
-            className="border-website-border-strong bg-website-surface-soft hover:bg-website-orange/20 shadow-website min-h-10 rounded-xs border-2 border-dashed p-2 text-sm font-bold transition-[transform,box-shadow,background-color] duration-75 hover:cursor-pointer active:translate-y-0.5 active:scale-[0.98] active:shadow-none"
+            className="border-website-border-strong bg-website-surface-soft hover:bg-website-orange/20 shadow-website order-2 min-h-10 rounded-xs border-2 border-dashed p-2 text-sm font-bold transition-[transform,box-shadow,background-color] duration-75 hover:cursor-pointer active:translate-y-0.5 active:scale-[0.98] active:shadow-none lg:order-3"
           >
             Open Desktop
           </button>
@@ -86,9 +86,9 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
 
         <div
           id="top"
-          className="border-website-border mx-auto grid w-[min(1320px,calc(100%-2rem))] grid-cols-[240px_minmax(0,1fr)_280px] border max-xl:grid-cols-[220px_minmax(0,1fr)] max-lg:grid-cols-1"
+          className="border-website-border mx-auto grid w-[min(1320px,calc(100%-2rem))] grid-cols-1 border lg:grid-cols-[240px_minmax(0,1fr)_280px]"
         >
-          <aside className="border-website-border space-y-4 border-r p-4 max-lg:border-r-0">
+          <aside className="border-website-border space-y-4 border-b p-4 lg:border-r lg:border-b-0">
             <Panel title="Index">
               <nav className="font-website-sans grid gap-2 text-sm font-normal">
                 <a className="hover:underline" href="#work">
@@ -135,19 +135,19 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
             </Panel>
           </aside>
 
-          <div className="border-website-border space-y-4 border-r p-4 max-lg:border-r-0">
+          <div className="border-website-border space-y-4 border-b p-4 lg:border-r lg:border-b-0">
             <section className="website-panel">
-              <div className="border-website-border bg-website-surface-muted grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b px-4 py-4 text-sm max-md:grid-cols-1">
+              <div className="border-website-border bg-website-surface-muted grid grid-cols-1 items-center gap-3 border-b px-4 py-4 text-sm lg:grid-cols-[1fr_auto_1fr]">
                 <span>Sunday, July 12, 2026</span>
-                <h1 className="font-website-display m-0 text-center text-4xl leading-none font-extrabold tracking-[0.015em] max-md:text-left">
+                <h1 className="font-website-display m-0 text-left text-4xl leading-none font-extrabold tracking-[0.015em] lg:text-center">
                   Portfolio News
                 </h1>
-                {/* <span className="text-website-green justify-self-end font-bold max-md:justify-self-start">
+                {/* <span className="text-website-green justify-self-start font-bold lg:justify-self-end">
                 Systems operational
               </span> */}
               </div>
 
-              <div className="grid grid-cols-[1fr_120px] gap-4 p-4 max-sm:grid-cols-1">
+              <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-[1fr_120px]">
                 <div>
                   <div className="website-label">Editor note</div>
                   <h2 className="font-website-display mt-1 text-2xl leading-tight font-extrabold tracking-[0.015em]">
@@ -169,7 +169,7 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
                 <img
                   src={Portrait}
                   alt="Carl Andrei Del Rosario"
-                  className="border-website-border h-32 w-32 border object-cover"
+                  className="border-website-border mx-auto h-32 w-32 border object-cover lg:mx-0"
                 />
               </div>
             </section>
@@ -258,7 +258,7 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
             </Panel>
           </div>
 
-          <aside className="space-y-4 p-4 max-lg:pb-4">
+          <aside className="space-y-4 p-4">
             <section className="website-panel">
               <div className="font-website-display border-website-border bg-website-surface-muted border-b px-3 py-2 text-sm font-bold tracking-[0.015em]">
                 Jump to:
