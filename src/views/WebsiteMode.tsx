@@ -84,14 +84,14 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
             <img src={BrandLogo} alt="Brand Logo" className="w-18" />
           </a>
 
-          <button
-            type="button"
+          <ButtonLink
             onClick={onOpenDesktop}
-            aria-label="Switch to OS Mode"
-            className="border-website-border-strong bg-website-surface-soft hover:bg-website-orange/20 shadow-website order-2 min-h-10 rounded-xs border-2 border-dashed p-2 text-sm font-bold transition-[transform,box-shadow,background-color] duration-75 hover:cursor-pointer active:translate-y-0.5 active:scale-[0.98] active:shadow-none lg:order-3"
+            variant="surface"
+            outlined
+            className="order-2 lg:order-3"
           >
             Open Desktop
-          </button>
+          </ButtonLink>
         </header>
 
         <div
@@ -167,11 +167,11 @@ const WebsiteMode = ({ onOpenDesktop }: WebsiteModeProps): ReactElement => {
                     React, APIs, cloud deployments, and recommendation systems
                     from the Philippines.
                   </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <ButtonLink href={ResumePdf} variant="primary">
+                  <div className="mt-4 flex flex-wrap gap-4">
+                    <ButtonLink href={ResumePdf} variant="primary" outlined>
                       View resume
                     </ButtonLink>
-                    <ButtonLink href="#contact" variant="secondary">
+                    <ButtonLink href="#contact" variant="secondary" outlined>
                       Contact
                     </ButtonLink>
                   </div>
