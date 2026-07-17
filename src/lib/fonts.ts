@@ -4,8 +4,7 @@ export type FontWeights = number | number[];
 
 /** Add families here; pass a subset to `loadFonts` when a view mounts. */
 export const fontRegistry = {
-  "Noto Serif": [400, 500, 600, 700, 800],
-  "Instrument Serif": [400, 600, 700],
+  "Instrument Sans": [400, 600, 700],
 } as const satisfies Record<string, FontWeights>;
 
 export type FontRegistryKey = keyof typeof fontRegistry;
@@ -24,10 +23,9 @@ export const loadFonts = (fonts: Record<string, FontWeights>): void => {
   googleFonts.add(fonts);
 };
 
-/** Website mode: Noto Serif (body) + Instrument Serif (headings). */
+/** Website mode: local Departure Mono + remotely loaded Instrument Sans. */
 export const loadWebsiteFonts = (): void => {
   loadFonts({
-    "Noto Serif": fontRegistry["Noto Serif"],
-    "Instrument Serif": fontRegistry["Instrument Serif"],
+    "Instrument Sans": fontRegistry["Instrument Sans"],
   });
 };

@@ -45,6 +45,12 @@ const isViewMode = (value: string | null): value is ViewMode => {
 };
 
 const getInitialMode = (): ViewMode => {
+  const requestedMode = new URLSearchParams(window.location.search).get("mode");
+
+  if (isViewMode(requestedMode)) {
+    return requestedMode;
+  }
+
   const savedMode = window.localStorage.getItem(DESIGN_MODE_KEY);
 
   return isViewMode(savedMode) ? savedMode : "os";
@@ -163,7 +169,7 @@ const App = (): ReactElement => {
   };
 
   if (mode === "website") {
-    return <WebsiteMode onOpenDesktop={() => setMode("os")} />;
+    return <WebsiteMode />;
   }
 
   return (

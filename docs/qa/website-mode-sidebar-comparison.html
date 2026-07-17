@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website sidebar comparison</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 2880px;
+        height: 1325px;
+        margin: 0;
+        overflow: hidden;
+        background: #f7f2e9;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: repeat(2, 1440px);
+      }
+
+      img {
+        display: block;
+        width: 1440px;
+        height: 1325px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="website-mode-figma.png" alt="Figma source" />
+      <img src="website-mode-sidebar-fixed.png" alt="Updated implementation" />
+    </main>
+  </body>
+</html>

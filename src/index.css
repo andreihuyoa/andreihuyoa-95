@@ -14,6 +14,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Departure Mono";
+  src: url("/assets/fonts/DepartureMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   font-family: msw, system-ui, sans-serif;
   line-height: 1.5;
@@ -60,15 +68,15 @@ body {
 }
 
 :root[data-mode="website"] {
-  --website-text: #1f221f;
-  --website-text-muted: #565b54;
-  --website-text-soft: #3f443e;
+  --website-text: #2f332f;
+  --website-text-muted: #747870;
+  --website-text-soft: #565b54;
   --website-background: #f7f2e9;
   --website-surface: #fffaf2;
   --website-surface-muted: #ece5d9;
   --website-surface-soft: #fbf7f0;
-  --website-border: #c5c0b6;
-  --website-border-strong: #98938a;
+  --website-border: #747870;
+  --website-border-strong: #2f332f;
   --website-green: #24382d;
   --website-green-dot: #5f7d67;
   --website-green-soft: #e4efda;
@@ -77,8 +85,20 @@ body {
 
   color: var(--website-text);
   background-color: var(--website-background);
+  --website-container: 966px;
+  --website-sidebar: 250px;
+  --website-content: 716px;
+  --website-space-1: 5px;
+  --website-space-2: 10px;
+  --website-space-3: 15px;
+  --website-space-4: 20px;
+  --website-space-5: 40px;
+  --website-radius-sm: 2px;
+  --website-layer-header: 30;
+  --website-layer-content: 1;
+
   font-family:
-    "Noto Serif",
+    "Instrument Sans",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -94,8 +114,15 @@ body {
 }
 
 :root[data-mode="website"] .font-website-display {
-  font-weight: 800;
-  letter-spacing: 0.025em;
+  font-family: "Departure Mono", "Courier New", monospace;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+
+:root[data-mode="website"] *,
+:root[data-mode="website"] *::before,
+:root[data-mode="website"] *::after {
+  user-select: text;
 }
 
 * {

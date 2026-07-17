@@ -36,7 +36,7 @@ export default {
         MS95: ["msw", "sans-serif"],
         msdonchia: ["msdon", "sans-serif"],
         "website-sans": [
-          '"Noto Serif"',
+          '"Instrument Sans"',
           "ui-sans-serif",
           "system-ui",
           "-apple-system",
@@ -47,13 +47,7 @@ export default {
           "Arial",
           "sans-serif",
         ],
-        "website-display": [
-          '"Instrument Serif"',
-          "Georgia",
-          '"Times New Roman"',
-          "ui-serif",
-          "serif",
-        ],
+        "website-display": ['"Departure Mono"', "monospace"],
       },
     },
   },
