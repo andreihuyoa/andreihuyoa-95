@@ -18,6 +18,8 @@ import {
 import { loadWebsiteFonts } from "../lib/fonts";
 import "../styles/website-mode.css";
 
+const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
+
 const experiences: WebsiteListItem[] = [
   {
     title: "Full Stack Developer · Shinka Studios",
@@ -208,7 +210,16 @@ const WebsiteMode = (): ReactElement => {
 
   return (
     <main className="website-mode flex h-dvh flex-col overflow-hidden" id="top">
-      <WebsiteHeader />
+      // * Website header
+      <header className="website-masthead shrink-0">
+        <a
+          className="website-masthead__brand"
+          href="#top"
+          aria-label="Andrei Huyo-a, home"
+        >
+          <img src={BrandLogo} alt="Andrei Huyo-a" />
+        </a>
+      </header>
       <div className="website-layout min-h-0 flex-1">
         <WebsiteSidebar
           activeSection={activeSection}
