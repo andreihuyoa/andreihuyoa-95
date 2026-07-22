@@ -7,6 +7,5 @@ export { MotionReveal } from "./MotionReveal";
 export { Panel } from "./Panel";
 export { Row } from "./Row";
 export { StatsSection } from "./StatsSection";
-export { WebsiteHeader } from "./WebsiteHeader";
 export { WebsiteSidebar } from "./WebsiteSidebar";
 export type { WebsiteSectionId } from "./WebsiteSidebar";

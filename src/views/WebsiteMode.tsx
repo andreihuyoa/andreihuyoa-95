@@ -10,13 +10,11 @@ import {
   HeroSection,
   MotionReveal,
   StatsSection,
-  WebsiteHeader,
   WebsiteSidebar,
   type WebsiteListItem,
   type WebsiteSectionId,
 } from "../components/website";
 import { loadWebsiteFonts } from "../lib/fonts";
-import "../styles/website-mode.css";
 
 const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
 
