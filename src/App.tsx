@@ -8,6 +8,7 @@ import StartMenu from "./components/StartMenu";
 import DesktopIcon from "./components/DesktopIcon";
 import Window from "./components/Window";
 import WebsiteMode from "./views/WebsiteMode";
+import { persistViewMode, type ViewMode } from "./viewMode";
 
 import Biography from "./views/Biography";
 import Resume from "./views/Resume";
@@ -36,32 +37,14 @@ interface OpenWindow {
   position: Position;
 }
 
-type ViewMode = "os" | "website";
+interface AppProps {
+  mode: ViewMode;
+  onModeChange: (mode: ViewMode) => void;
+}
 
-const DESIGN_MODE_KEY = "design-mode";
-
-const isViewMode = (value: string | null): value is ViewMode => {
-  return value === "os" || value === "website";
-};
-
-const getInitialMode = (): ViewMode => {
-  const requestedMode = new URLSearchParams(window.location.search).get("mode");
-
-  if (isViewMode(requestedMode)) {
-    return requestedMode;
-  }
-
-  const savedMode = window.localStorage.getItem(DESIGN_MODE_KEY);
-
-  return isViewMode(savedMode) ? savedMode : "os";
-};
-
-const App = (): ReactElement => {
-  const [mode, setMode] = useState<ViewMode>(getInitialMode);
-
+const App = ({ mode, onModeChange }: AppProps): ReactElement => {
   useEffect(() => {
-    document.documentElement.dataset.mode = mode;
-    window.localStorage.setItem(DESIGN_MODE_KEY, mode);
+    persistViewMode(mode);
   }, [mode]);
 
   const getBiographyPosition = (): Position => {
@@ -245,7 +228,7 @@ const App = (): ReactElement => {
       <StartMenu
         isOpen={isStartMenuOpen}
         onClose={() => setIsStartMenuOpen(false)}
-        onWebsiteClick={() => setMode("website")}
+        onWebsiteClick={() => onModeChange("website")}
       />
     </div>
   );
