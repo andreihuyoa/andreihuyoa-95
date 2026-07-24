@@ -1,11 +1,7 @@
 export { Badge } from "./Badge";
 export { ButtonLink } from "./ButtonLink";
-export { ContentListSection } from "./ContentListSection";
-export type { WebsiteListItem } from "./ContentListSection";
-export { HeroSection } from "./HeroSection";
 export { MotionReveal } from "./MotionReveal";
 export { Panel } from "./Panel";
 export { Row } from "./Row";
-export { StatsSection } from "./StatsSection";
 export { WebsiteSidebar } from "./WebsiteSidebar";
 export type { WebsiteSectionId } from "./WebsiteSidebar";

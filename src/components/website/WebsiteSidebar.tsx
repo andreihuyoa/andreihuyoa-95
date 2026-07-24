@@ -1,20 +1,20 @@
 import {
-  Bag,
-  Calculator,
-  Case,
-  ChatRound,
-  Letter,
-  Monitor,
-  Moon,
-  Notebook,
-  Soundwave,
-  Sun,
-  Suitcase,
+  BagBrokenIcon,
+  CalculatorBrokenIcon,
+  CaseBrokenIcon,
+  ChatRoundBrokenIcon,
+  MailboxBrokenIcon,
+  MonitorBrokenIcon,
+  MoonBrokenIcon,
+  NotebookBrokenIcon,
+  SoundwaveBrokenIcon,
+  SuitcaseBrokenIcon,
+  SunBrokenIcon,
 } from "@solar-icons/react";
 import type { ReactElement, ReactNode } from "react";
 
 const sidebarLinkClass =
-  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:[&_span]:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
+  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
 const sidebarButtonClass = `${sidebarLinkClass} cursor-pointer border-0 bg-transparent p-0 font-[inherit] tracking-[inherit]`;
 const sketchRuleClass =
   "h-0 w-full border-t-2 border-website-text-muted opacity-85";
@@ -196,13 +196,13 @@ export const WebsiteSidebar = ({
           <div className={sidebarGroupClass}>
             <SidebarLink
               href="mailto:andrei.huyoa.me@gmail.com?subject=Portfolio%20collaboration"
-              icon={<Case aria-hidden="true" size={14} weight="Linear" />}
+              icon={<CaseBrokenIcon aria-hidden="true" size={14} />}
             >
               collabs
             </SidebarLink>
             <SidebarLink
               href="mailto:andrei.huyoa.me@gmail.com?subject=Consulting%20inquiry"
-              icon={<Suitcase aria-hidden="true" size={14} weight="Linear" />}
+              icon={<SuitcaseBrokenIcon aria-hidden="true" size={14} />}
             >
               consulting
             </SidebarLink>
@@ -212,17 +212,17 @@ export const WebsiteSidebar = ({
 
           <div className={sidebarGroupClass}>
             <SidebarButton
-              icon={<Bag aria-hidden="true" size={14} weight="Linear" />}
+              icon={<BagBrokenIcon aria-hidden="true" size={14} />}
             >
               shop
             </SidebarButton>
             <SidebarButton
-              icon={<Notebook aria-hidden="true" size={14} weight="Linear" />}
+              icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
             >
               blog
             </SidebarButton>
             <SidebarButton
-              icon={<Monitor aria-hidden="true" size={14} weight="Linear" />}
+              icon={<MonitorBrokenIcon aria-hidden="true" size={14} />}
             >
               gear
             </SidebarButton>
@@ -232,7 +232,7 @@ export const WebsiteSidebar = ({
                 onSelectSection("resources");
                 onClose();
               }}
-              icon={<Calculator aria-hidden="true" size={14} weight="Linear" />}
+              icon={<CalculatorBrokenIcon aria-hidden="true" size={14} />}
             >
               resources
             </SidebarSectionButton>
@@ -243,40 +243,6 @@ export const WebsiteSidebar = ({
           className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
           id="contact"
         >
-          <div className="grid gap-2">
-            <a
-              className="grid min-h-6 w-full max-w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-0 bg-transparent p-0 text-left font-[inherit] tracking-[inherit] text-inherit no-underline"
-              href="mailto:andrei.huyoa.me@gmail.com?subject=Ask%20Andrei%20anything"
-            >
-              <span className="min-w-0">ask anything</span>
-              <span className="inline-flex items-center gap-1">
-                <kbd className="bg-website-surface-muted inline-flex items-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
-                  ⌘
-                </kbd>
-                <span>+</span>
-                <kbd className="bg-website-surface-muted inline-flex items-center justify-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
-                  K
-                </kbd>
-              </span>
-            </a>
-            <button
-              className="grid min-h-6 w-full max-w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-0 bg-transparent p-0 text-left font-[inherit] tracking-[inherit] text-inherit no-underline"
-              type="button"
-              title="typing test — coming soon"
-            >
-              <span className="min-w-0">typing test</span>
-              <span className="inline-flex items-center gap-1">
-                <kbd className="bg-website-surface-muted inline-flex items-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
-                  ⌘
-                </kbd>
-                <span>+</span>
-                <kbd className="bg-website-surface-muted inline-flex items-center justify-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
-                  J
-                </kbd>
-              </span>
-            </button>
-          </div>
-          <div className={sketchRuleClass} aria-hidden="true" />
           <p className="font-website-display text-sm tracking-tighter">
             31 people viewing right now
           </p>
@@ -284,7 +250,7 @@ export const WebsiteSidebar = ({
             className={sidebarLinkClass}
             href="mailto:andrei.huyoa.me@gmail.com?subject=Community%20chat"
           >
-            <ChatRound aria-hidden="true" size={14} weight="Linear" />
+            <ChatRoundBrokenIcon aria-hidden="true" size={14} />
             <span>community chat</span>
           </a>
           <div className={sketchRuleClass} aria-hidden="true" />
@@ -300,7 +266,7 @@ export const WebsiteSidebar = ({
                   aria-label="System theme"
                   title="System theme"
                 >
-                  <Monitor aria-hidden="true" size={13} weight="Linear" />
+                  <MonitorBrokenIcon aria-hidden="true" size={13} />
                 </button>
                 <button
                   className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
@@ -308,7 +274,7 @@ export const WebsiteSidebar = ({
                   aria-label="Light theme"
                   title="Light theme"
                 >
-                  <Sun aria-hidden="true" size={13} weight="Linear" />
+                  <SunBrokenIcon aria-hidden="true" size={13} />
                 </button>
                 <button
                   className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
@@ -316,7 +282,7 @@ export const WebsiteSidebar = ({
                   aria-label="Dark theme"
                   title="Dark theme — coming soon"
                 >
-                  <Moon aria-hidden="true" size={13} weight="Linear" />
+                  <MoonBrokenIcon aria-hidden="true" size={13} />
                 </button>
               </div>
               <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
@@ -326,18 +292,18 @@ export const WebsiteSidebar = ({
                   aria-label="Sound"
                   title="Sound — coming soon"
                 >
-                  <Soundwave aria-hidden="true" size={13} weight="Linear" />
+                  <SoundwaveBrokenIcon aria-hidden="true" size={13} />
                 </button>
               </div>
             </div>
           </div>
           <p>For work, collaborations &amp; everything else, reach me at</p>
           <a
-            className="hover:[&_span]:text-website-text !text-website-text flex w-fit items-center gap-1 no-underline hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+            className="hover:text-website-text flex w-fit items-center gap-1 text-inherit no-underline hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
             href="mailto:andrei.huyoa.me@gmail.com"
           >
-            <Letter aria-hidden="true" size={22} weight="Linear" />
-            <span className="underline decoration-dotted underline-offset-4">
+            <MailboxBrokenIcon aria-hidden="true" size={22} />
+            <span className="underline decoration-dotted underline-offset-3">
               andrei.huyoa.me@gmail.com
             </span>
           </a>
