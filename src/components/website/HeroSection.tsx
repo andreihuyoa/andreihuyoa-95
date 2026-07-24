@@ -1,7 +1,6 @@
 import { ArrowToTopRight } from "@solar-icons/react";
 import type { ReactElement } from "react";
 
-const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
 const Portrait = "/assets/WebsiteMode/andrei-portrait-cutout.png";
 
 const socialLinks = [
@@ -15,30 +14,36 @@ const socialLinks = [
 ];
 
 export const HeroSection = (): ReactElement => (
-  <section className="website-hero" aria-labelledby="website-intro-title">
-    <div className="website-hero__portrait-wrap">
+  <section
+    className="flex min-h-[320px] flex-wrap items-start gap-10 p-2.5 pt-40 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:px-0 max-[760px]:pt-20 max-[760px]:pb-7"
+    aria-labelledby="website-intro-title"
+  >
+    <h1 className="sr-only" id="website-intro-title">
+      Andrei Huyo-a
+    </h1>
+    <div className="h-[242px] w-[242px] shrink-0 overflow-hidden max-[1180px]:h-[220px] max-[1180px]:w-[220px] max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
       <img
-        className="website-hero__portrait"
+        className="h-full w-full object-contain object-bottom mix-blend-luminosity contrast-[1.08] grayscale"
         src={Portrait}
         alt="Carl Andrei Del Rosario"
         width="853"
         height="861"
       />
     </div>
-    <div className="website-hero__copy">
-      <h1 id="website-intro-title">
-        <img src={BrandLogo} alt="Andrei Huyo-a" />
-      </h1>
-      <p>
+    <div className="max-w-[34rem] min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
+      <p className="m-0 leading-[1.2]">
         I&apos;m a full-stack engineer. I build modern web and mobile apps, with
         a focus on practical systems, reliable APIs, and AI-assisted
         development.
       </p>
-      <p>
+      <p className="mt-4 leading-[1.2]">
         Right now I&apos;m turning rough ideas into useful products—from
         appraisal workflows to healthcare recommendation systems.
       </p>
-      <nav className="website-socials" aria-label="Social links">
+      <nav
+        className="font-website-display flex flex-wrap gap-1.5 py-[15px] text-sm tracking-[-0.05em] [&_a]:inline-flex [&_a]:min-h-6 [&_a]:items-center [&_a]:gap-1 [&_a]:no-underline hover:[&_a]:underline hover:[&_a]:decoration-dotted"
+        aria-label="Social links"
+      >
         {socialLinks.map((link) => {
           const external = link.href.startsWith("http");
           return (

@@ -12,9 +12,11 @@ export const Panel = ({
   className = "",
 }: PanelProps): ReactElement => {
   return (
-    <section className={`website-panel ${className}`}>
+    <section
+      className={`border-website-border bg-website-surface border ${className}`}
+    >
       {title ? (
-        <div className="website-label border-website-border bg-website-surface-muted text-website-text-soft border-b px-3 py-2">
+        <div className="border-website-border bg-website-surface-muted text-website-text-soft border-b px-3 py-2 font-mono text-[11px] font-bold tracking-[0.12em] uppercase">
           {title}
         </div>
       ) : null}

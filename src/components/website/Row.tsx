@@ -21,7 +21,9 @@ export const Row = ({
     id={id}
     className={`border-website-border border-t py-3 first:border-t-0 ${className}`}
   >
-    <div className="website-label text-website-text-muted">{label}</div>
+    <div className="text-website-text-muted font-mono text-[11px] font-bold tracking-[0.12em] uppercase">
+      {label}
+    </div>
     <h3 className="font-website-display mt-1 text-lg leading-tight font-extrabold tracking-[0.015em]">
       {title}
     </h3>

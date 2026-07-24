@@ -10,9 +10,16 @@ import {
   Soundwave,
   Sun,
   Suitcase,
-  UsersGroupRounded,
 } from "@solar-icons/react";
 import type { ReactElement, ReactNode } from "react";
+
+const sidebarLinkClass =
+  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:[&_span]:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
+const sidebarButtonClass = `${sidebarLinkClass} cursor-pointer border-0 bg-transparent p-0 font-[inherit] tracking-[inherit]`;
+const sketchRuleClass =
+  "h-0 w-full border-t-2 border-website-text-muted opacity-85";
+const sidebarGroupClass =
+  "flex w-full flex-col items-start gap-2 overflow-hidden";
 
 export type WebsiteSectionId =
   | "experience"
@@ -25,6 +32,8 @@ export type WebsiteSectionId =
 
 interface WebsiteSidebarProps {
   activeSection: WebsiteSectionId;
+  isMobileOpen: boolean;
+  onClose: () => void;
   onSelectSection: (section: WebsiteSectionId) => void;
 }
 
@@ -52,7 +61,7 @@ const SidebarLink = ({
   external = false,
 }: SidebarLinkProps): ReactElement => (
   <a
-    className="website-sidebar-link"
+    className={sidebarLinkClass}
     href={href}
     rel={external ? "noreferrer" : undefined}
     target={external ? "_blank" : undefined}
@@ -67,7 +76,7 @@ const SidebarButton = ({
   icon,
 }: SidebarButtonProps): ReactElement => (
   <button
-    className="website-sidebar-link"
+    className={sidebarButtonClass}
     type="button"
     title={`${String(children)} — coming soon`}
   >
@@ -83,7 +92,7 @@ const SidebarSectionButton = ({
   onClick,
 }: SidebarSectionButtonProps): ReactElement => (
   <button
-    className={`website-sidebar-link website-sidebar-section-button${active ? "is-active" : ""}`}
+    className={`${sidebarButtonClass} ${active ? "[&_span]:text-website-text [&_span]:underline [&_span]:decoration-dotted [&_span]:underline-offset-4" : ""}`}
     type="button"
     aria-pressed={active}
     onClick={onClick}
@@ -95,157 +104,245 @@ const SidebarSectionButton = ({
 
 export const WebsiteSidebar = ({
   activeSection,
+  isMobileOpen,
+  onClose,
   onSelectSection,
 }: WebsiteSidebarProps): ReactElement => (
-  <aside
-    className="website-sidebar font-website-display h-full min-h-0"
-    aria-label="Portfolio navigation and contact"
-  >
-    <div className="website-sidebar__top">
-      <nav className="website-sidebar__nav" aria-label="Portfolio sections">
-        <SidebarSectionButton
-          active={activeSection === "experience"}
-          onClick={() => onSelectSection("experience")}
-        >
-          experience
-        </SidebarSectionButton>
-        <SidebarSectionButton
-          active={activeSection === "projects"}
-          onClick={() => onSelectSection("projects")}
-        >
-          projects
-        </SidebarSectionButton>
-        <SidebarSectionButton
-          active={activeSection === "certifications"}
-          onClick={() => onSelectSection("certifications")}
-        >
-          certifications
-        </SidebarSectionButton>
-        <SidebarSectionButton
-          active={activeSection === "stack"}
-          onClick={() => onSelectSection("stack")}
-        >
-          stack
-        </SidebarSectionButton>
-        <SidebarSectionButton
-          active={activeSection === "recommendations"}
-          onClick={() => onSelectSection("recommendations")}
-        >
-          recommendations
-        </SidebarSectionButton>
-        <SidebarSectionButton
-          active={activeSection === "affiliations"}
-          onClick={() => onSelectSection("affiliations")}
-        >
-          affiliations
-        </SidebarSectionButton>
-      </nav>
+  <>
+    <div
+      className={`bg-website-text/20 fixed inset-0 z-40 transition-opacity min-[761px]:hidden ${
+        isMobileOpen
+          ? "pointer-events-auto opacity-100"
+          : "pointer-events-none opacity-0"
+      }`}
+      aria-hidden="true"
+      onClick={onClose}
+    />
+    <aside
+      className={`bg-website-background font-website-display text-website-text-muted fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
+        isMobileOpen ? "translate-x-0" : "max-[760px]:-translate-x-full"
+      }`}
+      aria-label="Portfolio navigation and contact"
+    >
+      <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
+        <div className="flex min-h-0 w-full shrink flex-col items-center justify-center gap-3 overflow-hidden pt-32 max-[760px]:pt-14">
+          <button
+            className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
+            type="button"
+            aria-label="Close navigation"
+            onClick={onClose}
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+          <nav className={sidebarGroupClass} aria-label="Portfolio sections">
+            <SidebarSectionButton
+              active={activeSection === "experience"}
+              onClick={() => {
+                onSelectSection("experience");
+                onClose();
+              }}
+            >
+              experience
+            </SidebarSectionButton>
+            <SidebarSectionButton
+              active={activeSection === "projects"}
+              onClick={() => {
+                onSelectSection("projects");
+                onClose();
+              }}
+            >
+              projects
+            </SidebarSectionButton>
+            <SidebarSectionButton
+              active={activeSection === "certifications"}
+              onClick={() => {
+                onSelectSection("certifications");
+                onClose();
+              }}
+            >
+              certifications
+            </SidebarSectionButton>
+            <SidebarSectionButton
+              active={activeSection === "stack"}
+              onClick={() => {
+                onSelectSection("stack");
+                onClose();
+              }}
+            >
+              stack
+            </SidebarSectionButton>
+            <SidebarSectionButton
+              active={activeSection === "recommendations"}
+              onClick={() => {
+                onSelectSection("recommendations");
+                onClose();
+              }}
+            >
+              recommendations
+            </SidebarSectionButton>
+            <SidebarSectionButton
+              active={activeSection === "affiliations"}
+              onClick={() => {
+                onSelectSection("affiliations");
+                onClose();
+              }}
+            >
+              affiliations
+            </SidebarSectionButton>
+          </nav>
 
-      <div className="website-sketch-rule" aria-hidden="true" />
+          <div className={sketchRuleClass} aria-hidden="true" />
 
-      <div className="website-sidebar__group">
-        <SidebarLink
-          href="mailto:andrei.huyoa.me@gmail.com?subject=Portfolio%20collaboration"
-          icon={<Case aria-hidden="true" size={14} weight="Linear" />}
+          <div className={sidebarGroupClass}>
+            <SidebarLink
+              href="mailto:andrei.huyoa.me@gmail.com?subject=Portfolio%20collaboration"
+              icon={<Case aria-hidden="true" size={14} weight="Linear" />}
+            >
+              collabs
+            </SidebarLink>
+            <SidebarLink
+              href="mailto:andrei.huyoa.me@gmail.com?subject=Consulting%20inquiry"
+              icon={<Suitcase aria-hidden="true" size={14} weight="Linear" />}
+            >
+              consulting
+            </SidebarLink>
+          </div>
+
+          <div className={sketchRuleClass} aria-hidden="true" />
+
+          <div className={sidebarGroupClass}>
+            <SidebarButton
+              icon={<Bag aria-hidden="true" size={14} weight="Linear" />}
+            >
+              shop
+            </SidebarButton>
+            <SidebarButton
+              icon={<Notebook aria-hidden="true" size={14} weight="Linear" />}
+            >
+              blog
+            </SidebarButton>
+            <SidebarButton
+              icon={<Monitor aria-hidden="true" size={14} weight="Linear" />}
+            >
+              gear
+            </SidebarButton>
+            <SidebarSectionButton
+              active={activeSection === "resources"}
+              onClick={() => {
+                onSelectSection("resources");
+                onClose();
+              }}
+              icon={<Calculator aria-hidden="true" size={14} weight="Linear" />}
+            >
+              resources
+            </SidebarSectionButton>
+          </div>
+        </div>
+
+        <div
+          className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
+          id="contact"
         >
-          collabs
-        </SidebarLink>
-        <SidebarLink
-          href="mailto:andrei.huyoa.me@gmail.com?subject=Consulting%20inquiry"
-          icon={<Suitcase aria-hidden="true" size={14} weight="Linear" />}
-        >
-          consulting
-        </SidebarLink>
+          <div className="grid gap-2">
+            <a
+              className="grid min-h-6 w-full max-w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-0 bg-transparent p-0 text-left font-[inherit] tracking-[inherit] text-inherit no-underline"
+              href="mailto:andrei.huyoa.me@gmail.com?subject=Ask%20Andrei%20anything"
+            >
+              <span className="min-w-0">ask anything</span>
+              <span className="inline-flex items-center gap-1">
+                <kbd className="bg-website-surface-muted inline-flex items-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
+                  ⌘
+                </kbd>
+                <span>+</span>
+                <kbd className="bg-website-surface-muted inline-flex items-center justify-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
+                  K
+                </kbd>
+              </span>
+            </a>
+            <button
+              className="grid min-h-6 w-full max-w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-0 bg-transparent p-0 text-left font-[inherit] tracking-[inherit] text-inherit no-underline"
+              type="button"
+              title="typing test — coming soon"
+            >
+              <span className="min-w-0">typing test</span>
+              <span className="inline-flex items-center gap-1">
+                <kbd className="bg-website-surface-muted inline-flex items-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
+                  ⌘
+                </kbd>
+                <span>+</span>
+                <kbd className="bg-website-surface-muted inline-flex items-center justify-center rounded-sm border border-black/10 px-2 py-1 font-[inherit]">
+                  J
+                </kbd>
+              </span>
+            </button>
+          </div>
+          <div className={sketchRuleClass} aria-hidden="true" />
+          <p className="font-website-display text-sm tracking-tighter">
+            31 people viewing right now
+          </p>
+          <a
+            className={sidebarLinkClass}
+            href="mailto:andrei.huyoa.me@gmail.com?subject=Community%20chat"
+          >
+            <ChatRound aria-hidden="true" size={14} weight="Linear" />
+            <span>community chat</span>
+          </a>
+          <div className={sketchRuleClass} aria-hidden="true" />
+          <div className="flex flex-col items-start gap-2">
+            <div
+              className="flex items-start gap-2 overflow-hidden"
+              aria-label="Display controls"
+            >
+              <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-0.5">
+                <button
+                  className="bg-website-surface-soft text-website-text flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                  type="button"
+                  aria-label="System theme"
+                  title="System theme"
+                >
+                  <Monitor aria-hidden="true" size={13} weight="Linear" />
+                </button>
+                <button
+                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                  type="button"
+                  aria-label="Light theme"
+                  title="Light theme"
+                >
+                  <Sun aria-hidden="true" size={13} weight="Linear" />
+                </button>
+                <button
+                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                  type="button"
+                  aria-label="Dark theme"
+                  title="Dark theme — coming soon"
+                >
+                  <Moon aria-hidden="true" size={13} weight="Linear" />
+                </button>
+              </div>
+              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
+                <button
+                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                  type="button"
+                  aria-label="Sound"
+                  title="Sound — coming soon"
+                >
+                  <Soundwave aria-hidden="true" size={13} weight="Linear" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <p>For work, collaborations &amp; everything else, reach me at</p>
+          <a
+            className="hover:[&_span]:text-website-text !text-website-text flex w-fit items-center gap-1 no-underline hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+            href="mailto:andrei.huyoa.me@gmail.com"
+          >
+            <Letter aria-hidden="true" size={22} weight="Linear" />
+            <span className="underline decoration-dotted underline-offset-4">
+              andrei.huyoa.me@gmail.com
+            </span>
+          </a>
+        </div>
       </div>
-
-      <div className="website-sketch-rule" aria-hidden="true" />
-
-      <div className="website-sidebar__group">
-        <SidebarButton
-          icon={<Bag aria-hidden="true" size={14} weight="Linear" />}
-        >
-          shop
-        </SidebarButton>
-        <SidebarButton
-          icon={<Notebook aria-hidden="true" size={14} weight="Linear" />}
-        >
-          blog
-        </SidebarButton>
-        <SidebarButton
-          icon={<Monitor aria-hidden="true" size={14} weight="Linear" />}
-        >
-          gear
-        </SidebarButton>
-        <SidebarSectionButton
-          active={activeSection === "resources"}
-          onClick={() => onSelectSection("resources")}
-          icon={<Calculator aria-hidden="true" size={14} weight="Linear" />}
-        >
-          resources
-        </SidebarSectionButton>
-      </div>
-    </div>
-
-    <div className="website-sidebar__bottom" id="contact">
-      <div className="website-sidebar__shortcuts">
-        <a href="mailto:andrei.huyoa.me@gmail.com?subject=Ask%20Andrei%20anything">
-          <span className="website-sidebar__shortcut-label">ask anything</span>
-          <span className="website-sidebar__key-combo">
-            <kbd>⌘</kbd>
-            <span>+</span>
-            <kbd>K</kbd>
-          </span>
-        </a>
-        <button type="button" title="typing test — coming soon">
-          <span className="website-sidebar__shortcut-label">typing test</span>
-          <span className="website-sidebar__key-combo">
-            <kbd>⌘</kbd>
-            <span>+</span>
-            <kbd>J</kbd>
-          </span>
-        </button>
-      </div>
-      <div className="website-sketch-rule" aria-hidden="true" />
-      <p className="website-sidebar__presence">31 people viewing right now</p>
-      <a
-        className="website-sidebar-link"
-        href="mailto:andrei.huyoa.me@gmail.com?subject=Community%20chat"
-      >
-        <ChatRound aria-hidden="true" size={14} weight="Linear" />
-        <span>community chat</span>
-      </a>
-      <div className="website-sketch-rule" aria-hidden="true" />
-      <div
-        className="website-sidebar__icon-buttons"
-        aria-label="Display controls"
-      >
-        <a
-          href="https://github.com/andreihuyoa"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="GitHub profile"
-        >
-          <UsersGroupRounded aria-hidden="true" size={14} weight="Linear" />
-        </a>
-        <button type="button" aria-label="Light theme" title="Light theme">
-          <Sun aria-hidden="true" size={14} weight="Linear" />
-        </button>
-        <button
-          type="button"
-          aria-label="Dark theme"
-          title="Dark theme — coming soon"
-        >
-          <Moon aria-hidden="true" size={14} weight="Linear" />
-        </button>
-        <button type="button" aria-label="Sound" title="Sound — coming soon">
-          <Soundwave aria-hidden="true" size={14} weight="Linear" />
-        </button>
-      </div>
-      <p>For work, collaborations &amp; everything else, reach me at</p>
-      <a className="website-email-link" href="mailto:andrei.huyoa.me@gmail.com">
-        <Letter aria-hidden="true" size={22} weight="Linear" />
-        <span>andrei.huyoa.me@gmail.com</span>
-      </a>
-    </div>
-  </aside>
+    </aside>
+  </>
 );

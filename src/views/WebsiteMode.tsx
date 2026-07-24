@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ReactElement,
-  type RefObject,
-} from "react";
+import { useRef, useState, type ReactElement, type RefObject } from "react";
 import {
   ContentListSection,
   HeroSection,
@@ -14,7 +8,6 @@ import {
   type WebsiteListItem,
   type WebsiteSectionId,
 } from "../components/website";
-import { loadWebsiteFonts } from "../lib/fonts";
 
 const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
 
@@ -106,37 +99,46 @@ const sectionDetails: Record<
   },
 };
 
-interface SectionPlaceholderProps {
+interface WebsitePageShellProps {
+  children: ReactElement;
   section: WebsiteSectionId;
 }
 
-const SectionPlaceholder = ({
+interface WebsitePageIntroProps {
+  section: WebsiteSectionId;
+}
+
+const WebsitePageShell = ({
+  children,
   section,
-}: SectionPlaceholderProps): ReactElement => {
+}: WebsitePageShellProps): ReactElement => (
+  <MotionReveal>
+    <div
+      className="min-h-full pt-40 max-[760px]:pt-20"
+      aria-labelledby={`${section}-title`}
+    >
+      {children}
+    </div>
+  </MotionReveal>
+);
+
+const WebsitePageIntro = ({ section }: WebsitePageIntroProps): ReactElement => {
   const details = sectionDetails[section];
 
   return (
-    <section
-      className="border-website-text flex min-h-full flex-col border-t"
-      aria-labelledby={`${section}-placeholder-title`}
-    >
-      <div className="font-website-display border-website-text flex min-h-12 items-center justify-between border-b py-4 text-sm">
-        <span>
+    <section className="flex min-h-[320px] flex-wrap items-start gap-10 p-2.5 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:px-0">
+      <div className="h-[242px] w-[242px] shrink-0 max-[1180px]:h-[220px] max-[1180px]:w-[220px] max-[760px]:hidden" />
+      <div className="max-w-[34rem] min-w-80 flex-[1_1_24rem] pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
+        <p className="font-website-display text-website-text-muted m-0 text-sm tracking-[-0.05em]">
           {details.index} - {section}
-        </span>
-        <span className="text-website-text-muted">content scaffold</span>
-      </div>
-      <div className="flex flex-1 flex-col justify-center py-10">
-        <p className="font-website-display text-website-text-muted text-sm">
-          section ready
         </p>
         <h1
-          className="mt-3 text-4xl font-semibold capitalize"
-          id={`${section}-placeholder-title`}
+          className="mt-3 mb-0 text-4xl leading-none font-semibold capitalize"
+          id={`${section}-title`}
         >
           {section}
         </h1>
-        <p className="text-website-text-muted mt-4 max-w-md">
+        <p className="text-website-text-muted mt-4 mb-0 leading-[1.2]">
           {details.description}
         </p>
       </div>
@@ -153,7 +155,10 @@ const renderSection = (section: WebsiteSectionId): ReactElement => {
             <HeroSection />
           </MotionReveal>
           <StatsSection />
-          <div className="website-dot-rule" aria-hidden="true" />
+          <div
+            className="border-website-text mb-0 h-3 border-b-4 border-dotted"
+            aria-hidden="true"
+          />
           <MotionReveal>
             <ContentListSection
               id="experience"
@@ -166,40 +171,41 @@ const renderSection = (section: WebsiteSectionId): ReactElement => {
       );
     case "projects":
       return (
-        <MotionReveal>
+        <WebsitePageShell section="projects">
           <ContentListSection
             id="projects"
             index={sectionDetails.projects.index}
             title="projects"
             items={projects}
           />
-        </MotionReveal>
+        </WebsitePageShell>
       );
     case "stack":
       return (
-        <MotionReveal>
+        <WebsitePageShell section="stack">
           <ContentListSection
             id="stack"
             index={sectionDetails.stack.index}
             title="stack"
             items={stack}
           />
-        </MotionReveal>
+        </WebsitePageShell>
       );
     default:
-      return <SectionPlaceholder section={section} />;
+      return (
+        <WebsitePageShell section={section}>
+          <WebsitePageIntro section={section} />
+        </WebsitePageShell>
+      );
   }
 };
 
 const WebsiteMode = (): ReactElement => {
   const [activeSection, setActiveSection] =
     useState<WebsiteSectionId>("experience");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const contentRef: RefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    loadWebsiteFonts();
-  }, []);
 
   const selectSection = (section: WebsiteSectionId): void => {
     setActiveSection(section);
@@ -207,24 +213,37 @@ const WebsiteMode = (): ReactElement => {
   };
 
   return (
-    <main className="website-mode flex h-dvh flex-col overflow-hidden" id="top">
-      // * Website header
-      <header className="website-masthead shrink-0">
-        <a
-          className="website-masthead__brand"
-          href="#top"
-          aria-label="Andrei Huyo-a, home"
-        >
-          <img src={BrandLogo} alt="Andrei Huyo-a" />
-        </a>
-      </header>
-      <div className="website-layout min-h-0 flex-1">
+    <main className="bg-website-background font-website-sans text-website-text flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:!animate-none motion-reduce:*:!scroll-auto motion-reduce:*:!transition-none max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible">
+      <button
+        className="border-website-border bg-website-surface-muted text-website-text shadow-website fixed top-4 left-4 z-40 flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded={isSidebarOpen}
+        onClick={() => setIsSidebarOpen(true)}
+      >
+        <span className="h-px w-5 bg-current" aria-hidden="true" />
+        <span className="h-px w-5 bg-current" aria-hidden="true" />
+        <span className="h-px w-5 bg-current" aria-hidden="true" />
+      </button>
+      <a
+        className="pointer-events-none fixed top-5 left-5 z-40 block w-156 max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
+        aria-label="Andrei Huyo-a, home"
+      >
+        <img
+          className="block h-auto w-full max-w-none"
+          src={BrandLogo}
+          alt="Andrei Huyo-a"
+        />
+      </a>
+      <div className="relative z-1 flex h-full min-h-0 w-full flex-1 items-start overflow-hidden max-[760px]:h-auto max-[760px]:overflow-visible">
         <WebsiteSidebar
           activeSection={activeSection}
+          isMobileOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
           onSelectSection={selectSection}
         />
         <div
-          className="website-content h-full min-h-0 overflow-x-hidden overflow-y-auto"
+          className="ml-72 h-full min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain scroll-smooth [scrollbar-gutter:stable] max-[760px]:mx-auto max-[760px]:h-auto max-[760px]:w-[min(calc(100%_-_32px),620px)] max-[760px]:overflow-visible max-[760px]:pt-18"
           ref={contentRef}
         >
           <div className="min-h-full" key={activeSection}>
