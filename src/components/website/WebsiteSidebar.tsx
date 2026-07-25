@@ -1,5 +1,4 @@
 import {
-  BagBrokenIcon,
   CalculatorBrokenIcon,
   CaseBrokenIcon,
   ChatRoundBrokenIcon,
@@ -11,11 +10,11 @@ import {
   SuitcaseBrokenIcon,
   SunBrokenIcon,
 } from "@solar-icons/react";
+import { Link } from "@tanstack/react-router";
 import type { ReactElement, ReactNode } from "react";
 
 const sidebarLinkClass =
   "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
-const sidebarButtonClass = `${sidebarLinkClass} cursor-pointer border-0 bg-transparent p-0 font-[inherit] tracking-[inherit]`;
 const sketchRuleClass =
   "h-0 w-full border-t-2 border-website-text-muted opacity-85";
 const sidebarGroupClass =
@@ -27,14 +26,12 @@ export type WebsiteSectionId =
   | "certifications"
   | "stack"
   | "recommendations"
-  | "affiliations"
+  | "blog"
   | "resources";
 
 interface WebsiteSidebarProps {
-  activeSection: WebsiteSectionId;
   isMobileOpen: boolean;
   onClose: () => void;
-  onSelectSection: (section: WebsiteSectionId) => void;
 }
 
 interface SidebarLinkProps {
@@ -44,14 +41,11 @@ interface SidebarLinkProps {
   external?: boolean;
 }
 
-interface SidebarButtonProps {
+interface SidebarRouteLinkProps {
   children: ReactNode;
   icon?: ReactNode;
-}
-
-interface SidebarSectionButtonProps extends SidebarButtonProps {
-  active: boolean;
   onClick: () => void;
+  to: `/${WebsiteSectionId}`;
 }
 
 const SidebarLink = ({
@@ -71,42 +65,30 @@ const SidebarLink = ({
   </a>
 );
 
-const SidebarButton = ({
-  children,
-  icon,
-}: SidebarButtonProps): ReactElement => (
-  <button
-    className={sidebarButtonClass}
-    type="button"
-    title={`${String(children)} — coming soon`}
-  >
-    {icon}
-    <span>{children}</span>
-  </button>
-);
-
-const SidebarSectionButton = ({
-  active,
+const SidebarRouteLink = ({
   children,
   icon,
   onClick,
-}: SidebarSectionButtonProps): ReactElement => (
-  <button
-    className={`${sidebarButtonClass} ${active ? "[&_span]:text-website-text [&_span]:underline [&_span]:decoration-dotted [&_span]:underline-offset-4" : ""}`}
-    type="button"
-    aria-pressed={active}
+  to,
+}: SidebarRouteLinkProps): ReactElement => (
+  <Link
+    activeProps={{
+      className:
+        "[&_span]:text-website-text [&_span]:underline [&_span]:decoration-dotted [&_span]:underline-offset-4",
+    }}
+    className={sidebarLinkClass}
     onClick={onClick}
+    search={{ mode: "website" }}
+    to={to}
   >
     {icon}
     <span>{children}</span>
-  </button>
+  </Link>
 );
 
 export const WebsiteSidebar = ({
-  activeSection,
   isMobileOpen,
   onClose,
-  onSelectSection,
 }: WebsiteSidebarProps): ReactElement => (
   <>
     <div
@@ -135,60 +117,21 @@ export const WebsiteSidebar = ({
             <span aria-hidden="true">×</span>
           </button>
           <nav className={sidebarGroupClass} aria-label="Portfolio sections">
-            <SidebarSectionButton
-              active={activeSection === "experience"}
-              onClick={() => {
-                onSelectSection("experience");
-                onClose();
-              }}
-            >
+            <SidebarRouteLink to="/experience" onClick={onClose}>
               experience
-            </SidebarSectionButton>
-            <SidebarSectionButton
-              active={activeSection === "projects"}
-              onClick={() => {
-                onSelectSection("projects");
-                onClose();
-              }}
-            >
+            </SidebarRouteLink>
+            <SidebarRouteLink to="/projects" onClick={onClose}>
               projects
-            </SidebarSectionButton>
-            <SidebarSectionButton
-              active={activeSection === "certifications"}
-              onClick={() => {
-                onSelectSection("certifications");
-                onClose();
-              }}
-            >
+            </SidebarRouteLink>
+            <SidebarRouteLink to="/certifications" onClick={onClose}>
               certifications
-            </SidebarSectionButton>
-            <SidebarSectionButton
-              active={activeSection === "stack"}
-              onClick={() => {
-                onSelectSection("stack");
-                onClose();
-              }}
-            >
+            </SidebarRouteLink>
+            <SidebarRouteLink to="/stack" onClick={onClose}>
               stack
-            </SidebarSectionButton>
-            <SidebarSectionButton
-              active={activeSection === "recommendations"}
-              onClick={() => {
-                onSelectSection("recommendations");
-                onClose();
-              }}
-            >
+            </SidebarRouteLink>
+            <SidebarRouteLink to="/recommendations" onClick={onClose}>
               recommendations
-            </SidebarSectionButton>
-            <SidebarSectionButton
-              active={activeSection === "affiliations"}
-              onClick={() => {
-                onSelectSection("affiliations");
-                onClose();
-              }}
-            >
-              affiliations
-            </SidebarSectionButton>
+            </SidebarRouteLink>
           </nav>
 
           <div className={sketchRuleClass} aria-hidden="true" />
@@ -211,31 +154,20 @@ export const WebsiteSidebar = ({
           <div className={sketchRuleClass} aria-hidden="true" />
 
           <div className={sidebarGroupClass}>
-            <SidebarButton
-              icon={<BagBrokenIcon aria-hidden="true" size={14} />}
-            >
-              shop
-            </SidebarButton>
-            <SidebarButton
+            <SidebarRouteLink
+              to="/blog"
+              onClick={onClose}
               icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
             >
               blog
-            </SidebarButton>
-            <SidebarButton
-              icon={<MonitorBrokenIcon aria-hidden="true" size={14} />}
-            >
-              gear
-            </SidebarButton>
-            <SidebarSectionButton
-              active={activeSection === "resources"}
-              onClick={() => {
-                onSelectSection("resources");
-                onClose();
-              }}
+            </SidebarRouteLink>
+            <SidebarRouteLink
+              to="/resources"
+              onClick={onClose}
               icon={<CalculatorBrokenIcon aria-hidden="true" size={14} />}
             >
               resources
-            </SidebarSectionButton>
+            </SidebarRouteLink>
           </div>
         </div>
 

@@ -7,7 +7,6 @@ import StartButton from "./components/StartButton";
 import StartMenu from "./components/StartMenu";
 import DesktopIcon from "./components/DesktopIcon";
 import Window from "./components/Window";
-import WebsiteMode from "./views/WebsiteMode";
 import { persistViewMode, type ViewMode } from "./viewMode";
 
 import Biography from "./views/Biography";
@@ -152,7 +151,7 @@ const App = ({ mode, onModeChange }: AppProps): ReactElement => {
   };
 
   if (mode === "website") {
-    return <WebsiteMode />;
+    return <></>;
   }
 
   return (
