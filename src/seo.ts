@@ -1,4 +1,4 @@
-export const siteUrl = "https://andreihuyoa.com";
+export const siteUrl = "https://andreihuyoa.dev";
 export const siteName = "Andrei Huyo-a";
 export const defaultOgImage = "/assets/WebsiteMode/andrei-portrait-cutout.png";
 
