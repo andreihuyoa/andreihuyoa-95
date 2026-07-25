@@ -1,7 +1,7 @@
 import {
   CalculatorBrokenIcon,
   CaseBrokenIcon,
-  ChatRoundBrokenIcon,
+  // ChatRoundBrokenIcon,
   MailboxBrokenIcon,
   MonitorBrokenIcon,
   MoonBrokenIcon,
@@ -175,7 +175,7 @@ export const WebsiteSidebar = ({
           className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
           id="contact"
         >
-          <p className="font-website-display text-sm tracking-tighter">
+          {/* <p className="font-website-display text-sm tracking-tighter">
             31 people viewing right now
           </p>
           <a
@@ -184,7 +184,7 @@ export const WebsiteSidebar = ({
           >
             <ChatRoundBrokenIcon aria-hidden="true" size={14} />
             <span>community chat</span>
-          </a>
+          </a> */}
           <div className={sketchRuleClass} aria-hidden="true" />
           <div className="flex flex-col items-start gap-2">
             <div
