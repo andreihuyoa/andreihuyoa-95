@@ -5,6 +5,7 @@ import {
   WebsiteSidebar,
   type WebsiteSectionId,
 } from "../components/website";
+import { getContactUrl, getMailtoUrl } from "../utils/links";
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 
 const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
@@ -47,13 +48,13 @@ interface LandingSectionPreview {
 }
 
 const socialLinks = [
-  { label: "github", href: "https://github.com/andreihuyoa" },
+  { label: "github", href: getContactUrl("github") },
   {
     label: "linkedin",
-    href: "https://www.linkedin.com/in/carl-andrei-del-rosario-3bab57257/",
+    href: getContactUrl("linkedin"),
   },
-  { label: "instagram", href: "https://www.instagram.com/unabridgedeeyore" },
-  { label: "email", href: "mailto:andrei.huyoa.me@gmail.com" },
+  { label: "instagram", href: getContactUrl("instagram") },
+  { label: "email", href: getMailtoUrl() },
 ];
 
 // const stats = [

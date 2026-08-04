@@ -1,5 +1,6 @@
 import SocialsButton from "./SocialsButton";
 import type { ReactNode } from "react";
+import { getContactUrl } from "../utils/links";
 
 const sidebarImage = "/assets/AndreiHuyoa95.png";
 const ig = "/assets/StartMenu/Instagram.svg";
@@ -37,17 +38,17 @@ const StartMenu = ({
       <div className="flex flex-col justify-center">
         <SocialsButton
           icon={ig}
-          link="https://www.instagram.com/unabridgedeeyore"
+          link={getContactUrl("instagram")}
           text="Instagram"
         />
         <SocialsButton
           icon={linkedin}
-          link="https://www.linkedin.com/in/carl-andrei-del-rosario-3bab57257/"
+          link={getContactUrl("linkedin")}
           text="LinkedIn"
         />
         <SocialsButton
           icon={git}
-          link="https://www.github.com/andreihuyoa"
+          link={getContactUrl("github")}
           text="Github"
         />
 
