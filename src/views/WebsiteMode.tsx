@@ -1,6 +1,7 @@
 import { Link, Outlet } from "@tanstack/react-router";
 import { useState, type ReactElement } from "react";
 import {
+  HamburgerMenu,
   MotionReveal,
   WebsiteSidebar,
   type WebsiteSectionId,
@@ -9,7 +10,7 @@ import { getContactUrl, getMailtoUrl } from "../utils/links";
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 
 const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
-const Portrait = "/assets/WebsiteMode/andrei-portrait-cutout.png";
+const Portrait = "/assets/WebsiteMode/grad-pic-dither.png";
 
 interface WebsiteListItem {
   title: string;
@@ -334,6 +335,11 @@ const ContentListSection = ({
   </section>
 );
 
+/**
+ * The Landing Page Preview section for a landing page, displaying a list of items and optional tags.
+ * @param param0
+ * @returns
+ */
 const LandingPreviewSection = ({
   actionLabel,
   index,
@@ -345,7 +351,7 @@ const LandingPreviewSection = ({
   tagsTo = to,
 }: LandingSectionPreview): ReactElement => (
   <section
-    className="relative py-12"
+    className="relative py-4"
     id={section}
     aria-labelledby={`${section}-preview-title`}
   >
@@ -417,34 +423,53 @@ const LandingPreviewSection = ({
   </section>
 );
 
+// Hero Section for the landing page, with a portrait, intro text, and social links.
 export const WebsiteLandingPage = (): ReactElement => (
   <>
     <MotionReveal>
       <section
-        className="flex min-h-80 flex-wrap items-start justify-center gap-10 pt-40 pb-8 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-20 max-[760px]:pb-7"
+        className="flex min-h-80 flex-wrap items-start justify-center gap-10 pt-10 pb-8 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-0 max-[760px]:pb-7"
         aria-labelledby="website-intro-title"
       >
         <h1 className="sr-only" id="website-intro-title">
           Andrei Huyo-a
         </h1>
+        {/* Image */}
         <div className="h-60.5 w-60.5 shrink-0 overflow-hidden max-[1180px]:h-55 max-[1180px]:w-55 max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
           <img
-            className="h-full w-full object-contain object-bottom mix-blend-luminosity contrast-[1.08] grayscale"
+            className="h-full w-full translate-y-8 scale-[1.25] object-contain object-center"
             src={Portrait}
             alt="Carl Andrei Del Rosario"
-            width="853"
-            height="861"
+            width="1086"
+            height="1629"
           />
         </div>
+
         <div className="max-w-136 min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
+          <div>
+            {" "}
+            <Link
+              className="w-full max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
+              aria-label="Andrei Huyo-a, home"
+              search={{ mode: "website" }}
+              to="/"
+            >
+              <img
+                className="block h-auto w-full max-w-none"
+                src={BrandLogo}
+                alt="Andrei Huyo-a"
+              />
+            </Link>
+          </div>
           <p className="m-0 leading-[1.2]">
-            I&apos;m a full-stack engineer. I build modern web and mobile apps,
-            with a focus on practical systems, reliable APIs, and AI-assisted
-            development.
+            I&apos;m a full-stack developer building polished web and mobile
+            applications, with a focus on strong visual design, reliable
+            systems, and products.
           </p>
           <p className="mt-4 leading-[1.2]">
-            Right now I&apos;m turning rough ideas into useful products—from
-            appraisal workflows to healthcare recommendation systems.
+            Right now, I&apos;m turning ideas into tools that people can
+            genuinely use in their everyday workflows, combining solid
+            engineering with AI-assisted development.
           </p>
           <nav
             className="font-website-display flex flex-wrap justify-between gap-1.5 py-3.75 text-sm tracking-tighter [&_a]:inline-flex [&_a]:min-h-6 [&_a]:items-center [&_a]:gap-1 [&_a]:no-underline"
@@ -472,7 +497,7 @@ export const WebsiteLandingPage = (): ReactElement => (
       </section>
     </MotionReveal>
 
-    <div className="pb-10" aria-label="Portfolio overview">
+    <div className="py-4" aria-label="Portfolio overview">
       {landingSectionPreviews.map((section) => (
         <LandingPreviewSection {...section} key={section.section} />
       ))}
@@ -511,13 +536,14 @@ interface WebsitePageIntroProps {
   section: WebsiteSectionId;
 }
 
+// A shell component for the website pages.
 const WebsitePageShell = ({
   children,
   section,
 }: WebsitePageShellProps): ReactElement => (
   <MotionReveal>
     <div
-      className="min-h-full pt-40 max-[760px]:pt-20"
+      className="min-h-full pt-10 max-[760px]:pt-20"
       aria-labelledby={`${section}-title`}
     >
       {children}
@@ -611,31 +637,11 @@ const WebsiteMode = (): ReactElement => {
 
   return (
     <main className="bg-website-background font-website-sans text-website-text flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:animate-none! motion-reduce:*:scroll-auto! motion-reduce:*:transition-none! max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible">
-      {/* Brand Logo */}
-      <button
-        className="border-website-border bg-website-surface-muted text-website-text shadow-website fixed top-4 left-4 z-40 flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded={isSidebarOpen}
-        onClick={() => setIsSidebarOpen(true)}
-      >
-        <span className="h-px w-5 bg-current" aria-hidden="true" />
-        <span className="h-px w-5 bg-current" aria-hidden="true" />
-        <span className="h-px w-5 bg-current" aria-hidden="true" />
-      </button>
-      <Link
-        className="fixed top-5 left-5 z-40 block w-156 max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
-        aria-label="Andrei Huyo-a, home"
-        search={{ mode: "website" }}
-        to="/"
-      >
-        <img
-          className="block h-auto w-full max-w-none"
-          src={BrandLogo}
-          alt="Andrei Huyo-a"
-        />
-      </Link>
       <div className="relative z-1 flex h-full min-h-0 w-full flex-1 items-start overflow-hidden max-[760px]:h-auto max-[760px]:overflow-visible">
+        <HamburgerMenu
+          isOpen={isSidebarOpen}
+          onOpen={() => setIsSidebarOpen(true)}
+        />
         <WebsiteSidebar
           isMobileOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}

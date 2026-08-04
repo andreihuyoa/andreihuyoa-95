@@ -34,6 +34,11 @@ interface WebsiteSidebarProps {
   onClose: () => void;
 }
 
+interface HamburgerMenuProps {
+  isOpen: boolean;
+  onOpen: () => void;
+}
+
 interface SidebarLinkProps {
   children: ReactNode;
   href: string;
@@ -86,6 +91,23 @@ const SidebarRouteLink = ({
   </Link>
 );
 
+export const HamburgerMenu = ({
+  isOpen,
+  onOpen,
+}: HamburgerMenuProps): ReactElement => (
+  <button
+    className="border-website-border bg-website-surface-muted text-website-text shadow-website absolute top-4 left-4 flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
+    type="button"
+    aria-label="Open navigation"
+    aria-expanded={isOpen}
+    onClick={onOpen}
+  >
+    <span className="h-px w-5 bg-current" aria-hidden="true" />
+    <span className="h-px w-5 bg-current" aria-hidden="true" />
+    <span className="h-px w-5 bg-current" aria-hidden="true" />
+  </button>
+);
+
 export const WebsiteSidebar = ({
   isMobileOpen,
   onClose,
@@ -107,7 +129,7 @@ export const WebsiteSidebar = ({
       aria-label="Portfolio navigation and contact"
     >
       <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
-        <div className="flex min-h-0 w-full shrink flex-col items-center justify-center gap-3 overflow-hidden pt-32 max-[760px]:pt-14">
+        <div className="flex min-h-0 w-full shrink flex-col gap-3 overflow-hidden max-[760px]:pt-12">
           <button
             className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
             type="button"
