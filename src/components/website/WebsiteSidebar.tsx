@@ -13,10 +13,10 @@ import {
 import { Link } from "@tanstack/react-router";
 import type { ReactElement, ReactNode } from "react";
 
+import { Separator } from "./Separator";
+
 const sidebarLinkClass =
   "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
-const sketchRuleClass =
-  "h-0 w-full border-t-2 border-website-text-muted opacity-85";
 const sidebarGroupClass =
   "flex w-full flex-col items-start gap-2 overflow-hidden";
 
@@ -156,7 +156,7 @@ export const WebsiteSidebar = ({
             </SidebarRouteLink>
           </nav>
 
-          <div className={sketchRuleClass} aria-hidden="true" />
+          <Separator />
 
           <div className={sidebarGroupClass}>
             <SidebarLink
@@ -173,7 +173,7 @@ export const WebsiteSidebar = ({
             </SidebarLink>
           </div>
 
-          <div className={sketchRuleClass} aria-hidden="true" />
+          <Separator />
 
           <div className={sidebarGroupClass}>
             <SidebarRouteLink
@@ -207,7 +207,7 @@ export const WebsiteSidebar = ({
             <ChatRoundBrokenIcon aria-hidden="true" size={14} />
             <span>community chat</span>
           </a> */}
-          <div className={sketchRuleClass} aria-hidden="true" />
+          <Separator />
           <div className="flex flex-col items-start gap-2">
             <div
               className="flex items-start gap-2 overflow-hidden"

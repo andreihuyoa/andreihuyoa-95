@@ -1,11 +1,11 @@
 import { Link, Outlet } from "@tanstack/react-router";
 import { useState, type ReactElement } from "react";
+import { MotionReveal } from "../components/website/MotionReveal";
 import {
   HamburgerMenu,
-  MotionReveal,
   WebsiteSidebar,
   type WebsiteSectionId,
-} from "../components/website";
+} from "../components/website/WebsiteSidebar";
 import { getContactUrl, getMailtoUrl } from "../utils/links";
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 
@@ -315,6 +315,7 @@ const ContentListItem = ({ item }: ContentListItemProps): ReactElement => {
   );
 };
 
+// A section component that displays a list of content items, such as experiences or projects.
 const ContentListSection = ({
   id,
   index,
@@ -322,7 +323,7 @@ const ContentListSection = ({
   items,
 }: ContentListSectionProps): ReactElement => (
   <section className="scroll-mt-5" id={id} aria-labelledby={`${id}-title`}>
-    <div className="font-website-display border-website-text flex min-h-12.25 items-center justify-between gap-5 border-t py-3.75 text-sm tracking-tighter">
+    <div className="font-website-display border-website-text flex min-h-12.25 items-center justify-between gap-5 py-3.75 text-sm tracking-tighter">
       <h2 className="m-0 font-[inherit]" id={`${id}-title`}>
         {index} - {title}
       </h2>
