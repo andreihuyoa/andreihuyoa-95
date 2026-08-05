@@ -17,6 +17,7 @@ export default {
           text: "var(--website-text)",
           "text-muted": "var(--website-text-muted)",
           "text-soft": "var(--website-text-soft)",
+          interactive: "var(--website-interactive)",
           background: "var(--website-background)",
           surface: "var(--website-surface)",
           "surface-muted": "var(--website-surface-muted)",

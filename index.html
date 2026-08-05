@@ -41,11 +41,19 @@
         const mode =
           requestedMode === "website" || requestedMode === "os"
             ? requestedMode
-            : savedMode === "website"
-              ? "website"
-              : "os";
+            : savedMode === "website" || savedMode === "os"
+              ? savedMode
+              : "website";
+        const savedTheme = window.localStorage.getItem("website-theme");
+        const theme =
+          savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
 
         document.documentElement.dataset.mode = mode;
+        document.documentElement.dataset.theme = theme;
       })();
     </script>
   </head>
