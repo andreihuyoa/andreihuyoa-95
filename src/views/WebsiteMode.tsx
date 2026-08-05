@@ -1,12 +1,21 @@
-import { Link, Outlet } from "@tanstack/react-router";
-import { useState, type ReactElement } from "react";
+import { Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState, type ReactElement } from "react";
 import { MotionReveal } from "../components/website/MotionReveal";
+import { ThemePixelTransition } from "../components/website/ThemePixelTransition";
 import {
   HamburgerMenu,
   WebsiteSidebar,
   type WebsiteSectionId,
 } from "../components/website/WebsiteSidebar";
 import { getContactUrl, getMailtoUrl } from "../utils/links";
+import {
+  applyWebsiteTheme,
+  getSavedWebsiteTheme,
+  persistWebsiteTheme,
+  watchSystemTheme,
+  type WebsiteTheme,
+} from "../utils/websiteTheme";
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 
 const BrandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
@@ -304,10 +313,7 @@ const ContentListItem = ({ item }: ContentListItemProps): ReactElement => {
   );
 
   return item.href ? (
-    <a
-      className={`${itemClassName} hover:[&_h3]:underline hover:[&_h3]:decoration-dotted`}
-      href={item.href}
-    >
+    <a className={`${itemClassName} `} href={item.href}>
       {content}
     </a>
   ) : (
@@ -361,7 +367,7 @@ const LandingPreviewSection = ({
         {index} - {section}
       </h2>
       <Link
-        className="hover:text-website-text shrink-0 text-xs uppercase no-underline"
+        className="hover:text-website-interactive shrink-0 text-xs uppercase no-underline transition-colors duration-200"
         search={{ mode: "website" }}
         to={to}
       >
@@ -378,7 +384,7 @@ const LandingPreviewSection = ({
           to={to}
         >
           <div className="min-w-0">
-            <h3 className="group-hover:text-website-text-muted m-0 truncate text-[15px] leading-tight font-bold">
+            <h3 className="group-hover:text-website-interactive m-0 truncate text-[15px] leading-tight font-bold transition-colors duration-200">
               {row.title}
             </h3>
             <p className="text-website-text-muted mt-1 mb-0 truncate text-sm leading-[1.2]">
@@ -397,7 +403,7 @@ const LandingPreviewSection = ({
         <div className="font-website-display text-website-text-muted mb-2 flex w-full items-baseline justify-between gap-4 text-xs tracking-tighter uppercase">
           <h3 className="m-0 font-[inherit]">Stack</h3>
           <Link
-            className="hover:text-website-text shrink-0 no-underline"
+            className="hover:text-website-interactive shrink-0 no-underline transition-colors duration-200"
             search={{ mode: "website" }}
             to={tagsTo}
           >
@@ -413,7 +419,7 @@ const LandingPreviewSection = ({
           </span>
         ))}
         <Link
-          className="border-website-border hover:border-website-border-strong hover:text-website-text font-website-display text-website-text-muted rounded-md border border-dashed px-2.5 py-1 text-xs no-underline"
+          className="border-website-border hover:border-website-interactive hover:text-website-interactive font-website-display text-website-text-muted rounded-md border border-dashed px-2.5 py-1 text-xs no-underline transition-colors duration-200"
           search={{ mode: "website" }}
           to={tagsTo}
         >
@@ -448,7 +454,6 @@ export const WebsiteLandingPage = (): ReactElement => (
 
         <div className="max-w-136 min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
           <div>
-            {" "}
             <Link
               className="w-full max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
               aria-label="Andrei Huyo-a, home"
@@ -456,7 +461,7 @@ export const WebsiteLandingPage = (): ReactElement => (
               to="/"
             >
               <img
-                className="block h-auto w-full max-w-none"
+                className="website-brand-logo block h-auto w-full max-w-none"
                 src={BrandLogo}
                 alt="Andrei Huyo-a"
               />
@@ -479,18 +484,20 @@ export const WebsiteLandingPage = (): ReactElement => (
             {socialLinks.map((link) => {
               const external = link.href.startsWith("http");
               return (
-                <a
-                  className="text-website-text-muted hover:text-website-text transition-colors duration-200"
+                <motion.a
+                  className="text-website-text-muted hover:text-website-interactive transition-colors duration-200"
                   key={link.label}
                   href={link.href}
                   rel={external ? "noreferrer" : undefined}
                   target={external ? "_blank" : undefined}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.96 }}
                 >
                   {link.label}
                   {external ? (
                     <ArrowRightUpBrokenIcon aria-hidden="true" size={13} />
                   ) : null}
-                </a>
+                </motion.a>
               );
             })}
           </nav>
@@ -635,9 +642,72 @@ export const WebsiteResourcesPage = (): ReactElement => (
 
 const WebsiteMode = (): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [pendingTheme, setPendingTheme] = useState<WebsiteTheme | null>(null);
+  const [theme, setTheme] = useState<WebsiteTheme>(getSavedWebsiteTheme);
+  const [transitionColor, setTransitionColor] = useState("");
+  const reduceMotion = useReducedMotion();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    persistWebsiteTheme(theme);
+
+    if (theme !== "system") {
+      return;
+    }
+
+    return watchSystemTheme(() => applyWebsiteTheme("system"));
+  }, [theme]);
+
+  useEffect(
+    () => () => {
+      delete document.documentElement.dataset.themeTransitioning;
+    },
+    [],
+  );
+
+  const handleThemeChange = (nextTheme: WebsiteTheme): void => {
+    if (nextTheme === theme || pendingTheme) {
+      return;
+    }
+
+    if (reduceMotion) {
+      setTheme(nextTheme);
+      return;
+    }
+
+    const currentTextColor = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue("--website-text")
+      .trim();
+
+    setTransitionColor(currentTextColor);
+    document.documentElement.dataset.themeTransitioning = "true";
+    setPendingTheme(nextTheme);
+  };
+
+  const handleThemeCovered = (): void => {
+    if (!pendingTheme) {
+      return;
+    }
+
+    persistWebsiteTheme(pendingTheme);
+    setTheme(pendingTheme);
+  };
+
+  const handleThemeTransitionComplete = (): void => {
+    delete document.documentElement.dataset.themeTransitioning;
+    setPendingTheme(null);
+  };
 
   return (
     <main className="bg-website-background font-website-sans text-website-text flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:animate-none! motion-reduce:*:scroll-auto! motion-reduce:*:transition-none! max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible">
+      {pendingTheme && !reduceMotion ? (
+        <ThemePixelTransition
+          color={transitionColor}
+          onComplete={handleThemeTransitionComplete}
+          onCovered={handleThemeCovered}
+        />
+      ) : null}
       <div className="relative z-1 flex h-full min-h-0 w-full flex-1 items-start overflow-hidden max-[760px]:h-auto max-[760px]:overflow-visible">
         <HamburgerMenu
           isOpen={isSidebarOpen}
@@ -646,6 +716,12 @@ const WebsiteMode = (): ReactElement => {
         <WebsiteSidebar
           isMobileOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
+          onOsMode={() => {
+            void navigate({ to: "/", search: { mode: "os" } });
+          }}
+          onThemeChange={handleThemeChange}
+          theme={pendingTheme ?? theme}
+          themeChangeDisabled={pendingTheme !== null}
         />
         <div className="ml-72 h-full min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain scroll-smooth px-20 [scrollbar-gutter:stable] *:mx-auto *:w-full *:max-w-5xl max-lg:px-12 max-md:mx-auto max-md:ml-0 max-md:h-auto max-md:w-full max-md:overflow-visible max-md:px-4 max-md:pt-18">
           <Outlet />

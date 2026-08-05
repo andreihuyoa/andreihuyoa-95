@@ -2,6 +2,7 @@ import {
   CalculatorBrokenIcon,
   CaseBrokenIcon,
   // ChatRoundBrokenIcon,
+  GlobeBrokenIcon,
   MailboxBrokenIcon,
   MonitorBrokenIcon,
   MoonBrokenIcon,
@@ -11,12 +12,14 @@ import {
   SunBrokenIcon,
 } from "@solar-icons/react";
 import { Link } from "@tanstack/react-router";
+import { motion } from "motion/react";
 import type { ReactElement, ReactNode } from "react";
 
+import type { WebsiteTheme } from "../../utils/websiteTheme";
 import { Separator } from "./Separator";
 
 const sidebarLinkClass =
-  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline hover:text-website-text hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
+  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 hover:text-website-interactive hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
 const sidebarGroupClass =
   "flex w-full flex-col items-start gap-2 overflow-hidden";
 
@@ -32,6 +35,10 @@ export type WebsiteSectionId =
 interface WebsiteSidebarProps {
   isMobileOpen: boolean;
   onClose: () => void;
+  onOsMode: () => void;
+  onThemeChange: (theme: WebsiteTheme) => void;
+  themeChangeDisabled: boolean;
+  theme: WebsiteTheme;
 }
 
 interface HamburgerMenuProps {
@@ -91,6 +98,52 @@ const SidebarRouteLink = ({
   </Link>
 );
 
+const displayControlButtonClass = (isActive: boolean): string =>
+  `relative flex size-4 shrink-0 items-center justify-center rounded-full transition-colors duration-200 hover:cursor-pointer disabled:cursor-default ${
+    isActive
+      ? "text-website-text"
+      : "text-website-text-muted hover:text-website-interactive"
+  }`;
+
+interface ThemeButtonProps {
+  icon: ReactNode;
+  isActive: boolean;
+  isDisabled: boolean;
+  label: string;
+  onClick: () => void;
+}
+
+const ThemeButton = ({
+  icon,
+  isActive,
+  isDisabled,
+  label,
+  onClick,
+}: ThemeButtonProps): ReactElement => (
+  <motion.button
+    className={displayControlButtonClass(isActive)}
+    type="button"
+    aria-label={label}
+    aria-pressed={isActive}
+    disabled={isDisabled}
+    title={label}
+    whileHover={isDisabled ? undefined : { y: -1 }}
+    whileTap={isDisabled ? undefined : { scale: 0.78 }}
+    onClick={onClick}
+  >
+    {isActive ? (
+      <motion.span
+        className="bg-website-surface-soft absolute inset-0 rounded-full"
+        layoutId="active-website-theme"
+        transition={{ type: "spring", stiffness: 520, damping: 34 }}
+      />
+    ) : null}
+    <span className="relative z-1 flex items-center justify-center">
+      {icon}
+    </span>
+  </motion.button>
+);
+
 export const HamburgerMenu = ({
   isOpen,
   onOpen,
@@ -111,6 +164,10 @@ export const HamburgerMenu = ({
 export const WebsiteSidebar = ({
   isMobileOpen,
   onClose,
+  onOsMode,
+  onThemeChange,
+  themeChangeDisabled,
+  theme,
 }: WebsiteSidebarProps): ReactElement => (
   <>
     <div
@@ -214,46 +271,58 @@ export const WebsiteSidebar = ({
               aria-label="Display controls"
             >
               <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-0.5">
-                <button
-                  className="bg-website-surface-soft text-website-text flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
-                  type="button"
-                  aria-label="System theme"
-                  title="System theme"
-                >
-                  <MonitorBrokenIcon aria-hidden="true" size={13} />
-                </button>
-                <button
-                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
-                  type="button"
-                  aria-label="Light theme"
-                  title="Light theme"
-                >
-                  <SunBrokenIcon aria-hidden="true" size={13} />
-                </button>
-                <button
-                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
-                  type="button"
-                  aria-label="Dark theme"
-                  title="Dark theme — coming soon"
-                >
-                  <MoonBrokenIcon aria-hidden="true" size={13} />
-                </button>
+                <ThemeButton
+                  icon={<MonitorBrokenIcon aria-hidden="true" size={13} />}
+                  isActive={theme === "system"}
+                  isDisabled={themeChangeDisabled}
+                  label="System theme"
+                  onClick={() => onThemeChange("system")}
+                />
+                <ThemeButton
+                  icon={<SunBrokenIcon aria-hidden="true" size={13} />}
+                  isActive={theme === "light"}
+                  isDisabled={themeChangeDisabled}
+                  label="Light theme"
+                  onClick={() => onThemeChange("light")}
+                />
+                <ThemeButton
+                  icon={<MoonBrokenIcon aria-hidden="true" size={13} />}
+                  isActive={theme === "dark"}
+                  isDisabled={themeChangeDisabled}
+                  label="Dark theme"
+                  onClick={() => onThemeChange("dark")}
+                />
               </div>
               <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
-                <button
-                  className="bg-website-background text-website-text-muted flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                <motion.button
+                  className={displayControlButtonClass(false)}
+                  type="button"
+                  aria-label="Windows 95 mode"
+                  title="Windows 95 mode"
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.78 }}
+                  onClick={onOsMode}
+                >
+                  <GlobeBrokenIcon aria-hidden="true" size={13} />
+                </motion.button>
+              </div>
+              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
+                <motion.button
+                  className={displayControlButtonClass(false)}
                   type="button"
                   aria-label="Sound"
                   title="Sound — coming soon"
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.78 }}
                 >
                   <SoundwaveBrokenIcon aria-hidden="true" size={13} />
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
           <p>For work, collaborations &amp; everything else, reach me at</p>
           <a
-            className="hover:text-website-text flex w-fit items-center gap-1 text-inherit no-underline hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+            className="hover:text-website-interactive flex w-fit items-center gap-1 text-inherit no-underline transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
             href="mailto:andrei.huyoa.me@gmail.com"
           >
             <MailboxBrokenIcon aria-hidden="true" size={22} />
