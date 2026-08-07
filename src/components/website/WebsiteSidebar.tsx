@@ -144,21 +144,44 @@ const ThemeButton = ({
   </motion.button>
 );
 
+const WebsiteMonogram = (): ReactElement => (
+  <svg
+    className="h-10 w-auto fill-current"
+    width="52"
+    height="58"
+    viewBox="0 0 52 58"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path d="M51.176 39.864C49.768 40.8027 47.7627 42.3173 45.16 44.408H43.944C42.5787 43.1707 41.2987 40.9093 40.104 37.624C39.208 35.1067 38.3333 32.568 37.48 30.008H18.536L15.144 37.432C20.0507 37.432 23.5067 38.3067 25.512 40.056L29.16 37.688L29.928 38.392L21.288 44.408H19.816C17.256 42.5307 14.2693 41.592 10.856 41.592C8.59467 41.592 6.58933 42.1893 4.84 43.384C2.92 44.7067 1.96 46.456 1.96 48.632C1.96 53.496 5.62933 55.928 12.968 55.928C14.888 55.928 16.744 55.736 18.536 55.352L18.92 56.632C15.0373 56.9307 13.3093 57.08 13.736 57.08C5.11733 57.08 0.808 54.264 0.808 48.632C0.808 45.7307 2.23733 43.128 5.096 40.824C7.784 38.648 10.6427 37.5173 13.672 37.432L22.504 17.72C21.608 16.312 20.328 15.608 18.664 15.608C16.744 15.608 15.3147 16.4827 14.376 18.232L13.416 17.848C14.44 13.4107 16.936 11.192 20.904 11.192C22.44 11.192 23.7627 11.5333 24.872 12.216L27.368 6.904C25.9173 5.79467 24.1467 5.24 22.056 5.24C19.7947 5.24 17.576 6.24266 15.4 8.248L14.568 7.8C15.4213 5.66667 16.744 3.87467 18.536 2.424C20.3707 0.930665 22.376 0.183998 24.552 0.183998C26.472 0.183998 28.2853 0.866665 29.992 2.232L31.016 0.183998H31.848C32.5733 4.92 35.0693 12.3653 39.336 22.52C43.6453 32.6747 46.7813 38.5413 48.744 40.12L50.536 39.032L51.176 39.864ZM35.432 25.336L28.2 7.864L20.456 25.336H35.432Z" />
+  </svg>
+);
+
 export const HamburgerMenu = ({
   isOpen,
   onOpen,
 }: HamburgerMenuProps): ReactElement => (
-  <button
-    className="border-website-border bg-website-surface-muted text-website-text shadow-website absolute top-4 left-4 flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
-    type="button"
-    aria-label="Open navigation"
-    aria-expanded={isOpen}
-    onClick={onOpen}
-  >
-    <span className="h-px w-5 bg-current" aria-hidden="true" />
-    <span className="h-px w-5 bg-current" aria-hidden="true" />
-    <span className="h-px w-5 bg-current" aria-hidden="true" />
-  </button>
+  <div className="absolute top-4 right-4 left-4 z-40 flex items-center justify-between min-[761px]:right-auto min-[761px]:items-start">
+    <button
+      className="border-website-border bg-website-surface-muted text-website-text shadow-website flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded={isOpen}
+      onClick={onOpen}
+    >
+      <span className="h-px w-5 bg-current" aria-hidden="true" />
+      <span className="h-px w-5 bg-current" aria-hidden="true" />
+      <span className="h-px w-5 bg-current" aria-hidden="true" />
+    </button>
+    <Link
+      className="text-website-text inline-flex shrink-0 transition-colors duration-300"
+      aria-label="Andrei Huyo-a, home"
+      search={{ mode: "website" }}
+      to="/"
+    >
+      <WebsiteMonogram />
+    </Link>
+  </div>
 );
 
 export const WebsiteSidebar = ({
@@ -180,13 +203,14 @@ export const WebsiteSidebar = ({
       onClick={onClose}
     />
     <aside
-      className={`bg-website-background font-website-display text-website-text-muted fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
+      className={`bg-website-background font-website-display text-website-text-muted border-website-border/20 fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto border-r p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
         isMobileOpen ? "translate-x-0" : "max-[760px]:-translate-x-full"
       }`}
       aria-label="Portfolio navigation and contact"
     >
       <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
-        <div className="flex min-h-0 w-full shrink flex-col gap-3 overflow-hidden max-[760px]:pt-12">
+        {/* Navigation Links - Top Container */}
+        <div className="flex min-h-0 w-full shrink flex-col gap-6 overflow-hidden pt-16 max-[760px]:pt-12">
           <button
             className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
             type="button"
@@ -250,20 +274,11 @@ export const WebsiteSidebar = ({
           </div>
         </div>
 
+        {/* Contact Information - Bottom Container */}
         <div
           className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
           id="contact"
         >
-          {/* <p className="font-website-display text-sm tracking-tighter">
-            31 people viewing right now
-          </p>
-          <a
-            className={sidebarLinkClass}
-            href="mailto:andrei.huyoa.me@gmail.com?subject=Community%20chat"
-          >
-            <ChatRoundBrokenIcon aria-hidden="true" size={14} />
-            <span>community chat</span>
-          </a> */}
           <Separator />
           <div className="flex flex-col items-start gap-2">
             <div

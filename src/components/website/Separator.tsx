@@ -10,11 +10,11 @@ export const Separator = ({
   orientation = "horizontal",
 }: SeparatorProps): ReactElement => {
   const orientationClass =
-    orientation === "vertical" ? "h-full w-0.5" : "h-0.5 w-full";
+    orientation === "vertical" ? "h-full w-px" : "h-px w-full";
 
   return (
     <div
-      className={`bg-website-border-strong opacity-80 ${orientationClass} ${className}`}
+      className={`bg-website-border opacity-20 ${orientationClass} ${className}`}
       aria-hidden="true"
     />
   );
