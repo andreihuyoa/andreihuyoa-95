@@ -1,7 +1,7 @@
 import { getContactUrl, getMailtoUrl } from "../utils/links";
 
 export const brandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
-export const portrait = "/assets/WebsiteMode/grad-pic.png";
+export const portrait = "/assets/WebsiteMode/grad-pic-dither.png";
 
 export type WebsiteSectionId =
   | "experience"
