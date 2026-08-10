@@ -2,6 +2,7 @@ import { Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState, type ReactElement } from "react";
 import { MotionReveal } from "../components/website/MotionReveal";
+import { PixelStarField } from "../components/website/PixelStarField";
 import { ThemePixelTransition } from "../components/website/ThemePixelTransition";
 import {
   HamburgerMenu,
@@ -442,14 +443,17 @@ export const WebsiteLandingPage = (): ReactElement => (
           Andrei Huyo-a
         </h1>
         {/* Image */}
-        <div className="h-60.5 w-60.5 shrink-0 overflow-hidden max-[1180px]:h-55 max-[1180px]:w-55 max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
-          <img
-            className="h-full w-full translate-y-8 scale-[1.25] object-contain object-center"
-            src={Portrait}
-            alt="Carl Andrei Del Rosario"
-            width="1086"
-            height="1629"
-          />
+        <div className="relative h-60.5 w-60.5 shrink-0 max-[1180px]:h-55 max-[1180px]:w-55 max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
+          <PixelStarField />
+          <div className="relative z-1 h-full w-full overflow-hidden">
+            <img
+              className="h-full w-full translate-y-8 scale-[1.25] object-contain object-center"
+              src={Portrait}
+              alt="Carl Andrei Del Rosario"
+              width="1086"
+              height="1629"
+            />
+          </div>
         </div>
 
         <div className="max-w-136 min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
@@ -468,7 +472,7 @@ export const WebsiteLandingPage = (): ReactElement => (
             </Link>
           </div>
           <p className="m-0 leading-[1.2]">
-            I&apos;m a full-stack developer building polished web and mobile
+            I&apos;m a full-stack developer building web and mobile
             applications, with a focus on strong visual design, reliable
             systems, and products.
           </p>
