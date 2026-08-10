@@ -1,6 +1,14 @@
 import { motion } from "motion/react";
 import type { ReactElement } from "react";
 
+/**
+ * Static animation settings for one pixel-art star.
+ *
+ * Position values are percentages relative to the star field bounds. Size and
+ * drift values are pixels, while delay and duration are seconds. The phase
+ * toggles which sprite frame appears first, keeping neighboring stars from
+ * swapping states in unison.
+ */
 interface PixelStar {
   x: number;
   y: number;
@@ -12,6 +20,12 @@ interface PixelStar {
   phase: 0 | 1;
 }
 
+/**
+ * Dense, hand-tuned star placement around the portrait.
+ *
+ * The values are fixed so the field stays deterministic between renders while
+ * still feeling scattered and naturally staggered.
+ */
 const pixelStars: PixelStar[] = [
   {
     x: 8,
@@ -255,6 +269,13 @@ const pixelStars: PixelStar[] = [
   },
 ];
 
+/**
+ * Renders the animated pixel star field behind the website portrait.
+ *
+ * Each star is composed from simple square spans and animated with Motion
+ * keyframes. The hard opacity swaps create a two-frame sprite effect, while
+ * scale and drift keyframes add independent twinkling without React state.
+ */
 export const PixelStarField = (): ReactElement => (
   <div
     className="pointer-events-none absolute inset-[-12%] z-0"
