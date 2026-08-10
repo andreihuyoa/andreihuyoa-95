@@ -16,21 +16,13 @@ import { motion } from "motion/react";
 import type { ReactElement, ReactNode } from "react";
 
 import type { WebsiteTheme } from "../../utils/websiteTheme";
+import type { WebsiteSectionId } from "../../content/website";
 import { Separator } from "./Separator";
 
 const sidebarLinkClass =
   "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 hover:text-website-interactive hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
 const sidebarGroupClass =
   "flex w-full flex-col items-start gap-2 overflow-hidden";
-
-export type WebsiteSectionId =
-  | "experience"
-  | "projects"
-  | "certifications"
-  | "stack"
-  | "recommendations"
-  | "blog"
-  | "resources";
 
 interface WebsiteSidebarProps {
   isMobileOpen: boolean;

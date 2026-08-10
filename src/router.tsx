@@ -14,16 +14,17 @@ import {
   persistViewMode,
   type ViewMode,
 } from "./viewMode";
-import WebsiteMode, {
+import WebsiteLayout from "./views/website/WebsiteLayout";
+import {
   WebsiteBlogPage,
   WebsiteCertificationsPage,
   WebsiteExperiencePage,
+  WebsiteLandingPage,
   WebsiteProjectsPage,
   WebsiteRecommendationsPage,
   WebsiteResourcesPage,
   WebsiteStackPage,
-  WebsiteLandingPage,
-} from "./views/WebsiteMode";
+} from "./views/website/SectionPages";
 
 interface HomeSearch {
   mode: ViewMode;
@@ -57,7 +58,7 @@ const RootRoute = (): ReactElement => {
       }}
     />
   ) : (
-    <WebsiteMode />
+    <WebsiteLayout />
   );
 };
 
