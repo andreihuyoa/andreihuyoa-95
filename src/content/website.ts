@@ -19,6 +19,15 @@ export interface WebsiteListItem {
   tags?: string[];
 }
 
+export interface ExperienceItem {
+  role: string;
+  company: string;
+  date: string;
+  summary: string;
+  responsibilities: string[];
+  tags: string[];
+}
+
 export interface LandingSectionPreviewRow {
   title: string;
   description: string;
@@ -36,11 +45,6 @@ export interface LandingSectionPreview {
   tagsTo?: `/${WebsiteSectionId}`;
 }
 
-export interface WebsitePageDetail {
-  index: string;
-  description: string;
-}
-
 export const socialLinks = [
   { label: "github", href: getContactUrl("github") },
   { label: "linkedin", href: getContactUrl("linkedin") },
@@ -49,27 +53,48 @@ export const socialLinks = [
 ];
 
 // Experience
-export const experiences: WebsiteListItem[] = [
+export const experiences: ExperienceItem[] = [
   {
-    title: "Full Stack Developer · Shinka Studios",
+    role: "Full Stack Developer",
+    company: "Shinka Studios",
     date: "Mar 2025—Jun 2026",
-    description:
-      "Built and maintained the Keystone Appraisal platform, automated DOCX reports and Azure file delivery, created Python document-processing pipelines, shipped an internal data-collection extension, and delivered five responsive PH Business Network websites.",
+    summary:
+      "Worked across product development and internal tooling, mainly on appraisal workflows, document automation, and client websites.",
+    responsibilities: [
+      "Built and maintained features for the Keystone Appraisal platform across its Next.js frontend and Go services, including fixes to the data flow between both sides of the application.",
+      "Automated DOCX appraisal reports and Azure file delivery, then built Python pipelines to process the source documents used by those workflows.",
+      "Created an internal data-collection extension and supporting tools that made report generation and day-to-day operational work easier to track.",
+      "Delivered five responsive PH Business Network websites, handling desktop and mobile layouts as well as production fixes after release.",
+    ],
     tags: ["Next.js", "Go / Echo", "Python", "Azure"],
   },
   {
-    title: "Full Stack Developer Intern · Strastan Solutions Corp.",
+    role: "Full Stack Developer Intern",
+    company: "Strastan Solutions Corp.",
     date: "Feb—Jun 2026",
-    description:
-      "Developed typed Next.js features for a virtual-events platform, integrated session-based authentication, and built tested AWS Lambda CRUD handlers and API Gateway endpoints with AWS CDK.",
+    summary:
+      "Contributed to a virtual-events platform while getting hands-on experience with its frontend, authentication flow, and serverless backend.",
+    responsibilities: [
+      "Led a six-person development team, coordinating tasks and keeping the group aligned as features moved from planning into implementation.",
+      "Developed typed Next.js features and worked within the existing component and application patterns instead of treating each screen as a standalone build.",
+      "Integrated session-based authentication and connected protected user flows to the platform's backend behavior.",
+      "Built and tested AWS Lambda CRUD handlers and API Gateway endpoints, with infrastructure defined through AWS CDK.",
+      "Traced issues across the interface and serverless services, documenting and testing fixes before they were folded back into the main application.",
+    ],
     tags: ["Next.js 14", "TypeScript", "AWS Lambda", "AWS CDK"],
   },
   {
-    title: "Frontend Developer · Freelance",
+    role: "Frontend Developer",
+    company: "Freelance",
     date: "Apr—May 2024",
-    description:
-      "Delivered responsive desktop, tablet, and mobile layouts while debugging existing frontend issues and adapting reusable components from Figma designs.",
-    tags: ["Figma", "HTML", "CSS"],
+    summary:
+      "Turned supplied designs into responsive pages while working around the constraints of an existing frontend codebase.",
+    responsibilities: [
+      "Translated Figma layouts into desktop, tablet, and mobile interfaces while keeping spacing and content behavior consistent across breakpoints.",
+      "Adapted existing components where possible and added focused pieces only when the current UI could not support the design.",
+      "Investigated and fixed frontend issues that affected layout, styling, and responsive behavior during delivery.",
+    ],
+    tags: ["React", "Tailwind CSS", "Figma", "HTML", "CSS"],
   },
 ];
 
@@ -204,30 +229,3 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     ],
   },
 ];
-
-export const pageDetails: Record<WebsiteSectionId, WebsitePageDetail> = {
-  experience: {
-    index: "01",
-    description: "Work history and roles will live in this view.",
-  },
-  projects: {
-    index: "02",
-    description: "Selected projects and case studies will live in this view.",
-  },
-  certifications: {
-    index: "03",
-    description: "Certification records and verification links will go here.",
-  },
-  stack: {
-    index: "04",
-    description: "Tools, languages, and technical capabilities will go here.",
-  },
-  blog: {
-    index: "05",
-    description: "Thoughts, writing, notes, engineering,and essays about tech.",
-  },
-  resources: {
-    index: "06",
-    description: "Downloads, references, and useful resources will go here.",
-  },
-};

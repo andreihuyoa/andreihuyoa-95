@@ -15,15 +15,15 @@ import {
   type ViewMode,
 } from "./viewMode";
 import WebsiteLayout from "./views/website/WebsiteLayout";
+import { WebsiteLandingPage } from "./views/website/LandingPage";
 import {
   WebsiteBlogPage,
   WebsiteCertificationsPage,
   WebsiteExperiencePage,
-  WebsiteLandingPage,
   WebsiteProjectsPage,
   WebsiteResourcesPage,
   WebsiteStackPage,
-} from "./views/website/SectionPages";
+} from "./views/website/pages";
 
 interface HomeSearch {
   mode: ViewMode;
