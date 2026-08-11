@@ -224,9 +224,6 @@ export const WebsiteSidebar = ({
             <SidebarRouteLink to="/stack" onClick={onClose}>
               stack
             </SidebarRouteLink>
-            <SidebarRouteLink to="/recommendations" onClick={onClose}>
-              recommendations
-            </SidebarRouteLink>
           </nav>
 
           <Separator />

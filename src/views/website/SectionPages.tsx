@@ -61,15 +61,6 @@ export const WebsiteStackPage = (): ReactElement => (
 );
 
 /**
- * Renders the dedicated recommendations route.
- */
-export const WebsiteRecommendationsPage = (): ReactElement => (
-  <WebsitePageShell section="recommendations">
-    <WebsitePageIntro section="recommendations" />
-  </WebsitePageShell>
-);
-
-/**
  * Renders the dedicated blog route.
  */
 export const WebsiteBlogPage = (): ReactElement => (

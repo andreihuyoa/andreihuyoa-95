@@ -8,7 +8,6 @@ export type WebsiteSectionId =
   | "projects"
   | "certifications"
   | "stack"
-  | "recommendations"
   | "blog"
   | "resources";
 
@@ -49,6 +48,7 @@ export const socialLinks = [
   { label: "email", href: getMailtoUrl() },
 ];
 
+// Experience
 export const experiences: WebsiteListItem[] = [
   {
     title: "Full Stack Developer · Shinka Studios",
@@ -73,6 +73,7 @@ export const experiences: WebsiteListItem[] = [
   },
 ];
 
+// Projects
 export const projects: WebsiteListItem[] = [
   {
     title: "Hilom — Healthcare Recommendation Model",
@@ -84,6 +85,7 @@ export const projects: WebsiteListItem[] = [
   },
 ];
 
+// Stack
 export const stack: WebsiteListItem[] = [
   {
     title: "Tools I use to ship dependable web products",
@@ -188,22 +190,8 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     ],
   },
   {
-    section: "recommendations",
-    index: "05",
-    actionLabel: "all recommendations",
-    to: "/recommendations",
-    rows: [
-      {
-        title: "Recommendations and testimonials",
-        description:
-          "Notes from collaborators, mentors, and teams I have worked with.",
-        meta: "Soon",
-      },
-    ],
-  },
-  {
     section: "resources",
-    index: "06",
+    index: "05",
     actionLabel: "all resources",
     to: "/resources",
     rows: [
@@ -234,16 +222,12 @@ export const pageDetails: Record<WebsiteSectionId, WebsitePageDetail> = {
     index: "04",
     description: "Tools, languages, and technical capabilities will go here.",
   },
-  recommendations: {
-    index: "05",
-    description: "Recommendations and testimonials will go here.",
-  },
   blog: {
-    index: "06",
+    index: "05",
     description: "Thoughts, writing, notes, engineering,and essays about tech.",
   },
   resources: {
-    index: "07",
+    index: "06",
     description: "Downloads, references, and useful resources will go here.",
   },
 };

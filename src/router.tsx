@@ -21,7 +21,6 @@ import {
   WebsiteExperiencePage,
   WebsiteLandingPage,
   WebsiteProjectsPage,
-  WebsiteRecommendationsPage,
   WebsiteResourcesPage,
   WebsiteStackPage,
 } from "./views/website/SectionPages";
@@ -97,12 +96,6 @@ const stackRoute = createRoute({
   component: WebsiteStackPage,
 });
 
-const recommendationsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/recommendations",
-  component: WebsiteRecommendationsPage,
-});
-
 const blogRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/blog",
@@ -121,7 +114,6 @@ const routeTree = rootRoute.addChildren([
   projectsRoute,
   certificationsRoute,
   stackRoute,
-  recommendationsRoute,
   blogRoute,
   resourcesRoute,
 ]);
