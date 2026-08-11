@@ -12,6 +12,7 @@ import {
   socialLinks,
   type LandingSectionPreview,
 } from "../../content/website";
+import { Separator } from "../../components/website/Separator";
 
 /**
  * Shows one compact landing-page preview block for a portfolio section.
@@ -31,6 +32,7 @@ const LandingPreviewSection = ({
     id={section}
     aria-labelledby={`${section}-preview-title`}
   >
+    {/* Sections - Section title and action link */}
     <div className="font-website-display text-website-text-muted mb-8 flex items-baseline justify-between gap-4 text-sm tracking-tighter">
       <h2 className="m-0 font-[inherit]" id={`${section}-preview-title`}>
         {index} - {section}
@@ -107,7 +109,7 @@ export const WebsiteLandingPage = (): ReactElement => (
   <>
     <MotionReveal>
       <section
-        className="flex min-h-80 flex-wrap items-start justify-center gap-10 pt-10 pb-8 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-0 max-[760px]:pb-7"
+        className="flex min-h-80 flex-wrap items-start justify-center gap-10 py-10 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-0 max-[760px]:pb-7"
         aria-labelledby="website-intro-title"
       >
         <h1 className="sr-only" id="website-intro-title">
@@ -177,6 +179,7 @@ export const WebsiteLandingPage = (): ReactElement => (
           </nav>
         </div>
       </section>
+      <Separator />
     </MotionReveal>
 
     <div className="py-4" aria-label="Portfolio overview">
