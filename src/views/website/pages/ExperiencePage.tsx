@@ -45,17 +45,18 @@ const formatExperienceDuration = (dateRange: string): ExperienceDuration => {
   }
 
   const totalMonths =
-    (endYear - startYear) * monthNames.length + endMonth - startMonth + 1;
+    (endYear - startYear) * monthNames.length + endMonth - startMonth;
   const years = Math.floor(totalMonths / monthNames.length);
   const months = totalMonths % monthNames.length;
+  const monthLabel = `${months} ${months === 1 ? "MO" : "MOS"}`;
 
   if (years === 0) {
-    return { hasYears: false, label: `${months} MOS` };
+    return { hasYears: false, label: monthLabel };
   }
 
   return {
     hasYears: true,
-    label: `${years} yr${years === 1 ? "" : "s"}${months > 0 ? ` ${months} mos` : ""}`,
+    label: `${years} yr${years === 1 ? "" : "s"}${months > 0 ? ` ${monthLabel.toLowerCase()}` : ""}`,
   };
 };
 
@@ -134,7 +135,7 @@ const ExperiencePage = (): ReactElement => (
 
                 {/* Stack */}
                 <ul
-                  className="mt-7 mb-0 flex list-none flex-wrap gap-2 p-0"
+                  className="mt-7 mb-0 flex list-none flex-wrap gap-2 pl-6"
                   aria-label={`${experience.role} technologies`}
                 >
                   {experience.tags.map((tag) => (

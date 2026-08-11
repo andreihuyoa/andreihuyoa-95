@@ -49,6 +49,7 @@ export default {
           "sans-serif",
         ],
         "website-display": ['"Departure Mono"', "monospace"],
+        "website-redaction": ['"Redaction 10"', "serif"],
       },
     },
   },
