@@ -132,28 +132,8 @@ export const stack: WebsiteListItem[] = [
 
 export const landingSectionPreviews: LandingSectionPreview[] = [
   {
-    section: "blog",
-    index: "01",
-    actionLabel: "all posts",
-    to: "/blog",
-    rows: [
-      {
-        title: "Notes on practical systems and shipping useful products",
-        description:
-          "Short essays on full-stack engineering, automation, product decisions, and AI-assisted workflows.",
-        meta: "Current",
-      },
-      {
-        title: "Turning rough ideas into dependable interfaces",
-        description:
-          "What I think about when moving from prototype energy to tools people can actually use.",
-        meta: "Drafts",
-      },
-    ],
-  },
-  {
     section: "experience",
-    index: "02",
+    index: "01",
     actionLabel: "full history",
     to: "/experience",
     rows: [
@@ -173,22 +153,10 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
         meta: "2024",
       },
     ],
-    tags: [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Go",
-      "Python",
-      "AWS",
-      "Azure",
-      "Figma",
-    ],
-    tagsActionLabel: "view all",
-    tagsTo: "/stack",
   },
   {
     section: "projects",
-    index: "03",
+    index: "02",
     actionLabel: "all projects",
     to: "/projects",
     rows: [
@@ -197,6 +165,26 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
         meta: "Sep 2025",
+      },
+    ],
+  },
+  {
+    section: "blog",
+    index: "03",
+    actionLabel: "all posts",
+    to: "/blog",
+    rows: [
+      {
+        title: "Notes on practical systems and shipping useful products",
+        description:
+          "Short essays on full-stack engineering, automation, product decisions, and AI-assisted workflows.",
+        meta: "Current",
+      },
+      {
+        title: "Turning rough ideas into dependable interfaces",
+        description:
+          "What I think about when moving from prototype energy to tools people can actually use.",
+        meta: "Drafts",
       },
     ],
   },
@@ -215,8 +203,25 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     ],
   },
   {
-    section: "resources",
+    section: "stack",
     index: "05",
+    actionLabel: "view all",
+    to: "/stack",
+    rows: [],
+    tags: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Go",
+      "Python",
+      "AWS",
+      "Azure",
+      "Figma",
+    ],
+  },
+  {
+    section: "resources",
+    index: "06",
     actionLabel: "all resources",
     to: "/resources",
     rows: [

@@ -46,41 +46,45 @@ const LandingPreviewSection = ({
       </Link>
     </div>
 
-    <div className="border-website-border divide-website-border divide-y border-y">
-      {rows.map((row) => (
-        <Link
-          className="hover:bg-website-surface-soft group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
-          key={`${section}-${row.title}`}
-          search={{ mode: "website" }}
-          to={to}
-        >
-          <div className="min-w-0">
-            <h3 className="group-hover:text-website-interactive m-0 truncate text-[15px] leading-tight font-bold transition-colors duration-200">
-              {row.title}
-            </h3>
-            <p className="text-website-text-muted mt-1 mb-0 truncate text-sm leading-[1.2]">
-              {row.description}
-            </p>
-          </div>
-          <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">
-            {row.meta}
-          </span>
-        </Link>
-      ))}
-    </div>
+    {rows.length ? (
+      <div className="border-website-border divide-website-border divide-y border-y">
+        {rows.map((row) => (
+          <Link
+            className="hover:bg-website-surface-soft group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
+            key={`${section}-${row.title}`}
+            search={{ mode: "website" }}
+            to={to}
+          >
+            <div className="min-w-0">
+              <h3 className="group-hover:text-website-interactive m-0 truncate text-[15px] leading-tight font-bold transition-colors duration-200">
+                {row.title}
+              </h3>
+              <p className="text-website-text-muted mt-1 mb-0 truncate text-sm leading-[1.2]">
+                {row.description}
+              </p>
+            </div>
+            <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">
+              {row.meta}
+            </span>
+          </Link>
+        ))}
+      </div>
+    ) : null}
 
     {tags?.length ? (
       <div className="mt-7 flex flex-wrap gap-2">
-        <div className="font-website-display text-website-text-muted mb-2 flex w-full items-baseline justify-between gap-4 text-xs tracking-tighter uppercase">
-          <h3 className="m-0 font-[inherit]">Stack</h3>
-          <Link
-            className="hover:text-website-interactive shrink-0 no-underline transition-colors duration-200"
-            search={{ mode: "website" }}
-            to={tagsTo}
-          >
-            {tagsActionLabel} →
-          </Link>
-        </div>
+        {section !== "stack" ? (
+          <div className="font-website-display text-website-text-muted mb-2 flex w-full items-baseline justify-between gap-4 text-xs tracking-tighter uppercase">
+            <h3 className="m-0 font-[inherit]">Stack</h3>
+            <Link
+              className="hover:text-website-interactive shrink-0 no-underline transition-colors duration-200"
+              search={{ mode: "website" }}
+              to={tagsTo}
+            >
+              {tagsActionLabel} →
+            </Link>
+          </div>
+        ) : null}
         {tags.map((tag) => (
           <span
             className="border-website-border bg-website-surface font-website-display text-website-text-muted rounded-md border px-2.5 py-1 text-xs"
@@ -89,13 +93,15 @@ const LandingPreviewSection = ({
             {tag}
           </span>
         ))}
-        <Link
-          className="border-website-border hover:border-website-interactive hover:text-website-interactive font-website-display text-website-text-muted rounded-md border border-dashed px-2.5 py-1 text-xs no-underline transition-colors duration-200"
-          search={{ mode: "website" }}
-          to={tagsTo}
-        >
-          + more
-        </Link>
+        {section !== "stack" ? (
+          <Link
+            className="border-website-border hover:border-website-interactive hover:text-website-interactive font-website-display text-website-text-muted rounded-md border border-dashed px-2.5 py-1 text-xs no-underline transition-colors duration-200"
+            search={{ mode: "website" }}
+            to={tagsTo}
+          >
+            + more
+          </Link>
+        ) : null}
       </div>
     ) : null}
   </section>
