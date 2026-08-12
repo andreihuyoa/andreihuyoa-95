@@ -1,14 +1,11 @@
 import {
   CalculatorBrokenIcon,
-  CaseBrokenIcon,
-  // ChatRoundBrokenIcon,
   GlobeBrokenIcon,
   MailboxBrokenIcon,
   MonitorBrokenIcon,
   MoonBrokenIcon,
   NotebookBrokenIcon,
   SoundwaveBrokenIcon,
-  SuitcaseBrokenIcon,
   SunBrokenIcon,
 } from "@solar-icons/react";
 import { Link } from "@tanstack/react-router";
@@ -19,10 +16,8 @@ import type { WebsiteTheme } from "../../utils/websiteTheme";
 import type { WebsiteSectionId } from "../../content/website";
 import { Separator } from "./Separator";
 
-const sidebarLinkClass =
-  "inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 hover:text-website-interactive hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4";
 const sidebarGroupClass =
-  "flex w-full flex-col items-start gap-2 overflow-hidden";
+  "flex w-full flex-col items-start gap-4 overflow-hidden";
 
 interface WebsiteSidebarProps {
   isMobileOpen: boolean;
@@ -38,36 +33,12 @@ interface HamburgerMenuProps {
   onOpen: () => void;
 }
 
-interface SidebarLinkProps {
-  children: ReactNode;
-  href: string;
-  icon?: ReactNode;
-  external?: boolean;
-}
-
 interface SidebarRouteLinkProps {
   children: ReactNode;
   icon?: ReactNode;
   onClick: () => void;
   to: `/${WebsiteSectionId}`;
 }
-
-const SidebarLink = ({
-  children,
-  href,
-  icon,
-  external = false,
-}: SidebarLinkProps): ReactElement => (
-  <a
-    className={sidebarLinkClass}
-    href={href}
-    rel={external ? "noreferrer" : undefined}
-    target={external ? "_blank" : undefined}
-  >
-    {icon}
-    <span>{children}</span>
-  </a>
-);
 
 const SidebarRouteLink = ({
   children,
@@ -80,7 +51,7 @@ const SidebarRouteLink = ({
       className:
         "[&_span]:text-website-text [&_span]:underline [&_span]:decoration-dotted [&_span]:underline-offset-4",
     }}
-    className={sidebarLinkClass}
+    className="hover:text-website-interactive inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
     onClick={onClick}
     search={{ mode: "website" }}
     to={to}
@@ -225,23 +196,6 @@ export const WebsiteSidebar = ({
               stack
             </SidebarRouteLink>
           </nav>
-
-          <Separator />
-
-          <div className={sidebarGroupClass}>
-            <SidebarLink
-              href="mailto:andrei.huyoa.me@gmail.com?subject=Portfolio%20collaboration"
-              icon={<CaseBrokenIcon aria-hidden="true" size={14} />}
-            >
-              collabs
-            </SidebarLink>
-            <SidebarLink
-              href="mailto:andrei.huyoa.me@gmail.com?subject=Consulting%20inquiry"
-              icon={<SuitcaseBrokenIcon aria-hidden="true" size={14} />}
-            >
-              consulting
-            </SidebarLink>
-          </div>
 
           <Separator />
 
