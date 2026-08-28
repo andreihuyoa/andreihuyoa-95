@@ -25,11 +25,11 @@ export const ButtonLink = (props: ButtonLinkProps): ReactElement => {
   } = props;
   const styles: Record<Variant, string> = {
     primary:
-      "border border-transparent bg-website-orange text-website-text hover:bg-website-orange/80",
+      "border border-transparent bg-website-green text-website-background hover:bg-website-green/80",
     secondary:
       "border border-website-border-strong bg-website-surface hover:bg-(--website-green-soft)",
     surface:
-      "border border-transparent bg-website-surface-soft hover:bg-website-orange/20",
+      "border border-transparent bg-website-surface-soft hover:bg-website-green-soft/20",
     ghost: "border border-transparent hover:underline",
   };
   const outline = outlined

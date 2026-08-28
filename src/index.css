@@ -95,9 +95,8 @@ body {
   --website-border: #747870;
   --website-border-strong: #2f332f;
   --website-green: #24382d;
-  --website-green-dot: #5f7d67;
+  --website-green-dot: #5fç7d67;
   --website-green-soft: #e4efda;
-  --website-orange: #ee9b1a;
   --website-shadow: rgba(72, 64, 48, 0.18);
 
   color-scheme: light;
@@ -124,7 +123,7 @@ body {
   --website-text: #fffaf2;
   --website-text-muted: #ece5d9;
   --website-text-soft: #f3ede2;
-  --website-interactive: #ee9b1a;
+  --website-interactive: #f3ede2;
   --website-background: #2f332f;
   --website-surface: #24382d;
   --website-surface-muted: #565b54;

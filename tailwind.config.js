@@ -27,7 +27,6 @@ export default {
           green: "var(--website-green)",
           "green-dot": "var(--website-green-dot)",
           "green-soft": "var(--website-green-soft)",
-          orange: "var(--website-orange)",
         },
       },
       boxShadow: {
