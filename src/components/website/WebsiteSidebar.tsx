@@ -62,7 +62,7 @@ const SidebarRouteLink = ({
 );
 
 const displayControlButtonClass = (isActive: boolean): string =>
-  `relative flex size-4 shrink-0 items-center justify-center rounded-full transition-colors duration-200 hover:cursor-pointer disabled:cursor-default ${
+  `relative flex size-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 hover:cursor-pointer disabled:cursor-default ${
     isActive
       ? "text-website-text"
       : "text-website-text-muted hover:text-website-interactive"
@@ -228,30 +228,30 @@ export const WebsiteSidebar = ({
               className="flex items-start gap-2 overflow-hidden"
               aria-label="Display controls"
             >
-              <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-0.5">
+              <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-1">
                 <ThemeButton
-                  icon={<MonitorBrokenIcon aria-hidden="true" size={13} />}
+                  icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
                   isActive={theme === "system"}
                   isDisabled={themeChangeDisabled}
                   label="System theme"
                   onClick={() => onThemeChange("system")}
                 />
                 <ThemeButton
-                  icon={<SunBrokenIcon aria-hidden="true" size={13} />}
+                  icon={<SunBrokenIcon aria-hidden="true" size={16} />}
                   isActive={theme === "light"}
                   isDisabled={themeChangeDisabled}
                   label="Light theme"
                   onClick={() => onThemeChange("light")}
                 />
                 <ThemeButton
-                  icon={<MoonBrokenIcon aria-hidden="true" size={13} />}
+                  icon={<MoonBrokenIcon aria-hidden="true" size={16} />}
                   isActive={theme === "dark"}
                   isDisabled={themeChangeDisabled}
                   label="Dark theme"
                   onClick={() => onThemeChange("dark")}
                 />
               </div>
-              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
+              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
                 <motion.button
                   className={displayControlButtonClass(false)}
                   type="button"
@@ -261,10 +261,10 @@ export const WebsiteSidebar = ({
                   whileTap={{ scale: 0.78 }}
                   onClick={onOsMode}
                 >
-                  <GlobeBrokenIcon aria-hidden="true" size={13} />
+                  <GlobeBrokenIcon aria-hidden="true" size={16} />
                 </motion.button>
               </div>
-              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-0.5">
+              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
                 <motion.button
                   className={displayControlButtonClass(false)}
                   type="button"
@@ -273,7 +273,7 @@ export const WebsiteSidebar = ({
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.78 }}
                 >
-                  <SoundwaveBrokenIcon aria-hidden="true" size={13} />
+                  <SoundwaveBrokenIcon aria-hidden="true" size={16} />
                 </motion.button>
               </div>
             </div>
