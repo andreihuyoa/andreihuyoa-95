@@ -45,18 +45,14 @@ const StackPage = (): ReactElement => (
             key={tag}
           >
             <img
-              className="absolute inset-0 -z-2 size-full scale-110 object-contain p-10 opacity-45 blur-xs grayscale"
+              className="absolute inset-0 -z-2 size-full scale-110 object-contain p-10 opacity-45 blur-[2px] grayscale"
               src={stackImageByTag[tag]}
               alt=""
               aria-hidden="true"
               loading="lazy"
             />
             <div
-              className="absolute inset-0 -z-2 bg-black/15"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 -z-1 bg-black/20"
+              className="absolute inset-0 -z-2 bg-black/10"
               aria-hidden="true"
             />
             <div className="font-website-display text-website-text mt-auto ml-auto flex max-w-[85%] items-baseline gap-2 text-right drop-shadow-sm">
