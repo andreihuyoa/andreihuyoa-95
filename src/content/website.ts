@@ -8,7 +8,7 @@ export type WebsiteSectionId =
   | "projects"
   | "certifications"
   | "stack"
-  | "blog"
+  | "blogs"
   | "resources";
 
 export interface WebsiteListItem {
@@ -181,24 +181,11 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     ],
   },
   {
-    section: "blog",
+    section: "blogs",
     index: "03",
     actionLabel: "all posts",
-    to: "/blog",
-    rows: [
-      {
-        title: "Notes on practical systems and shipping useful products",
-        description:
-          "Short essays on full-stack engineering, automation, product decisions, and AI-assisted workflows.",
-        meta: "Current",
-      },
-      {
-        title: "Turning rough ideas into dependable interfaces",
-        description:
-          "What I think about when moving from prototype energy to tools people can actually use.",
-        meta: "Drafts",
-      },
-    ],
+    to: "/blogs",
+    rows: [],
   },
   {
     section: "certifications",

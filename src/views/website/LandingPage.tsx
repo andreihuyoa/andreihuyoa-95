@@ -13,6 +13,9 @@ import {
   type LandingSectionPreview,
 } from "../../content/website";
 import { Separator } from "../../components/website/Separator";
+import { formatBlogDate, getAllPosts } from "../../lib/blog";
+
+const latestPosts = getAllPosts().slice(0, 3);
 
 /**
  * Shows one compact landing-page preview block for a portfolio section.
@@ -35,7 +38,7 @@ const LandingPreviewSection = ({
     {/* Sections - Section title and action link */}
     <div className="font-website-display text-website-text-muted mb-8 flex items-baseline justify-between gap-4 text-sm tracking-tighter">
       <h2 className="m-0 font-[inherit]" id={`${section}-preview-title`}>
-        {index} - {section}
+        {index} - {section === "blogs" ? "blog" : section}
       </h2>
       <Link
         className="hover:text-website-interactive shrink-0 text-xs uppercase no-underline transition-colors duration-200"
@@ -106,6 +109,74 @@ const LandingPreviewSection = ({
         ) : null}
       </div>
     ) : null}
+  </section>
+);
+
+/** Shows up to three latest posts with frontmatter-driven thumbnails. */
+const LandingBlogPreviewSection = ({
+  actionLabel,
+  index,
+  section,
+  to,
+}: LandingSectionPreview): ReactElement => (
+  <section
+    className="relative py-4"
+    id={section}
+    aria-labelledby={`${section}-preview-title`}
+  >
+    <div className="font-website-display text-website-text-muted mb-8 flex items-baseline justify-between gap-4 text-sm tracking-tighter">
+      <h2 className="m-0 font-[inherit]" id={`${section}-preview-title`}>
+        {index} - blog
+      </h2>
+      <Link
+        className="hover:text-website-interactive shrink-0 text-xs uppercase no-underline transition-colors duration-200"
+        search={{ mode: "website" }}
+        to={to}
+      >
+        {actionLabel} →
+      </Link>
+    </div>
+
+    {latestPosts.length ? (
+      <div className="border-website-border divide-website-border divide-y border-y">
+        {latestPosts.map((post) => (
+          <Link
+            className="hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group grid grid-cols-[minmax(0,1fr)_8rem] items-center gap-6 py-4 text-inherit no-underline max-[560px]:grid-cols-[minmax(0,1fr)_5.5rem] max-[560px]:gap-4"
+            key={post.slug}
+            params={{ slug: post.slug }}
+            search={{ mode: "website" }}
+            to="/blogs/$slug"
+          >
+            <div className="min-w-0">
+              <time
+                className="font-website-display text-website-text-muted text-[11px] tracking-tighter uppercase"
+                dateTime={post.date}
+              >
+                {formatBlogDate(post.date)}
+              </time>
+              <h3 className="group-hover:text-website-interactive mt-2 mb-1 line-clamp-2 text-lg leading-tight font-semibold tracking-[-0.03em] transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-website-text-muted m-0 line-clamp-1 text-sm leading-snug max-[560px]:hidden">
+                {post.description}
+              </p>
+            </div>
+            <img
+              className="bg-website-surface-muted aspect-[3/2] h-auto w-full rounded-sm object-cover"
+              src={post.coverImage}
+              alt=""
+              loading="lazy"
+            />
+          </Link>
+        ))}
+      </div>
+    ) : (
+      <div className="border-website-border border-y py-5">
+        <p className="text-website-text-muted m-0 text-sm">
+          No published posts yet.
+        </p>
+      </div>
+    )}
   </section>
 );
 
@@ -191,9 +262,13 @@ export const WebsiteLandingPage = (): ReactElement => (
     </MotionReveal>
 
     <div className="py-4" aria-label="Portfolio overview">
-      {landingSectionPreviews.map((section) => (
-        <LandingPreviewSection {...section} key={section.section} />
-      ))}
+      {landingSectionPreviews.map((section) =>
+        section.section === "blogs" ? (
+          <LandingBlogPreviewSection {...section} key={section.section} />
+        ) : (
+          <LandingPreviewSection {...section} key={section.section} />
+        ),
+      )}
     </div>
   </>
 );

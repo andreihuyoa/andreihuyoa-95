@@ -201,11 +201,11 @@ export const WebsiteSidebar = ({
 
           <div className={sidebarGroupClass}>
             <SidebarRouteLink
-              to="/blog"
+              to="/blogs"
               onClick={onClose}
               icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
             >
-              blog
+              blogs
             </SidebarRouteLink>
             <SidebarRouteLink
               to="/resources"

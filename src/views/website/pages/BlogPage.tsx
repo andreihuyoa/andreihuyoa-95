@@ -22,16 +22,6 @@ const BlogPage = (): ReactElement => (
           Blog
         </h1>
       </header>
-
-      <div className="border-website-text/50 max-w-2xl border-l pl-8 max-[640px]:pl-5">
-        <p className="font-website-display text-website-text-muted m-0 text-xs uppercase">
-          First entry in progress
-        </p>
-        <p className="mt-4 mb-0 text-2xl leading-tight">
-          Notes on engineering decisions, useful automation, and the work behind
-          dependable interfaces.
-        </p>
-      </div>
     </section>
   </MotionReveal>
 );
