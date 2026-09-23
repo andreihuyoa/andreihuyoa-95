@@ -1,3 +1,4 @@
+import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 import type { ReactElement } from "react";
 
 import { MotionReveal } from "../../../components/website/MotionReveal";
@@ -27,13 +28,25 @@ const ProjectsPage = (): ReactElement => (
       <div className="border-website-border divide-website-border divide-y border-y">
         {projects.map((project) => (
           <article
-            className="grid grid-cols-[minmax(0,1fr)_auto] gap-8 py-7 max-[760px]:grid-cols-1 max-[760px]:gap-3"
+            className="py-7"
             id={project.href?.replace("#", "")}
             key={project.title}
           >
             <div>
               <h2 className="m-0 text-xl leading-tight font-semibold">
-                {project.title}
+                {project.sourceUrl ? (
+                  <a
+                    className="hover:text-website-interactive inline-flex items-center gap-1.5 text-inherit no-underline transition-colors duration-200 hover:underline hover:decoration-dotted hover:underline-offset-4"
+                    href={project.sourceUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {project.title}
+                    <ArrowRightUpBrokenIcon aria-hidden="true" size={16} />
+                  </a>
+                ) : (
+                  project.title
+                )}
               </h2>
               <p className="text-website-text-muted mt-3 mb-0 max-w-3xl leading-[1.4]">
                 {project.description}
@@ -46,9 +59,6 @@ const ProjectsPage = (): ReactElement => (
                 </ul>
               ) : null}
             </div>
-            <time className="font-website-display text-website-text-muted shrink-0 text-xs">
-              {project.date}
-            </time>
           </article>
         ))}
       </div>

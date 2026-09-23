@@ -63,9 +63,11 @@ const LandingPreviewSection = ({
                 {row.description}
               </p>
             </div>
-            <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">
-              {row.meta}
-            </span>
+            {row.meta ? (
+              <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">
+                {row.meta}
+              </span>
+            ) : null}
           </Link>
         ))}
       </div>

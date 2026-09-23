@@ -16,6 +16,7 @@ export interface WebsiteListItem {
   description: string;
   date: string;
   href?: string;
+  sourceUrl?: string;
   tags?: string[];
 }
 
@@ -31,7 +32,7 @@ export interface ExperienceItem {
 export interface LandingSectionPreviewRow {
   title: string;
   description: string;
-  meta: string;
+  meta?: string;
 }
 
 export interface LandingSectionPreview {
@@ -99,10 +100,17 @@ export const experiences: ExperienceItem[] = [
 ];
 
 // Projects
-export const projects: WebsiteListItem[] = [
+export const projects: Omit<WebsiteListItem, "date">[] = [
+  {
+    title: "Fig — Personal Link Library",
+    href: "#fig-project",
+    sourceUrl: "https://github.com/andreihuyoa/consider-it-done",
+    description:
+      "An iOS-first personal link library for saving, organizing, searching, and returning to links that matter. Currently in active development with SwiftUI and SwiftData, alongside a lightweight macOS menu-bar companion.",
+    tags: ["SwiftUI", "SwiftData", "iOS", "macOS"],
+  },
   {
     title: "Hilom — Healthcare Recommendation Model",
-    date: "Sep—Dec 2025",
     href: "#hilom-project",
     description:
       "Led a hybrid recommendation API for healthcare facilities in Ermita, Manila, combining content-based filtering, a neural network, and Haversine distance. The model achieved 80.7% Recall@5 and 0.65 mean average precision.",
@@ -161,10 +169,14 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     to: "/projects",
     rows: [
       {
+        title: "Fig — Personal Link Library",
+        description:
+          "An iOS-first SwiftUI and SwiftData app for saving, organizing, and returning to links that matter.",
+      },
+      {
         title: "Hilom — Healthcare Recommendation Model",
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
-        meta: "Sep 2025",
       },
     ],
   },
