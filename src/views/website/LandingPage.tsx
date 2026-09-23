@@ -50,7 +50,7 @@ const LandingPreviewSection = ({
       <div className="border-website-border divide-website-border divide-y border-y">
         {rows.map((row) => (
           <Link
-            className="hover:bg-website-surface-soft group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
+            className="hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
             key={`${section}-${row.title}`}
             search={{ mode: "website" }}
             to={to}

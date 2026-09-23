@@ -134,7 +134,7 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
   {
     section: "experience",
     index: "01",
-    actionLabel: "full history",
+    actionLabel: "all history",
     to: "/experience",
     rows: [
       {
