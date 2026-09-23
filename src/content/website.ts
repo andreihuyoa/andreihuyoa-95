@@ -102,15 +102,15 @@ export const experiences: ExperienceItem[] = [
 // Projects
 export const projects: Omit<WebsiteListItem, "date">[] = [
   {
-    title: "Fig — Personal Link Library",
+    title: "Fig — Personal Saves Library",
     href: "#fig-project",
     sourceUrl: "https://github.com/andreihuyoa/consider-it-done",
     description:
-      "An iOS-first personal link library for saving, organizing, searching, and returning to links that matter. Currently in active development with SwiftUI and SwiftData, alongside a lightweight macOS menu-bar companion.",
+      "An iOS-first personal saved links library for keeping, organizing, searching, and returning to saved links across social media and the web that matter. Currently in active development with SwiftUI and SwiftData, alongside a lightweight macOS menu-bar companion.",
     tags: ["SwiftUI", "SwiftData", "iOS", "macOS"],
   },
   {
-    title: "Hilom — Healthcare Recommendation Model",
+    title: "Hilom — Healthcare Recommendation API Model",
     href: "#hilom-project",
     description:
       "Led a hybrid recommendation API for healthcare facilities in Ermita, Manila, combining content-based filtering, a neural network, and Haversine distance. The model achieved 80.7% Recall@5 and 0.65 mean average precision.",
