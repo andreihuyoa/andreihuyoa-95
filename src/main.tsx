@@ -1,16 +1,33 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { ViteReactSSG } from "vite-react-ssg/single-page";
 import "./index.css";
-import { AppRouter } from "./router";
+import { getAllPosts } from "./lib/blog";
+import { SsgRouterRoot } from "./SsgRouterRoot";
+import { createAppRouter, type AppRouter as PortfolioRouter } from "./router";
 
-const root = document.getElementById("root");
+let activeRouter: PortfolioRouter | null = null;
 
-if (!root) {
-  throw new Error("Root element not found");
-}
+const staticRoutes = [
+  "/",
+  "/experience",
+  "/projects",
+  "/certifications",
+  "/stack",
+  "/blogs",
+  "/resources",
+  ...getAllPosts().map((post) => `/blogs/${post.slug}`),
+];
 
-createRoot(root).render(
+export const includedRoutes = (): string[] => staticRoutes;
+
+export const createRoot = ViteReactSSG(
   <StrictMode>
-    <AppRouter />
+    <SsgRouterRoot getRouter={() => activeRouter} />
   </StrictMode>,
+  async (context) => {
+    activeRouter = createAppRouter(
+      context.isClient ? undefined : (context.routePath ?? "/"),
+    );
+    await activeRouter.load({ sync: true });
+  },
 );

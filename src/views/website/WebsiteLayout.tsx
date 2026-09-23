@@ -130,7 +130,10 @@ const WebsiteLayout = (): ReactElement => {
           theme={pendingTheme ?? theme}
           themeChangeDisabled={pendingTheme !== null}
         />
-        <div className="ml-72 h-full min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain scroll-smooth px-20 [scrollbar-gutter:stable] *:mx-auto *:w-full *:max-w-5xl max-lg:px-12 max-md:mx-auto max-md:ml-0 max-md:h-auto max-md:w-full max-md:overflow-visible max-md:px-4 max-md:pt-18">
+        <div
+          className="ml-72 h-full min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain scroll-smooth px-20 [scrollbar-gutter:stable] *:mx-auto *:w-full *:max-w-5xl max-lg:px-12 max-md:mx-auto max-md:ml-0 max-md:h-auto max-md:w-full max-md:overflow-visible max-md:px-4 max-md:pt-18"
+          data-website-scroll-container
+        >
           <Outlet />
         </div>
       </div>

@@ -1,4 +1,4 @@
-export const siteUrl = "https://andreihuyoa.dev";
+export const siteUrl = "https://andreihuyoa.com";
 export const siteName = "Andrei Huyo-a";
 export const defaultOgImage = "/assets/WebsiteMode/andrei-portrait-cutout.png";
 
@@ -7,6 +7,8 @@ export interface SeoMetadata {
   description: string;
   canonicalPath: string;
   ogImage?: string;
+  publishedTime?: string;
+  type?: "article" | "website";
 }
 
 export const homeSeo: SeoMetadata = {

@@ -7,6 +7,10 @@ export const isViewMode = (value: unknown): value is ViewMode => {
 };
 
 export const getSavedMode = (): ViewMode => {
+  if (typeof window === "undefined") {
+    return "website";
+  }
+
   const savedMode = window.localStorage.getItem(DESIGN_MODE_KEY);
 
   return isViewMode(savedMode) ? savedMode : "website";

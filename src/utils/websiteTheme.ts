@@ -8,6 +8,10 @@ const isWebsiteTheme = (value: unknown): value is WebsiteTheme => {
 };
 
 export const getSavedWebsiteTheme = (): WebsiteTheme => {
+  if (typeof window === "undefined") {
+    return "system";
+  }
+
   const savedTheme = window.localStorage.getItem(WEBSITE_THEME_KEY);
 
   return isWebsiteTheme(savedTheme) ? savedTheme : "system";

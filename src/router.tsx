@@ -1,23 +1,17 @@
 import {
-  RouterProvider,
+  createBrowserHistory,
+  createMemoryHistory,
   createRootRoute,
   createRoute,
   createRouter,
-  useNavigate,
 } from "@tanstack/react-router";
-import { useEffect, type ReactElement } from "react";
-import App from "./App";
-import { applySeoMetadata, homeSeo } from "./seo";
-import {
-  getSavedMode,
-  isViewMode,
-  persistViewMode,
-  type ViewMode,
-} from "./viewMode";
-import WebsiteLayout from "./views/website/WebsiteLayout";
+import { isViewMode, type ViewMode } from "./viewMode";
 import { WebsiteLandingPage } from "./views/website/LandingPage";
+import BlogsLayout from "./routes/blogs";
+import BlogsIndexPage from "./routes/blogs.index";
+import BlogPostPage from "./routes/blogs.$slug";
+import RootRouteComponent from "./routes/root";
 import {
-  WebsiteBlogPage,
   WebsiteCertificationsPage,
   WebsiteExperiencePage,
   WebsiteProjectsPage,
@@ -26,44 +20,16 @@ import {
 } from "./views/website/pages";
 
 interface HomeSearch {
-  mode: ViewMode;
+  mode?: ViewMode;
 }
 
 const validateHomeSearch = (search: Record<string, unknown>): HomeSearch => {
-  return {
-    mode: isViewMode(search.mode) ? search.mode : getSavedMode(),
-  };
-};
-
-const RootRoute = (): ReactElement => {
-  const { mode } = rootRoute.useSearch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    applySeoMetadata(homeSeo);
-    persistViewMode(mode);
-  }, [mode]);
-
-  return mode === "os" ? (
-    <App
-      mode={mode}
-      onModeChange={(nextMode) => {
-        if (nextMode === "website") {
-          void navigate({ to: "/", search: { mode: "website" } });
-          return;
-        }
-
-        void navigate({ to: "/", search: { mode: "os" } });
-      }}
-    />
-  ) : (
-    <WebsiteLayout />
-  );
+  return isViewMode(search.mode) ? { mode: search.mode } : {};
 };
 
 const rootRoute = createRootRoute({
   validateSearch: validateHomeSearch,
-  component: RootRoute,
+  component: RootRouteComponent,
 });
 
 const landingRoute = createRoute({
@@ -96,10 +62,22 @@ const stackRoute = createRoute({
   component: WebsiteStackPage,
 });
 
-const blogRoute = createRoute({
+const blogsLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/blog",
-  component: WebsiteBlogPage,
+  id: "blogs-layout",
+  component: BlogsLayout,
+});
+
+const blogsIndexRoute = createRoute({
+  getParentRoute: () => blogsLayoutRoute,
+  path: "/blogs",
+  component: BlogsIndexPage,
+});
+
+const blogPostRoute = createRoute({
+  getParentRoute: () => blogsLayoutRoute,
+  path: "/blogs/$slug",
+  component: BlogPostPage,
 });
 
 const resourcesRoute = createRoute({
@@ -108,22 +86,31 @@ const resourcesRoute = createRoute({
   component: WebsiteResourcesPage,
 });
 
-const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren([
   landingRoute,
   experienceRoute,
   projectsRoute,
   certificationsRoute,
   stackRoute,
-  blogRoute,
+  blogsLayoutRoute.addChildren([blogsIndexRoute, blogPostRoute]),
   resourcesRoute,
 ]);
 
-const router = createRouter({ routeTree });
+/** Creates a browser router or a route-specific memory router for SSG. */
+export const createAppRouter = (initialPath?: string) => {
+  const history = initialPath
+    ? createMemoryHistory({ initialEntries: [initialPath] })
+    : typeof window === "undefined"
+      ? undefined
+      : createBrowserHistory();
+
+  return createRouter({ routeTree, history });
+};
+
+export type AppRouter = ReturnType<typeof createAppRouter>;
 
 declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router;
+    router: AppRouter;
   }
 }
-
-export const AppRouter = (): ReactElement => <RouterProvider router={router} />;
