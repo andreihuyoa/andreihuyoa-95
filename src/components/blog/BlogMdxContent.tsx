@@ -1,4 +1,3 @@
-import { MDXProvider } from "@mdx-js/react";
 import type { MDXComponents } from "mdx/types";
 import type { ComponentType, ReactElement } from "react";
 
@@ -23,7 +22,7 @@ const components: MDXComponents = {
   blockquote: (props) => (
     <blockquote
       {...props}
-      className="border-website-border text-website-text-soft my-10 border-l-2 pl-6 text-2xl leading-[1.4] italic max-[640px]:pl-4 max-[640px]:text-xl"
+      className="border-website-border text-website-text-soft my-10 border-l-2 pl-6 text-2xl leading-[1.4] italic [font-synthesis:style] max-[640px]:pl-4 max-[640px]:text-xl"
     />
   ),
   code: (props) => (
@@ -32,7 +31,7 @@ const components: MDXComponents = {
       className="bg-website-surface-muted rounded px-1.5 py-0.5 font-mono text-[0.88em]"
     />
   ),
-  em: (props) => <em {...props} className="italic" />,
+  em: (props) => <em {...props} className="italic [font-synthesis:style]" />,
   h2: (props) => (
     <h2
       {...props}
@@ -81,8 +80,4 @@ const components: MDXComponents = {
 /** Applies the site's portable prose treatment to standard MDX elements. */
 export const BlogMdxContent = ({
   Content,
-}: BlogMdxContentProps): ReactElement => (
-  <MDXProvider components={components}>
-    <Content />
-  </MDXProvider>
-);
+}: BlogMdxContentProps): ReactElement => <Content components={components} />;

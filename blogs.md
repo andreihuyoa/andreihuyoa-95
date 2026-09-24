@@ -22,8 +22,9 @@ portable MDX body to Substack manually.
 ## Structure and portability
 
 - The page template supplies the hero image, post header, further-reading list,
-  and closing image from frontmatter. The MDX body should contain only portable
-  Markdown/MDX prose. Do not import or embed site-specific React components.
+  and an optional closing image from frontmatter. The MDX body should contain
+  only portable Markdown/MDX prose. Do not import or embed site-specific React
+  components.
 - Open with a concrete personal moment or tension. Put 1 to 2 target keywords
   naturally within the first 100 words and repeat one in a useful subheading.
 - Use descriptive subheadings only when they help the essay breathe. Do not turn
@@ -47,6 +48,8 @@ slug: "matching-kebab-case-slug"
 date: "YYYY-MM-DD"
 description: "A one-sentence dek and search description under 155 characters."
 coverImage: "/blog/matching-kebab-case-slug/descriptive-hero.webp"
+coverImageAlt: "A concise description of the hero image."
+# Optional: omit closingImage when the post should end with prose.
 closingImage: "/blog/matching-kebab-case-slug/descriptive-closing.webp"
 tags:
   - "Topic"
@@ -59,15 +62,16 @@ references:
 ---
 ```
 
-Store both images in `public/blog/<slug>/`. Use pre-compressed WebP files and
-descriptive, searchable filenames such as `craving-hard-things-hero.webp`, never
-camera defaults such as `IMG_2031.webp`. Frontmatter paths must be absolute so
-the same fixed URL is available to the page, Open Graph, and Twitter metadata.
+Store post images in `public/blog/`, preferably grouped under the post slug. Use
+pre-compressed WebP files for new assets and descriptive, searchable filenames
+such as `craving-hard-things-hero.webp`, never camera defaults such as
+`IMG_2031.webp`. Frontmatter paths must be absolute so the same fixed URL is
+available to the page, Open Graph, and Twitter metadata.
 
 ## Review gate
 
 Before presenting a draft, confirm that the research links resolve, the title
-and description meet their limits, both images exist, the target keywords read
-naturally, and the final prose contains no fabricated claims. Run the full
-repository verification suite. Stop at review: do not publish, deploy, or post to
-Substack without explicit approval.
+and description meet their limits, every referenced image exists, the target
+keywords read naturally, and the final prose contains no fabricated claims. Run
+the full repository verification suite. Stop at review: do not publish, deploy,
+or post to Substack without explicit approval.

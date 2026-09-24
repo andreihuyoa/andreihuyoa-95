@@ -58,9 +58,12 @@ const BlogPostPage = (): ReactElement => {
         <h1 className="mt-5 mb-5 text-6xl leading-[0.98] font-semibold tracking-[-0.055em] text-balance max-[760px]:text-5xl max-[520px]:text-4xl">
           {post.title}
         </h1>
+        {/* Post Description / Subheading */}
         <p className="text-website-text-soft mx-auto mt-0 mb-6 max-w-[58ch] text-xl leading-relaxed max-[640px]:text-lg">
           {post.description}
         </p>
+
+        {/* Tags */}
         <div className="flex flex-wrap justify-center gap-2">
           {post.tags.map((tag) => (
             <span
@@ -73,11 +76,11 @@ const BlogPostPage = (): ReactElement => {
         </div>
       </header>
 
-      <figure className="mx-[calc((min(100vw-2rem,64rem)-100%)/-2)] mt-0 mb-14 max-[760px]:mx-0">
+      <figure className="relative left-1/2 mt-0 mb-14 w-[min(64rem,calc(100vw-22rem))] -translate-x-1/2 max-md:w-[calc(100%-2rem)]">
         <img
           className="bg-website-surface-muted aspect-[3/2] h-auto w-full rounded-sm object-cover"
           src={post.coverImage}
-          alt={`${post.title} cover`}
+          alt={post.coverImageAlt}
           width="1440"
           height="960"
         />
@@ -113,16 +116,18 @@ const BlogPostPage = (): ReactElement => {
         </ol>
       </section>
 
-      <figure className="mt-14 mb-0">
-        <img
-          className="bg-website-surface-muted aspect-[16/10] h-auto w-full rounded-sm object-cover"
-          src={post.closingImage}
-          alt=""
-          width="1200"
-          height="750"
-          loading="lazy"
-        />
-      </figure>
+      {post.closingImage ? (
+        <figure className="mt-14 mb-0">
+          <img
+            className="bg-website-surface-muted aspect-[16/10] h-auto w-full rounded-sm object-cover"
+            src={post.closingImage}
+            alt=""
+            width="1200"
+            height="750"
+            loading="lazy"
+          />
+        </figure>
+      ) : null}
     </article>
   );
 };
