@@ -22,7 +22,7 @@ const components: MDXComponents = {
   blockquote: (props) => (
     <blockquote
       {...props}
-      className="border-website-border text-website-text-soft my-10 border-l-2 pl-6 text-2xl leading-[1.4] italic [font-synthesis:style] max-[640px]:pl-4 max-[640px]:text-xl"
+      className="border-website-border text-website-text-soft my-10 border-l-2 pl-6 text-2xl leading-[1.4] italic [font-synthesis:weight_style] max-[640px]:pl-4 max-[640px]:text-xl"
     />
   ),
   code: (props) => (
@@ -31,17 +31,43 @@ const components: MDXComponents = {
       className="bg-website-surface-muted rounded px-1.5 py-0.5 font-mono text-[0.88em]"
     />
   ),
-  em: (props) => <em {...props} className="italic [font-synthesis:style]" />,
+  em: (props) => (
+    <em {...props} className="italic [font-synthesis:weight_style]" />
+  ),
+  h1: (props) => (
+    <h1
+      {...props}
+      className="mt-14 mb-6 text-4xl leading-tight font-semibold tracking-[-0.045em] [font-synthesis:weight] max-[640px]:text-3xl"
+    />
+  ),
   h2: (props) => (
     <h2
       {...props}
-      className="mt-14 mb-5 text-3xl leading-tight font-semibold tracking-[-0.04em] max-[640px]:text-2xl"
+      className="mt-14 mb-5 text-3xl leading-tight font-semibold tracking-[-0.04em] [font-synthesis:weight] max-[640px]:text-2xl"
     />
   ),
   h3: (props) => (
     <h3
       {...props}
-      className="mt-10 mb-4 text-2xl leading-tight font-semibold tracking-[-0.03em] max-[640px]:text-xl"
+      className="mt-10 mb-4 text-2xl leading-tight font-semibold tracking-[-0.03em] [font-synthesis:weight] max-[640px]:text-xl"
+    />
+  ),
+  h4: (props) => (
+    <h4
+      {...props}
+      className="mt-8 mb-3 text-xl leading-tight font-semibold tracking-[-0.02em] [font-synthesis:weight]"
+    />
+  ),
+  h5: (props) => (
+    <h5
+      {...props}
+      className="mt-7 mb-3 text-lg leading-tight font-semibold [font-synthesis:weight]"
+    />
+  ),
+  h6: (props) => (
+    <h6
+      {...props}
+      className="mt-7 mb-3 text-base leading-tight font-semibold [font-synthesis:weight]"
     />
   ),
   hr: (props) => (
@@ -65,10 +91,12 @@ const components: MDXComponents = {
   pre: (props) => (
     <pre
       {...props}
-      className="bg-website-surface-muted my-8 overflow-x-auto rounded-md p-5 font-mono text-sm leading-relaxed"
+      className="bg-website-surface-muted my-8 overflow-x-auto rounded-md p-5 font-mono text-sm leading-relaxed [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit"
     />
   ),
-  strong: (props) => <strong {...props} className="font-semibold" />,
+  strong: (props) => (
+    <strong {...props} className="font-bold [font-synthesis:weight_style]" />
+  ),
   ul: (props) => (
     <ul
       {...props}
