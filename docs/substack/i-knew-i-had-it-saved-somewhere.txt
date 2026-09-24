@@ -36,7 +36,7 @@ In [the first reel](https://www.instagram.com/p/DdkL_kUxbBy/), she explains how 
 
 Her point matched my experience. Pressing Save gives me a small sense of relief. I can keep scrolling without worrying about losing the idea. The item feels handled, even though I only moved it into a folder.
 
-Saving is still useful. I cannot stop for every interesting thing I find online. Trouble starts when saving is the only thing that’s happening.
+Saving is still useful. I cannot stop for every interesting thing I find online. Trouble starts when the Save button becomes the only thing that’s happening.
 
 ## A saved post loses its why
 
@@ -68,7 +68,8 @@ Some saves only need to remain searchable. Others carry an intention and need a 
 
 ## Where Fig enters the story
 
-This question eventually became part of why I started building Fig _currently a personal app_. Fig is my attempt to bring saved links from social media and the web into one app, where I can organize them, search them, and return to them without having to remember which platform they came from. For the links I genuinely want to revisit, reminders can create a path back instead of leaving that intention buried in a folder.
-The internet already made collecting easy. I am more interested in what happens after Save.
+This question eventually became part of why I started building Fig _currently a personal app_.
+
+Fig is my attempt to give saved links from social media and the web in one app where they can be organized, searched, and come back to without me having to remember which platform I originally got them from. For the saved links that represent something I genuinely want to revisit, reminders can create a path back instead of leaving that intention buried in a folder.
 
 The internet already made collecting easy. I am more interested in what happens after Save.
