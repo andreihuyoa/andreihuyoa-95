@@ -85,7 +85,7 @@ body {
 
 :root[data-mode="website"] {
   --website-text: #2f332f;
-  --website-text-muted: #747870;
+  --website-text-muted: #646760;
   --website-text-soft: #565b54;
   --website-interactive: #2f332f;
   --website-background: #f3ede2;
