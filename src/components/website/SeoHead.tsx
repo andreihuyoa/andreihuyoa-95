@@ -7,10 +7,15 @@ const resolveUrl = (path: string): string => new URL(path, siteUrl).toString();
 
 interface SeoHeadProps {
   metadata: SeoMetadata;
+  /** Optional schema.org JSON-LD object rendered as a script tag. */
+  structuredData?: Record<string, unknown>;
 }
 
 /** Renders crawlable route-specific metadata during SSG and client navigation. */
-export const SeoHead = ({ metadata }: SeoHeadProps): ReactElement => {
+export const SeoHead = ({
+  metadata,
+  structuredData,
+}: SeoHeadProps): ReactElement => {
   const canonicalUrl = resolveUrl(metadata.canonicalPath);
   const imageUrl = resolveUrl(metadata.ogImage ?? defaultOgImage);
 
@@ -35,6 +40,11 @@ export const SeoHead = ({ metadata }: SeoHeadProps): ReactElement => {
       <meta name="twitter:description" content={metadata.description} />
       <meta name="twitter:image" content={imageUrl} />
       <link rel="canonical" href={canonicalUrl} />
+      {structuredData ? (
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData).replace(/</g, "\\u003c")}
+        </script>
+      ) : null}
     </Head>
   );
 };
