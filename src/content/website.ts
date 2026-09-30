@@ -1,3 +1,4 @@
+import { getLatestCertifications } from "../lib/certifications";
 import { getContactUrl, getMailtoUrl } from "../utils/links";
 
 export const brandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
@@ -192,14 +193,11 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     index: "04",
     actionLabel: "all certifications",
     to: "/certifications",
-    rows: [
-      {
-        title: "Certification records",
-        description:
-          "Verification links and credential details for current technical certifications.",
-        meta: "Soon",
-      },
-    ],
+    rows: getLatestCertifications(3).map((certification) => ({
+      title: certification.title,
+      description: certification.issuer,
+      meta: certification.issuedOn.slice(0, 4),
+    })),
   },
   {
     section: "stack",
