@@ -34,15 +34,25 @@ export const formatExperienceDuration = (
 
   const startMonth = monthNames.indexOf(startMatch[1] ?? "");
   const endMonth = monthNames.indexOf(endMatch[1] ?? "");
-  const endYear = Number(endMatch[2]);
-  const startYear = Number(startMatch[2] ?? endYear);
 
   if (startMonth < 0 || endMonth < 0) {
     return { hasYears: false, label: "" };
   }
 
+  const endYear = Number(endMatch[2]);
+  const startYear = startMatch[2]
+    ? Number(startMatch[2])
+    : startMonth > endMonth
+      ? endYear - 1
+      : endYear;
+
   const totalMonths =
-    (endYear - startYear) * monthNames.length + endMonth - startMonth;
+    (endYear - startYear) * monthNames.length + endMonth - startMonth + 1;
+
+  if (totalMonths <= 0) {
+    return { hasYears: false, label: "" };
+  }
+
   const years = Math.floor(totalMonths / monthNames.length);
   const months = totalMonths % monthNames.length;
   const monthLabel = `${months} ${months === 1 ? "MO" : "MOS"}`;
