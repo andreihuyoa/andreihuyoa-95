@@ -58,12 +58,12 @@ const Biography = (): ReactElement => {
               Solutions Corp.
             </p>
             <p>
-              My focus these days is shifting toward cloud engineering.
-              I&apos;ve been working with AWS services and containerization
-              tools like Docker, and I&apos;m actively learning more about its
-              infrastructure, scalability, and cloud-native architectures. I
-              find the challenge of designing systems that can handle scale and
-              reliability really engaging.
+              My focus these days is towards Full Stack Development and AI
+              Engineering. I&apos;ve been working with AWS services and
+              containerization tools like Docker, and I&apos;m actively learning
+              more about its infrastructure, scalability, and cloud-native
+              architectures. I find the challenge of designing systems that can
+              handle scale and reliability really engaging.
             </p>
             <p>
               In my role at Shinka Studios, I contributed to a production-grade
