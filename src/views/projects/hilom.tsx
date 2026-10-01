@@ -64,7 +64,7 @@ const Hilom = (): ReactElement => {
               The dataset was curated and validated for healthcare facilities in
               Ermita, Manila, and we generated synthetic interaction records to
               train and evaluate the ranking model. In our experiments, the
-              recommender achieved a Mean Average Precision (MAP) of 0.67 and
+              recommender achieved a Mean Average Precision (MAP) of 0.65 and
               produced results with ~70ms average latency. The ranking API was
               packaged with Flask and Docker; the mobile-friendly finder UI is
               live at{" "}

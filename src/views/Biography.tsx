@@ -51,10 +51,11 @@ const Biography = (): ReactElement => {
           <div className="*:pb-2.5 *:text-sm *:font-light *:text-gray-700">
             <p>
               I&apos;m a {age}-year-old full stack developer and Computer
-              Science student at Adamson University. I&apos;m currently working
-              at Shinka Studios, where I build and maintain features for a land
-              sales web application using Next.js and Go, while also doing my
-              internship at Strastan Solutions Corp.
+              Science graduate of Adamson University. From March 2025 to August
+              2026, I worked at Shinka Studios, where I built and maintained
+              features for a land sales web application using Next.js and Go,
+              and from February to June 2026 I did my internship at Strastan
+              Solutions Corp.
             </p>
             <p>
               My focus these days is shifting toward cloud engineering.
@@ -65,24 +66,23 @@ const Biography = (): ReactElement => {
               reliability really engaging.
             </p>
             <p>
-              In my current role at Shinka Studios, I contribute to a
-              production-grade web platform by improving data flows between
-              frontend and backend services, building internal tooling for sales
-              report generation and operational visibility, and delivering
-              reliable features and fixes. I keep implementation details
-              high-level while focusing on engineering fundamentals:
-              correctness, maintainability, and performance. In parallel, my
-              internship at Strastan Solutions Corp is strengthening my
-              day-to-day practices in a professional engineering environment.
-              Before these roles, I built the backend for Hilom, a Healthcare
-              Facility Recommender System that suggests hospitals and clinics
-              based on required medical services and user location. The project
-              combined content-based filtering with geospatial ranking (via
-              distance calculations) and used a validated dataset of healthcare
-              facilities in Ermita, Manila, alongside synthetic interaction data
-              for model training and evaluation. In our experiments, the system
-              achieved a Mean Average Precision (MAP) of 0.67 and generated
-              recommendations with ~70ms average latency.
+              In my role at Shinka Studios, I contributed to a production-grade
+              web platform by improving data flows between frontend and backend
+              services, building internal tooling for sales report generation
+              and operational visibility, and delivering reliable features and
+              fixes. I kept implementation details high-level while focusing on
+              engineering fundamentals: correctness, maintainability, and
+              performance. In parallel, my internship at Strastan Solutions Corp
+              strengthened my day-to-day practices in a professional engineering
+              environment. Before these roles, I built the backend for Hilom, a
+              Healthcare Facility Recommender System that suggests hospitals and
+              clinics based on required medical services and user location. The
+              project combined content-based filtering with geospatial ranking
+              (via distance calculations) and used a validated dataset of
+              healthcare facilities in Ermita, Manila, alongside synthetic
+              interaction data for model training and evaluation. In our
+              experiments, the system achieved a Mean Average Precision (MAP) of
+              0.65 and generated recommendations with ~70ms average latency.
             </p>
             <p>
               When I&apos;m not coding, I enjoy reading and listening to music.

@@ -59,7 +59,7 @@ export const experiences: ExperienceItem[] = [
   {
     role: "Full Stack Developer",
     company: "Shinka Studios",
-    date: "Mar 2025—Jun 2026",
+    date: "Mar 2025—Aug 2026",
     summary:
       "Worked across product development and internal tooling, mainly on appraisal workflows, document automation, and client websites.",
     responsibilities: [
