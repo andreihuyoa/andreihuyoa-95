@@ -21,7 +21,27 @@ The mode is selected in `src/App.tsx` from the `?mode=` query parameter or
 npm install
 npm run dev       # local Vite server
 npm run dev:lan  # Vite server on the LAN
+npm test          # Vitest, single run
 ```
+
+## Project structure
+
+- `src/main.tsx`, `src/router.tsx`: entry point and route tree (TanStack Router,
+  prerendered with vite-react-ssg). `src/routes/` holds the root layout and the
+  blog routes.
+- `src/App.tsx`, `src/viewMode.ts`: mode selection and persistence.
+- `src/views/website/`: website-mode layout, landing page, and section pages.
+- `src/views/*.tsx`, `src/views/projects/`: Windows 95 mode windows (Biography,
+  Resume, Mail, projects).
+- `src/components/`: shared UI. `components/website/` and `components/blog/`
+  serve website mode; top-level files serve Windows 95 mode.
+- `src/content/`: site content as typed data (`website.ts`, `certifications.ts`)
+  and blog MDX posts in `content/blog/`.
+- `src/lib/`: content loading and parsing (blog, frontmatter, certifications).
+- `src/utils/`: small pure helpers (links, website theme, birthday, experience
+  durations).
+- Types live next to the code that uses them. No global types folder; the
+  existing `src/*.d.ts` files stay where they are.
 
 ## Working loop
 
@@ -57,13 +77,24 @@ npm run dev:lan  # Vite server on the LAN
   shader/WebGL/SVG-filter treatments incrementally, not as ad hoc replacements.
 - Do not commit changes unless the user explicitly asks for a commit.
 
+## Testing
+
+- `npm test` runs Vitest once. CI runs it on every pull request.
+- Tests live in `tests/` as `<module>.test.ts`.
+- Logic worth testing goes in `src/lib` or `src/utils` as pure functions. Keep
+  components thin.
+- Unit tests must not import React components or modules that use
+  `import.meta.glob`.
+- When fixing a bug, write a failing test that reproduces it first.
+
 ## Verification
 
-All four commands must pass before declaring a change complete:
+All five commands must pass before declaring a change complete:
 
 ```bash
 npm run typecheck     # tsc --noEmit
 npm run lint          # eslint .
+npm test              # vitest run
 npm run format:check  # prettier --check .
 npm run build         # typecheck, Vite build, and prerender
 ```
