@@ -17,10 +17,40 @@ import {
 import {
   getCertificationGroups,
   getCertificationsStructuredData,
+  type CertificationGroupWithItems,
 } from "../../../lib/certifications";
 
 const certificationGroups = getCertificationGroups();
 const structuredData = getCertificationsStructuredData();
+
+/** Employer-issued certificates live in the "experience" group. */
+const workGroups = certificationGroups.filter(
+  (group) => group.id === "experience",
+);
+const personalGroups = certificationGroups.filter(
+  (group) => group.id !== "experience",
+);
+
+const divisions: Array<{
+  id: string;
+  label: string;
+  groups: CertificationGroupWithItems[];
+  /** Show each field group (ai, engineering, ...) as a sub-heading. */
+  showGroupHeadings: boolean;
+}> = [
+  {
+    id: "work",
+    label: "Work certifications",
+    groups: workGroups,
+    showGroupHeadings: false,
+  },
+  {
+    id: "personal",
+    label: "Personal certifications",
+    groups: personalGroups,
+    showGroupHeadings: true,
+  },
+];
 
 /**
  * Grouped certification showcase. Cards open a detail viewer; each card's
@@ -83,39 +113,68 @@ const CertificationsPage = (): ReactElement => {
           </div>
 
           <div className="flex flex-col gap-12">
-            {certificationGroups.map((group) => (
-              <section
-                aria-labelledby={`certifications-${group.id}`}
-                className="@container"
-                key={group.id}
-              >
-                <h2
-                  className="font-website-display m-0 mb-4 text-sm font-normal tracking-tighter"
-                  id={`certifications-${group.id}`}
+            {divisions
+              .filter((division) => division.groups.length > 0)
+              .map((division) => (
+                <div
+                  aria-labelledby={`certifications-${division.id}-title`}
+                  className="flex flex-col gap-8"
+                  key={division.id}
+                  role="group"
                 >
-                  {group.label}{" "}
-                  <span className="text-website-text-muted">
-                    · {group.items.length}
-                  </span>
-                </h2>
-                <motion.ul
-                  className="m-0 grid list-none grid-cols-1 gap-6 p-0 max-[760px]:gap-4 @lg:grid-cols-2 @3xl:grid-cols-3"
-                  initial={reduceMotion ? false : "hidden"}
-                  variants={staggerContainer}
-                  viewport={revealViewport}
-                  whileInView={reduceMotion ? undefined : "visible"}
-                >
-                  {group.items.map((certification) => (
-                    <motion.li key={certification.id} variants={staggerItem}>
-                      <CertificationCard
-                        certification={certification}
-                        onOpen={handleOpen}
-                      />
-                    </motion.li>
+                  <h2
+                    className="font-website-display text-website-text-muted m-0 text-sm font-normal tracking-tighter"
+                    id={`certifications-${division.id}-title`}
+                  >
+                    {division.label}
+                  </h2>
+                  {division.groups.map((group) => (
+                    <section
+                      aria-label={
+                        division.showGroupHeadings ? undefined : group.label
+                      }
+                      aria-labelledby={
+                        division.showGroupHeadings
+                          ? `certifications-${group.id}`
+                          : undefined
+                      }
+                      className="@container"
+                      key={group.id}
+                    >
+                      {division.showGroupHeadings ? (
+                        <h3
+                          className="font-website-display m-0 mb-4 text-sm font-normal tracking-tighter"
+                          id={`certifications-${group.id}`}
+                        >
+                          {group.label}{" "}
+                          <span className="text-website-text-muted">
+                            · {group.items.length}
+                          </span>
+                        </h3>
+                      ) : null}
+                      <motion.ul
+                        className="m-0 grid list-none grid-cols-1 gap-6 p-0 max-[760px]:gap-4 @lg:grid-cols-2 @3xl:grid-cols-3"
+                        initial={reduceMotion ? false : "hidden"}
+                        variants={staggerContainer}
+                        viewport={revealViewport}
+                        whileInView={reduceMotion ? undefined : "visible"}
+                      >
+                        {group.items.map((certification) => (
+                          <motion.li
+                            key={certification.id}
+                            variants={staggerItem}
+                          >
+                            <CertificationCard
+                              certification={certification}
+                              onOpen={handleOpen}
+                            />
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </section>
                   ))}
-                </motion.ul>
-              </section>
-            ))}
+                </div>
+              ))}
           </div>
         </section>
       </MotionReveal>
