@@ -104,7 +104,7 @@ const ProjectsPage = (): ReactElement => (
               >
                 {projectCategoryLabels[category]}
               </h2>
-              <div className="border-website-border divide-website-border divide-y border-y">
+              <div className="border-website-border/20 divide-website-border/20 divide-y border-t">
                 {items.map((project) => (
                   <ProjectEntry key={project.title} project={project} />
                 ))}

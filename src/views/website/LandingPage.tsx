@@ -50,7 +50,7 @@ const LandingPreviewSection = ({
     </div>
 
     {rows.length ? (
-      <div className="border-website-border divide-website-border divide-y border-y">
+      <div className="border-website-border/20 divide-website-border/20 divide-y border-t">
         {rows.map((row) => (
           <Link
             className="hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
@@ -138,7 +138,7 @@ const LandingBlogPreviewSection = ({
     </div>
 
     {latestPosts.length ? (
-      <div className="border-website-border divide-website-border divide-y border-y">
+      <div className="border-website-border/20 divide-website-border/20 divide-y border-t">
         {latestPosts.map((post) => (
           <Link
             className="hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group grid grid-cols-[minmax(0,1fr)_8rem] items-center gap-6 py-4 text-inherit no-underline max-[560px]:grid-cols-[minmax(0,1fr)_5.5rem] max-[560px]:gap-4"
@@ -171,7 +171,7 @@ const LandingBlogPreviewSection = ({
         ))}
       </div>
     ) : (
-      <div className="border-website-border border-y py-5">
+      <div className="border-website-border/20 border-t py-5">
         <p className="text-website-text-muted m-0 text-sm">
           No published posts yet.
         </p>
