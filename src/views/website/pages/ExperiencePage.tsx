@@ -13,7 +13,7 @@ const ExperiencePage = (): ReactElement => (
       className="min-h-full py-10 max-[760px]:pt-5 max-[760px]:pb-12"
       aria-labelledby="experience-title"
     >
-      <header className="mx-auto mb-14 max-w-3xl max-[760px]:mb-10">
+      <header className="mb-14 max-w-2xl max-[760px]:mb-10">
         <p className="font-website-display text-website-text-muted m-0 text-sm tracking-tighter">
           01 - work history
         </p>
@@ -29,7 +29,7 @@ const ExperiencePage = (): ReactElement => (
         </p>
       </header>
 
-      <ol className="before:border-website-text/50 relative m-0 mx-auto max-w-3xl list-none p-0 before:absolute before:top-2.5 before:bottom-2.5 before:left-4 before:border-l before:border-dashed max-[640px]:before:top-2 max-[640px]:before:bottom-2 max-[640px]:before:left-3">
+      <ol className="before:border-website-text/50 relative m-0 max-w-3xl list-none p-0 before:absolute before:top-2.5 before:bottom-2.5 before:left-4 before:border-l before:border-dashed max-[640px]:before:top-2 max-[640px]:before:bottom-2 max-[640px]:before:left-3">
         {experiences.map((experience) => {
           const duration = formatExperienceDuration(experience.date);
 
