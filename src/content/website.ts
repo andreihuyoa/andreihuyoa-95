@@ -21,6 +21,24 @@ export interface WebsiteListItem {
   tags?: string[];
 }
 
+export type ProjectCategory = "work" | "personal";
+
+export interface ProjectItem {
+  title: string;
+  category: ProjectCategory;
+  /** Employer or client the project was built for (work projects). */
+  organization?: string;
+  /** Resume date range, e.g. "Mar 2025—Aug 2026". */
+  date?: string;
+  href: string;
+  description: string;
+  /** Key contributions shown as a short list under the description. */
+  highlights?: string[];
+  /** External link on the title, always opened in a new tab. */
+  url?: string;
+  tags: string[];
+}
+
 export interface ExperienceItem {
   role: string;
   company: string;
@@ -101,20 +119,58 @@ export const experiences: ExperienceItem[] = [
 ];
 
 // Projects
-export const projects: Omit<WebsiteListItem, "date">[] = [
+export const projectCategoryLabels: Record<ProjectCategory, string> = {
+  work: "Work projects",
+  personal: "Personal projects",
+};
+
+/**
+ * Staging (staging.phbusinessnetwork.com) is currently down, so the PH Business
+ * Network entry links to the production site instead.
+ */
+export const projects: ProjectItem[] = [
+  {
+    title: "PH Business Network",
+    category: "work",
+    organization: "Shinka Studios",
+    date: "Mar 2025—Aug 2026",
+    href: "#phbn-project",
+    description:
+      "Rebuilt the website frontend in Next.js to improve SEO readiness, site structure, user experience, and maintainable MDX content. Joined stakeholder meetings to gather requirements, review progress, and align implementation with business goals.",
+    highlights: [
+      "Improved SEO readiness across the site.",
+      "Reworked the landing page: hero, past events, partner brands, and community sections.",
+      "Handled the event photos: galleries, albums, and image viewing on desktop and mobile.",
+    ],
+    url: "https://phbusinessnetwork.com/",
+    tags: ["Next.js", "MDX", "Tailwind CSS", "Motion"],
+  },
+  {
+    title: "Keystone Appraisal Platform",
+    category: "work",
+    organization: "Shinka Studios",
+    date: "Mar 2025—Aug 2026",
+    href: "#keystone-project",
+    description:
+      "Built and maintained features across the Next.js frontend and Go services of a land sales appraisal platform, automated DOCX appraisal reports with Azure file delivery, and created internal tooling for report generation and operational visibility. Internal product, no public link.",
+    tags: ["Next.js", "Go / Echo", "Python", "Azure"],
+  },
   {
     title: "Fig — Personal Saves Library",
+    category: "personal",
     href: "#fig-project",
-    sourceUrl: "https://github.com/andreihuyoa/consider-it-done",
     description:
       "An iOS-first personal saved links library for keeping, organizing, searching, and returning to saved links across social media and the web that matter. Currently in active development with SwiftUI and SwiftData, alongside a lightweight macOS menu-bar companion.",
+    url: "https://github.com/andreihuyoa/consider-it-done",
     tags: ["SwiftUI", "SwiftData", "iOS", "macOS"],
   },
   {
     title: "Hilom — Healthcare Recommendation API Model",
+    category: "personal",
     href: "#hilom-project",
     description:
       "Led a hybrid recommendation API for healthcare facilities in Ermita, Manila, combining content-based filtering, a neural network, and Haversine distance. The model achieved 80.7% Recall@5 and 0.65 mean average precision.",
+    url: "https://csrp.andreihuyoa.dev/",
     tags: ["Python", "Flask", "Neural Network", "Amazon S3"],
   },
 ];
@@ -170,14 +226,22 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     to: "/projects",
     rows: [
       {
+        title: "PH Business Network",
+        description:
+          "Rebuilt the Next.js website frontend for SEO, structure, and maintainable MDX content at Shinka Studios.",
+        meta: "work",
+      },
+      {
         title: "Fig — Personal Link Library",
         description:
           "An iOS-first SwiftUI and SwiftData app for saving, organizing, and returning to links that matter.",
+        meta: "personal",
       },
       {
         title: "Hilom — Healthcare Recommendation Model",
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
+        meta: "personal",
       },
     ],
   },
