@@ -6,6 +6,10 @@ import {
   HamburgerMenu,
   WebsiteSidebar,
 } from "../../components/website/WebsiteSidebar";
+import {
+  finishInitialLoadReveal,
+  isInitialLoadPending,
+} from "../../components/website/motion";
 import { ThemePixelTransition } from "../../components/website/ThemePixelTransition";
 import {
   applyWebsiteTheme,
@@ -23,6 +27,7 @@ const WebsiteLayout = (): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [pendingTheme, setPendingTheme] = useState<WebsiteTheme | null>(null);
   const [theme, setTheme] = useState<WebsiteTheme>(getSavedWebsiteTheme);
+  const [introPlaying, setIntroPlaying] = useState(false);
   const [transitionColor, setTransitionColor] = useState("");
   const reduceMotion = useReducedMotion();
   const navigate = useNavigate();
@@ -36,6 +41,24 @@ const WebsiteLayout = (): ReactElement => {
 
     return watchSystemTheme(() => applyWebsiteTheme("system"));
   }, [theme]);
+
+  // Pixel reveal from the theme switch, in a deeper shade of the theme color, played once on the
+  // first load of the landing page across the whole viewport, sidebar included.
+  useEffect(() => {
+    if (!isInitialLoadPending()) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      finishInitialLoadReveal();
+
+      if (!reduceMotion && window.location.pathname === "/") {
+        setIntroPlaying(true);
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [reduceMotion]);
 
   useEffect(
     () => () => {
@@ -113,6 +136,14 @@ const WebsiteLayout = (): ReactElement => {
           color={transitionColor}
           onComplete={handleThemeTransitionComplete}
           onCovered={handleThemeCovered}
+        />
+      ) : null}
+      {introPlaying ? (
+        <ThemePixelTransition
+          color="var(--website-intro-pixel)"
+          onComplete={() => setIntroPlaying(false)}
+          onCovered={() => undefined}
+          startCovered
         />
       ) : null}
       <div className="relative z-1 flex h-full min-h-0 w-full flex-1 items-start overflow-hidden max-[760px]:h-auto max-[760px]:overflow-visible">

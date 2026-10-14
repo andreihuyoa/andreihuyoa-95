@@ -36,3 +36,13 @@ export const revealViewport = {
   once: true,
   amount: 0.18,
 } as const;
+
+let initialLoadPending = true;
+
+/** Whether the page is still on its first load, when the intro transition plays. */
+export const isInitialLoadPending = (): boolean => initialLoadPending;
+
+/** Marks the first load as handled so the intro never replays on navigation. */
+export const finishInitialLoadReveal = (): void => {
+  initialLoadPending = false;
+};
