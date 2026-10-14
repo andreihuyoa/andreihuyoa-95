@@ -5,6 +5,8 @@ interface ThemePixelTransitionProps {
   color: string;
   onCovered: () => void;
   onComplete: () => void;
+  /** Skip the cover wave and only play the reveal, e.g. for the first load. */
+  startCovered?: boolean;
 }
 
 const COLUMN_COUNT = 12;
@@ -19,8 +21,11 @@ export const ThemePixelTransition = ({
   color,
   onComplete,
   onCovered,
+  startCovered = false,
 }: ThemePixelTransitionProps): ReactElement => {
-  const [phase, setPhase] = useState<"covering" | "revealing">("covering");
+  const [phase, setPhase] = useState<"covering" | "revealing">(
+    startCovered ? "revealing" : "covering",
+  );
   const revealFrame = useRef<number | null>(null);
 
   useEffect(
@@ -67,7 +72,11 @@ export const ThemePixelTransition = ({
                 : { opacity: 0, scale: 1.08 }
             }
             className="block h-full w-full"
-            initial={{ opacity: 0, scale: 0.55 }}
+            initial={
+              startCovered
+                ? { opacity: 1, scale: 1.02 }
+                : { opacity: 0, scale: 0.55 }
+            }
             key={pixel}
             style={{ backgroundColor: color }}
             transition={{
