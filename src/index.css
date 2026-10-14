@@ -94,6 +94,11 @@ body {
   --website-surface-soft: #fbf7f0;
   --website-border: #747870;
   --website-border-strong: #2f332f;
+  --website-intro-pixel: color-mix(
+    in srgb,
+    var(--website-background),
+    #3a2e1c 28%
+  );
   --website-green: #24382d;
   --website-green-dot: #5fç7d67;
   --website-green-soft: #e4efda;
@@ -130,6 +135,11 @@ body {
   --website-surface-soft: #747870;
   --website-border: #747870;
   --website-border-strong: #f3ede2;
+  --website-intro-pixel: color-mix(
+    in srgb,
+    var(--website-background),
+    #000000 60%
+  );
   --website-green: #e4efda;
   --website-green-dot: #5f7d67;
   --website-green-soft: #24382d;
