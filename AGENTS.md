@@ -31,13 +31,18 @@ npm test          # Vitest, single run
   blog routes.
 - `src/App.tsx`, `src/viewMode.ts`: mode selection and persistence.
 - `src/views/website/`: website-mode layout, landing page, and section pages.
+  `pages/ditherkit/` is the Ditherkit project page, a standalone route
+  (`/projects/ditherkit`) outside the sidebar layout.
 - `src/views/*.tsx`, `src/views/projects/`: Windows 95 mode windows (Biography,
   Resume, Mail, projects).
 - `src/components/`: shared UI. `components/website/` and `components/blog/`
   serve website mode; top-level files serve Windows 95 mode.
 - `src/content/`: site content as typed data (`website.ts`, `certifications.ts`)
   and blog MDX posts in `content/blog/`.
-- `src/lib/`: content loading and parsing (blog, frontmatter, certifications).
+- `src/lib/`: content loading and parsing (blog, frontmatter, certifications),
+  plus `ditherEngine/` (vendored from the Ditherkit plugin repo; change it there
+  and copy it back, see its `index.ts`) and `ditherkit/` (the Ditherkit page's
+  upload, palette and render helpers).
 - `src/utils/`: small pure helpers (links, website theme, birthday, experience
   durations).
 - Types live next to the code that uses them. No global types folder; the
@@ -65,6 +70,8 @@ npm test          # Vitest, single run
   styled-components, a UI kit, or raw hex colors in components.
 - Use the existing `95-*` tokens for Windows 95 chrome and `website-*` tokens
   for website mode. Extend the theme when a token is missing.
+- The Ditherkit project page (`src/views/website/pages/ditherkit/`) has its own
+  design system: use only its `dk-*` tokens there, and nowhere else.
 - Reference static assets from `/assets/...` in `public/assets`; do not import
   them as modules.
 - Keep TypeScript strict. Do not add `any`, suppressions, or compiler/linter
