@@ -83,6 +83,7 @@ const BlogPostPage = (): ReactElement => {
           alt={post.coverImageAlt}
           width="1440"
           height="960"
+          loading="lazy"
         />
       </figure>
 
