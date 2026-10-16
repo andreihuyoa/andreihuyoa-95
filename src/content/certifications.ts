@@ -3,10 +3,7 @@ const credlyBadgeUrl = (badgeId: string): string =>
   `https://www.credly.com/badges/${badgeId}`;
 
 export type CertificationGroupId =
-  | "experience"
-  | "ai"
-  | "engineering"
-  | "design";
+  "experience" | "ai" | "engineering" | "design";
 
 export type CertificationKind = "badge" | "certificate";
 

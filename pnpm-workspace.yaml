@@ -1,0 +1,5 @@
+# react-helmet-async (via vite-react-ssg) declares peers up to React 18 but works on 19.
+peerDependencyRules:
+  allowedVersions:
+    react-helmet-async>react: "19"
+    react-helmet-async>react-dom: "19"
