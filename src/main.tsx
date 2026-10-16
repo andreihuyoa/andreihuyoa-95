@@ -11,6 +11,7 @@ const staticRoutes = [
   "/",
   "/experience",
   "/projects",
+  "/projects/ditherkit",
   "/certifications",
   "/stack",
   "/blogs",

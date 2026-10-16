@@ -4,6 +4,7 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
+  lazyRouteComponent,
 } from "@tanstack/react-router";
 import { isViewMode, type ViewMode } from "./viewMode";
 import { WebsiteLandingPage } from "./views/website/LandingPage";
@@ -50,6 +51,15 @@ const projectsRoute = createRoute({
   component: WebsiteProjectsPage,
 });
 
+// Its own site with its own design system; Three.js and the dither engine load only here.
+const ditherkitRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/projects/ditherkit",
+  component: lazyRouteComponent(
+    () => import("./views/website/pages/ditherkit/DitherkitPage"),
+  ),
+});
+
 const certificationsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/certifications",
@@ -90,6 +100,7 @@ export const routeTree = rootRoute.addChildren([
   landingRoute,
   experienceRoute,
   projectsRoute,
+  ditherkitRoute,
   certificationsRoute,
   stackRoute,
   blogsLayoutRoute.addChildren([blogsIndexRoute, blogPostRoute]),
