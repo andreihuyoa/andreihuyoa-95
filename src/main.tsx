@@ -28,6 +28,11 @@ export const createRoot = ViteReactSSG(
     activeRouter = createAppRouter(
       context.isClient ? undefined : (context.routePath ?? "/"),
     );
+    // The router skips its Suspense boundary during SSG; match that on the client.
+    if (context.isClient) {
+      activeRouter.ssr = { manifest: undefined };
+    }
+
     await activeRouter.load({ sync: true });
   },
 );
