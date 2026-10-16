@@ -18,10 +18,10 @@ The mode is selected in `src/App.tsx` from the `?mode=` query parameter or
 ## Quick start
 
 ```bash
-npm install
-npm run dev       # local Vite server
-npm run dev:lan  # Vite server on the LAN
-npm test          # Vitest, single run
+pnpm install
+pnpm dev        # local Vite server
+pnpm dev:lan    # Vite server on the LAN
+pnpm test       # Vitest, single run
 ```
 
 ## Project structure
@@ -69,8 +69,7 @@ npm test          # Vitest, single run
   them as modules.
 - Keep TypeScript strict. Do not add `any`, suppressions, or compiler/linter
   bypasses to make a check pass.
-- Preserve existing Taglish comments when editing nearby code; do not translate
-  comments wholesale.
+- Write code comments in English.
 - Add focused JSDoc to newly created functions, components, hooks, and exported
   helpers when their behavior or constraints are not self-evident.
 - Keep website visual effects accessible and performant. Add richer
@@ -79,7 +78,7 @@ npm test          # Vitest, single run
 
 ## Testing
 
-- `npm test` runs Vitest once. CI runs it on every pull request.
+- `pnpm test` runs Vitest once. CI runs it on every pull request.
 - Tests live in `tests/` as `<module>.test.ts`.
 - Logic worth testing goes in `src/lib` or `src/utils` as pure functions. Keep
   components thin.
@@ -92,14 +91,14 @@ npm test          # Vitest, single run
 All five commands must pass before declaring a change complete:
 
 ```bash
-npm run typecheck     # tsc --noEmit
-npm run lint          # eslint .
-npm test              # vitest run
-npm run format:check  # prettier --check .
-npm run build         # typecheck, Vite build, and prerender
+pnpm typecheck      # tsc --noEmit
+pnpm lint           # eslint .
+pnpm test           # vitest run
+pnpm format:check   # prettier --check .
+pnpm build          # typecheck, Vite build, and prerender
 ```
 
-Use `npm run format` to apply Prettier formatting. If verification is blocked by
+Use `pnpm format` to apply Prettier formatting. If verification is blocked by
 an existing failure, do not claim success: identify the exact file and error,
 and distinguish it from failures caused by the current change.
 

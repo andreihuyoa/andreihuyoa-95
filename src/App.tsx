@@ -84,7 +84,7 @@ const App = ({ mode, onModeChange }: AppProps): ReactElement => {
     setIsStartMenuOpen(!isStartMenuOpen);
   };
 
-  //Open a window by adding it sa openWindows array if di pa open
+  // Open a window by adding it to the openWindows array if not already open
   const openWindow = (
     windowId: string,
     title: string,
@@ -111,7 +111,7 @@ const App = ({ mode, onModeChange }: AppProps): ReactElement => {
       ]);
       setZIndexCounter((prev) => prev + 1);
     } else {
-      //if window is open just bring it sa front
+      // If the window is already open, just bring it to the front
       bringToFront(windowId);
     }
   };
@@ -211,7 +211,7 @@ const App = ({ mode, onModeChange }: AppProps): ReactElement => {
 
       <TaskBar>
         <StartButton onClick={toggleStartMenu} />
-        {/* make this as a component later, para sa mga opened apps in taskbar */}
+        {/* make this a component later, for the opened apps in the taskbar */}
         {openWindows.map((win) => (
           <TaskBarButton
             key={win.windowId}

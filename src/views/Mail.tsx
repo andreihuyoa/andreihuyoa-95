@@ -69,7 +69,7 @@ const Mail = (): ReactElement => {
       <SubHeader
         className="mb-2"
         buttons={[
-          //replace it with onClickSendEmail pag nakapag setup na ng backend eg. express
+          // Replace with onClickSendEmail once a backend (e.g. express) is set up
           // tho mas okay with library eg. email.js, formspree, smtp.js(best?)
           { icon: SendEmailIcon, title: "Send", onClick: onClickUseDiffApp },
         ]}

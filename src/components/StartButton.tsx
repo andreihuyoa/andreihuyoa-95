@@ -7,7 +7,7 @@ interface StartButtonProps {
 const StartButton = ({ onClick }: StartButtonProps): ReactNode => {
   return (
     <button
-      //add shadow din siguro later
+      // Maybe add a shadow later
       className="border-95-white border-b-95-black border-r-95-black bg-95-gray active:border-95-black active:border-b-95-white active:border-r-95-white mr-2 flex items-center space-x-1 border-2 px-2 py-1 font-semibold focus:outline-none"
       onClick={onClick}
     >
