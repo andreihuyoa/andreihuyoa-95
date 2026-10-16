@@ -36,6 +36,8 @@ export interface ProjectItem {
   highlights?: string[];
   /** External link on the title, always opened in a new tab. */
   url?: string;
+  /** Live page for the project. When set, the title links here and `url` becomes a GitHub button. */
+  liveTo?: "/projects/ditherkit";
   tags: string[];
 }
 
@@ -156,6 +158,16 @@ export const projects: ProjectItem[] = [
     tags: ["Next.js", "Go / Echo", "Python", "Azure"],
   },
   {
+    title: "Ditherkit — Photoshop Dithering Plugin",
+    category: "personal",
+    href: "#ditherkit-project",
+    description:
+      "An open source Photoshop plugin for dithering and halftones: 31 patterns, palette tools, and a zoomable live preview, with each Dither applied as a single undo step. Built on Bolt UXP with a React webview UI, a shared design system for future plugins, and a tested TypeScript image engine.",
+    url: "https://github.com/andreihuyoa/rea-photoshop-plugins",
+    liveTo: "/projects/ditherkit",
+    tags: ["TypeScript", "React", "Photoshop UXP", "Image Processing"],
+  },
+  {
     title: "Fig — Personal Saves Library",
     category: "personal",
     href: "#fig-project",
@@ -230,6 +242,12 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
         description:
           "Rebuilt the Next.js website frontend for SEO, structure, and maintainable MDX content at Shinka Studios.",
         meta: "work",
+      },
+      {
+        title: "Ditherkit — Photoshop Dithering Plugin",
+        description:
+          "An open source Photoshop plugin with 31 dithering and halftone patterns, palette tools and a live preview.",
+        meta: "personal",
       },
       {
         title: "Fig — Personal Link Library",

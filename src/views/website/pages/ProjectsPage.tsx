@@ -1,4 +1,5 @@
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
+import { Link } from "@tanstack/react-router";
 import type { ReactElement } from "react";
 
 import { MotionReveal } from "../../../components/website/MotionReveal";
@@ -21,22 +22,46 @@ interface ProjectEntryProps {
  */
 const ProjectEntry = ({ project }: ProjectEntryProps): ReactElement => (
   <article className="py-7" id={project.href.replace("#", "")}>
-    <h3 className="m-0 text-xl leading-tight font-semibold">
-      {project.url ? (
+    <div className="flex items-start justify-between gap-4">
+      <h3 className="m-0 text-xl leading-tight font-semibold">
+        {/* The live site always wins the title link; GitHub moves to its own button. */}
+        {project.liveTo ? (
+          <Link
+            className="hover:text-website-interactive inline-flex items-center gap-1.5 text-inherit no-underline transition-colors duration-200 hover:underline hover:decoration-dotted hover:underline-offset-4"
+            search={{ mode: "website" }}
+            to={project.liveTo}
+          >
+            {project.title}
+            <ArrowRightUpBrokenIcon aria-hidden="true" size={16} />
+          </Link>
+        ) : project.url ? (
+          <a
+            className="hover:text-website-interactive inline-flex items-center gap-1.5 text-inherit no-underline transition-colors duration-200 hover:underline hover:decoration-dotted hover:underline-offset-4"
+            href={project.url}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {project.title}
+            <ArrowRightUpBrokenIcon aria-hidden="true" size={16} />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        ) : (
+          project.title
+        )}
+      </h3>
+      {project.liveTo && project.url ? (
         <a
-          className="hover:text-website-interactive inline-flex items-center gap-1.5 text-inherit no-underline transition-colors duration-200 hover:underline hover:decoration-dotted hover:underline-offset-4"
+          className="border-website-border hover:border-website-interactive hover:text-website-interactive font-website-display text-website-text inline-flex h-8 shrink-0 items-center gap-1 rounded-md border px-3 text-xs no-underline transition-colors duration-200"
           href={project.url}
           rel="noopener noreferrer"
           target="_blank"
         >
-          {project.title}
-          <ArrowRightUpBrokenIcon aria-hidden="true" size={16} />
+          GitHub
+          <ArrowRightUpBrokenIcon aria-hidden="true" size={13} />
           <span className="sr-only">(opens in a new tab)</span>
         </a>
-      ) : (
-        project.title
-      )}
-    </h3>
+      ) : null}
+    </div>
     {project.organization ? (
       <p className="font-website-display text-website-text-muted mt-2 mb-0 text-[11px]">
         {project.organization}

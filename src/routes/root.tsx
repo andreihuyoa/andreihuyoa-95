@@ -1,4 +1,9 @@
-import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
+import {
+  Outlet,
+  useNavigate,
+  useRouterState,
+  useSearch,
+} from "@tanstack/react-router";
 import { useEffect, type ReactElement } from "react";
 
 import App from "../App";
@@ -6,6 +11,9 @@ import { SeoHead } from "../components/website/SeoHead";
 import { homeSeo } from "../seo";
 import { getSavedMode, persistViewMode } from "../viewMode";
 import WebsiteLayout from "../views/website/WebsiteLayout";
+
+/** Pages that bring their own chrome instead of the website sidebar layout. */
+const STANDALONE_PATHS = new Set(["/projects/ditherkit"]);
 
 /** Selects website chrome for content routes and Windows mode for home only. */
 const RootRouteComponent = (): ReactElement => {
@@ -23,7 +31,9 @@ const RootRouteComponent = (): ReactElement => {
   return (
     <>
       <SeoHead metadata={homeSeo} />
-      {effectiveMode === "os" ? (
+      {STANDALONE_PATHS.has(pathname.replace(/\/+$/, "") || "/") ? (
+        <Outlet />
+      ) : effectiveMode === "os" ? (
         <App
           mode={effectiveMode}
           onModeChange={(nextMode) => {
