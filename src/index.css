@@ -31,6 +31,14 @@
 }
 
 @font-face {
+  font-family: "Junicode";
+  src: url("/assets/fonts/Junicode-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Redaction 10";
   src: url("/assets/fonts/Redaction-10-Regular.woff2") format("woff2");
   font-weight: 400;
@@ -212,4 +220,42 @@ textarea {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+
+/* Ditherkit project page: its own design system, scoped so it never mixes with
+   the portfolio's website-* tokens. Dark first; light follows the site theme. */
+[data-site="ditherkit"] {
+  --dk-ground: #121417;
+  --dk-panel: #191c20;
+  --dk-panel-2: #1f2328;
+  --dk-line: #2a2e34;
+  --dk-ink: #eceef1;
+  --dk-ink-2: #b8bec6;
+  --dk-muted: #7f8790;
+  --dk-accent: #3d6bff;
+  --dk-on-accent: #ffffff;
+  --dk-stage: #e2e7ea;
+  --dk-stage-ink: #1f4fe0;
+  --dk-stage-muted: #5b6672;
+  --dk-danger: #ff7a6b;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] [data-site="ditherkit"] {
+  --dk-ground: #eef0f2;
+  --dk-panel: #ffffff;
+  --dk-panel-2: #f6f7f9;
+  --dk-line: #d9dde2;
+  --dk-ink: #14171b;
+  --dk-ink-2: #3d444d;
+  --dk-muted: #6a727c;
+  --dk-accent: #1f4fe0;
+  --dk-on-accent: #ffffff;
+  --dk-stage: #16181b;
+  --dk-stage-ink: #3d6bff;
+  --dk-stage-muted: #8d949d;
+  --dk-danger: #c2372b;
+
+  color-scheme: light;
 }
