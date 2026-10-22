@@ -10,10 +10,11 @@ import {
 } from "@solar-icons/react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import type { ReactElement, ReactNode } from "react";
+import { useState, type ReactElement, type ReactNode } from "react";
 
 import type { WebsiteTheme } from "../../utils/websiteTheme";
 import type { WebsiteSectionId } from "../../content/website";
+import { EmailModal } from "./EmailModal";
 import { Separator } from "./Separator";
 
 const sidebarGroupClass =
@@ -154,142 +155,149 @@ export const WebsiteSidebar = ({
   onThemeChange,
   themeChangeDisabled,
   theme,
-}: WebsiteSidebarProps): ReactElement => (
-  <>
-    <div
-      className={`bg-website-text/20 fixed inset-0 z-40 transition-opacity min-[761px]:hidden ${
-        isMobileOpen
-          ? "pointer-events-auto opacity-100"
-          : "pointer-events-none opacity-0"
-      }`}
-      aria-hidden="true"
-      onClick={onClose}
-    />
-    <aside
-      className={`bg-website-background font-website-display text-website-text-muted border-website-border/20 fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto border-r p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
-        isMobileOpen ? "translate-x-0" : "max-[760px]:-translate-x-full"
-      }`}
-      aria-label="Portfolio navigation and contact"
-    >
-      <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
-        {/* Navigation Links - Top Container */}
-        <div className="flex min-h-0 w-full shrink flex-col gap-6 overflow-hidden pt-16 max-[760px]:pt-12">
-          <button
-            className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
-            type="button"
-            aria-label="Close navigation"
-            onClick={onClose}
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-          <nav className={sidebarGroupClass} aria-label="Portfolio sections">
-            <SidebarRouteLink to="/experience" onClick={onClose}>
-              experience
-            </SidebarRouteLink>
-            <SidebarRouteLink to="/projects" onClick={onClose}>
-              projects
-            </SidebarRouteLink>
-            <SidebarRouteLink to="/certifications" onClick={onClose}>
-              certifications
-            </SidebarRouteLink>
-            <SidebarRouteLink to="/stack" onClick={onClose}>
-              stack
-            </SidebarRouteLink>
-          </nav>
+}: WebsiteSidebarProps): ReactElement => {
+  const [emailOpen, setEmailOpen] = useState(false);
 
-          <Separator />
-
-          <div className={sidebarGroupClass}>
-            <SidebarRouteLink
-              to="/blogs"
+  return (
+    <>
+      <div
+        className={`bg-website-text/20 fixed inset-0 z-40 transition-opacity min-[761px]:hidden ${
+          isMobileOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden="true"
+        onClick={onClose}
+      />
+      <aside
+        className={`bg-website-background font-website-display text-website-text-muted border-website-border/20 fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto border-r p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
+          isMobileOpen ? "translate-x-0" : "max-[760px]:-translate-x-full"
+        }`}
+        aria-label="Portfolio navigation and contact"
+      >
+        <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
+          {/* Navigation Links - Top Container */}
+          <div className="flex min-h-0 w-full shrink flex-col gap-6 overflow-hidden pt-16 max-[760px]:pt-12">
+            <button
+              className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
+              type="button"
+              aria-label="Close navigation"
               onClick={onClose}
-              icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
             >
-              blogs
-            </SidebarRouteLink>
-            <SidebarRouteLink
-              to="/resources"
-              onClick={onClose}
-              icon={<CalculatorBrokenIcon aria-hidden="true" size={14} />}
-            >
-              resources
-            </SidebarRouteLink>
-          </div>
-        </div>
+              <span aria-hidden="true">×</span>
+            </button>
+            <nav className={sidebarGroupClass} aria-label="Portfolio sections">
+              <SidebarRouteLink to="/experience" onClick={onClose}>
+                experience
+              </SidebarRouteLink>
+              <SidebarRouteLink to="/projects" onClick={onClose}>
+                projects
+              </SidebarRouteLink>
+              <SidebarRouteLink to="/certifications" onClick={onClose}>
+                certifications
+              </SidebarRouteLink>
+              <SidebarRouteLink to="/stack" onClick={onClose}>
+                stack
+              </SidebarRouteLink>
+            </nav>
 
-        {/* Contact Information - Bottom Container */}
-        <div
-          className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
-          id="contact"
-        >
-          <Separator />
-          <div className="flex flex-col items-start gap-2">
-            <div
-              className="flex items-start gap-2 overflow-hidden"
-              aria-label="Display controls"
-            >
-              <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-1">
-                <ThemeButton
-                  icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
-                  isActive={theme === "system"}
-                  isDisabled={themeChangeDisabled}
-                  label="System theme"
-                  onClick={() => onThemeChange("system")}
-                />
-                <ThemeButton
-                  icon={<SunBrokenIcon aria-hidden="true" size={16} />}
-                  isActive={theme === "light"}
-                  isDisabled={themeChangeDisabled}
-                  label="Light theme"
-                  onClick={() => onThemeChange("light")}
-                />
-                <ThemeButton
-                  icon={<MoonBrokenIcon aria-hidden="true" size={16} />}
-                  isActive={theme === "dark"}
-                  isDisabled={themeChangeDisabled}
-                  label="Dark theme"
-                  onClick={() => onThemeChange("dark")}
-                />
-              </div>
-              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
-                <motion.button
-                  className={displayControlButtonClass(false)}
-                  type="button"
-                  aria-label="Windows 95 mode"
-                  title="Windows 95 mode"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.78 }}
-                  onClick={onOsMode}
-                >
-                  <GlobeBrokenIcon aria-hidden="true" size={16} />
-                </motion.button>
-              </div>
-              <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
-                <motion.button
-                  className={displayControlButtonClass(false)}
-                  type="button"
-                  aria-label="Sound"
-                  title="Sound — coming soon"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.78 }}
-                >
-                  <SoundwaveBrokenIcon aria-hidden="true" size={16} />
-                </motion.button>
-              </div>
+            <Separator />
+
+            <div className={sidebarGroupClass}>
+              <SidebarRouteLink
+                to="/blogs"
+                onClick={onClose}
+                icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
+              >
+                blogs
+              </SidebarRouteLink>
+              <SidebarRouteLink
+                to="/resources"
+                onClick={onClose}
+                icon={<CalculatorBrokenIcon aria-hidden="true" size={14} />}
+              >
+                resources
+              </SidebarRouteLink>
             </div>
           </div>
-          <p>For work, collaborations &amp; everything else, reach me at</p>
-          <a
-            className="hover:text-website-interactive flex w-fit items-center gap-1 text-inherit no-underline transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
-            href="mailto:andrei.huyoa.me@gmail.com"
+
+          {/* Contact Information - Bottom Container */}
+          <div
+            className="[&_p]:font-inherit flex w-full shrink-0 flex-col gap-3 [&_p]:m-0 [&_p]:text-sm [&_p]:leading-tight [&_p]:tracking-normal"
+            id="contact"
           >
-            <MailboxBrokenIcon aria-hidden="true" size={22} />
-            <span className="underline decoration-dotted underline-offset-3">
-              andrei.huyoa.me@gmail.com
-            </span>
-          </a>
+            <Separator />
+            <div className="flex flex-col items-start gap-2">
+              <div
+                className="flex items-start gap-2 overflow-hidden"
+                aria-label="Display controls"
+              >
+                <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-1">
+                  <ThemeButton
+                    icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
+                    isActive={theme === "system"}
+                    isDisabled={themeChangeDisabled}
+                    label="System theme"
+                    onClick={() => onThemeChange("system")}
+                  />
+                  <ThemeButton
+                    icon={<SunBrokenIcon aria-hidden="true" size={16} />}
+                    isActive={theme === "light"}
+                    isDisabled={themeChangeDisabled}
+                    label="Light theme"
+                    onClick={() => onThemeChange("light")}
+                  />
+                  <ThemeButton
+                    icon={<MoonBrokenIcon aria-hidden="true" size={16} />}
+                    isActive={theme === "dark"}
+                    isDisabled={themeChangeDisabled}
+                    label="Dark theme"
+                    onClick={() => onThemeChange("dark")}
+                  />
+                </div>
+                <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
+                  <motion.button
+                    className={displayControlButtonClass(false)}
+                    type="button"
+                    aria-label="Windows 95 mode"
+                    title="Windows 95 mode"
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.78 }}
+                    onClick={onOsMode}
+                  >
+                    <GlobeBrokenIcon aria-hidden="true" size={16} />
+                  </motion.button>
+                </div>
+                <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
+                  <motion.button
+                    className={displayControlButtonClass(false)}
+                    type="button"
+                    aria-label="Sound"
+                    title="Sound — coming soon"
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.78 }}
+                  >
+                    <SoundwaveBrokenIcon aria-hidden="true" size={16} />
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+            <p>For work, collaborations &amp; everything else, reach me at</p>
+            <button
+              className="hover:text-website-interactive flex w-fit cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-left text-inherit transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+              type="button"
+              aria-haspopup="dialog"
+              onClick={() => setEmailOpen(true)}
+            >
+              <MailboxBrokenIcon aria-hidden="true" size={22} />
+              <span className="underline decoration-dotted underline-offset-3">
+                andrei.huyoa.me@gmail.com
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-    </aside>
-  </>
-);
+      </aside>
+      <EmailModal open={emailOpen} onClose={() => setEmailOpen(false)} />
+    </>
+  );
+};
