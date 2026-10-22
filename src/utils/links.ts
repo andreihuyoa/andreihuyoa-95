@@ -15,18 +15,43 @@ interface MailtoOptions {
 
 export const getContactUrl = (key: ContactUrlKey): string => contactUrls[key];
 
+/**
+ * Builds a `mailto:` URL to the contact address. Parameters are percent-encoded
+ * (spaces as `%20`) because mail clients show `+` literally in mailto links.
+ */
 export const getMailtoUrl = ({ subject, body }: MailtoOptions = {}): string => {
-  const params = new URLSearchParams();
+  const params: string[] = [];
 
   if (subject) {
-    params.set("subject", subject);
+    params.push(`subject=${encodeURIComponent(subject)}`);
+  }
+
+  if (body) {
+    params.push(`body=${encodeURIComponent(body)}`);
+  }
+
+  return params.length
+    ? `mailto:${contactEmail}?${params.join("&")}`
+    : `mailto:${contactEmail}`;
+};
+
+/**
+ * Builds a Gmail web compose URL to the contact address, for visitors without
+ * a desktop mail app registered for `mailto:` links.
+ */
+export const getGmailComposeUrl = ({
+  subject,
+  body,
+}: MailtoOptions = {}): string => {
+  const params = new URLSearchParams({ view: "cm", fs: "1", to: contactEmail });
+
+  if (subject) {
+    params.set("su", subject);
   }
 
   if (body) {
     params.set("body", body);
   }
 
-  const query = params.toString();
-
-  return query ? `mailto:${contactEmail}?${query}` : `mailto:${contactEmail}`;
+  return `https://mail.google.com/mail/?${params.toString()}`;
 };
