@@ -1,8 +1,9 @@
 import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import type { ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 
+import { EmailModal } from "../../components/website/EmailModal";
 import { PixelStarField } from "../../components/website/PixelStarField";
 import {
   brandLogo,
@@ -183,88 +184,104 @@ const LandingBlogPreviewSection = ({
  * Renders the website-mode landing page with the portrait, intro copy, socials,
  * and section previews.
  */
-export const WebsiteLandingPage = (): ReactElement => (
-  <>
-    <section
-      className="flex min-h-80 flex-wrap items-start justify-center gap-10 py-10 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-0 max-[760px]:pb-7"
-      aria-labelledby="website-intro-title"
-    >
-      <h1 className="sr-only" id="website-intro-title">
-        Andrei Huyo-a
-      </h1>
-      <div className="relative h-60.5 w-60.5 shrink-0 max-[1180px]:h-55 max-[1180px]:w-55 max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
-        <PixelStarField />
-        <div className="relative z-1 h-full w-full overflow-hidden">
-          <img
-            className="h-full w-full translate-y-8 scale-[1.25] object-contain object-center"
-            src={portrait}
-            alt="Carl Andrei Del Rosario"
-            width="1086"
-            height="1629"
-          />
-        </div>
-      </div>
+export const WebsiteLandingPage = (): ReactElement => {
+  const [emailOpen, setEmailOpen] = useState(false);
 
-      <div className="max-w-136 min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
-        <div>
-          <Link
-            className="w-full max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
-            aria-label="Andrei Huyo-a, home"
-            search={{ mode: "website" }}
-            to="/"
-          >
+  return (
+    <>
+      <section
+        className="flex min-h-80 flex-wrap items-start justify-center gap-10 py-10 max-[1280px]:gap-7 max-[760px]:min-h-0 max-[760px]:flex-col max-[760px]:gap-6 max-[760px]:pt-0 max-[760px]:pb-7"
+        aria-labelledby="website-intro-title"
+      >
+        <h1 className="sr-only" id="website-intro-title">
+          Andrei Huyo-a
+        </h1>
+        <div className="relative h-60.5 w-60.5 shrink-0 max-[1180px]:h-55 max-[1180px]:w-55 max-[760px]:mx-auto max-[760px]:h-[min(78vw,330px)] max-[760px]:w-[min(78vw,330px)]">
+          <PixelStarField />
+          <div className="relative z-1 h-full w-full overflow-hidden">
             <img
-              className="website-brand-logo block h-auto w-full max-w-none"
-              src={brandLogo}
-              alt="Andrei Huyo-a"
+              className="h-full w-full translate-y-8 scale-[1.25] object-contain object-center"
+              src={portrait}
+              alt="Carl Andrei Del Rosario"
+              width="1086"
+              height="1629"
             />
-          </Link>
+          </div>
         </div>
-        <p className="m-0 leading-[1.2]">
-          I&apos;m a full-stack developer building web and mobile applications,
-          with a focus on strong visual design, reliable systems, and products.
-        </p>
-        <p className="mt-4 leading-[1.2]">
-          Right now, I&apos;m turning ideas into tools that people can genuinely
-          use in their everyday workflows, combining solid engineering with
-          AI-assisted development.
-        </p>
-        <nav
-          className="font-website-display flex flex-wrap justify-between gap-1.5 py-3.75 text-sm tracking-tighter [&_a]:inline-flex [&_a]:min-h-6 [&_a]:items-center [&_a]:gap-1 [&_a]:no-underline"
-          aria-label="Social links"
-        >
-          {socialLinks.map((link) => {
-            const external = link.href.startsWith("http");
-            return (
-              <motion.a
-                className="text-website-text-muted hover:text-website-interactive transition-colors duration-200"
-                key={link.label}
-                href={link.href}
-                rel={external ? "noreferrer" : undefined}
-                target={external ? "_blank" : undefined}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                {link.label}
-                {external ? (
-                  <ArrowRightUpBrokenIcon aria-hidden="true" size={13} />
-                ) : null}
-              </motion.a>
-            );
-          })}
-        </nav>
-      </div>
-    </section>
-    <Separator />
 
-    <div className="py-4" aria-label="Portfolio overview">
-      {landingSectionPreviews.map((section) =>
-        section.section === "blogs" ? (
-          <LandingBlogPreviewSection {...section} key={section.section} />
-        ) : (
-          <LandingPreviewSection {...section} key={section.section} />
-        ),
-      )}
-    </div>
-  </>
-);
+        <div className="max-w-136 min-w-80 flex-[1_1_24rem] overflow-hidden pt-8 max-[1080px]:pt-4 max-[760px]:max-w-none max-[760px]:min-w-0 max-[760px]:pt-0">
+          <div>
+            <Link
+              className="w-full max-w-none max-[760px]:left-16 max-[760px]:w-[calc(100vw-5rem)]"
+              aria-label="Andrei Huyo-a, home"
+              search={{ mode: "website" }}
+              to="/"
+            >
+              <img
+                className="website-brand-logo block h-auto w-full max-w-none"
+                src={brandLogo}
+                alt="Andrei Huyo-a"
+              />
+            </Link>
+          </div>
+          <p className="m-0 leading-[1.2]">
+            I&apos;m a full-stack developer building web and mobile
+            applications, with a focus on strong visual design, reliable
+            systems, and products.
+          </p>
+          <p className="mt-4 leading-[1.2]">
+            Right now, I&apos;m turning ideas into tools that people can
+            genuinely use in their everyday workflows, combining solid
+            engineering with AI-assisted development.
+          </p>
+          <nav
+            className="font-website-display flex flex-wrap justify-between gap-1.5 py-3.75 text-sm tracking-tighter [&_a]:inline-flex [&_a]:min-h-6 [&_a]:items-center [&_a]:gap-1 [&_a]:no-underline"
+            aria-label="Social links"
+          >
+            {socialLinks.map((link) => {
+              const external = link.href.startsWith("http");
+              return (
+                <motion.a
+                  className="text-website-text-muted hover:text-website-interactive transition-colors duration-200"
+                  key={link.label}
+                  href={link.href}
+                  rel={external ? "noreferrer" : undefined}
+                  target={external ? "_blank" : undefined}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  {link.label}
+                  {external ? (
+                    <ArrowRightUpBrokenIcon aria-hidden="true" size={13} />
+                  ) : null}
+                </motion.a>
+              );
+            })}
+            <motion.button
+              className="text-website-text-muted hover:text-website-interactive inline-flex min-h-6 cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-[length:inherit] tracking-[inherit] transition-colors duration-200"
+              type="button"
+              aria-haspopup="dialog"
+              onClick={() => setEmailOpen(true)}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.96 }}
+            >
+              email
+            </motion.button>
+          </nav>
+        </div>
+      </section>
+      <Separator />
+
+      <div className="py-4" aria-label="Portfolio overview">
+        {landingSectionPreviews.map((section) =>
+          section.section === "blogs" ? (
+            <LandingBlogPreviewSection {...section} key={section.section} />
+          ) : (
+            <LandingPreviewSection {...section} key={section.section} />
+          ),
+        )}
+      </div>
+      <EmailModal open={emailOpen} onClose={() => setEmailOpen(false)} />
+    </>
+  );
+};

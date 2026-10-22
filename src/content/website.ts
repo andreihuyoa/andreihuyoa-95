@@ -1,5 +1,5 @@
 import { getLatestCertifications } from "../lib/certifications";
-import { getContactUrl, getMailtoUrl } from "../utils/links";
+import { getContactUrl } from "../utils/links";
 
 export const brandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
 export const portrait = "/assets/WebsiteMode/grad-pic-dither.png";
@@ -71,7 +71,6 @@ export const socialLinks = [
   { label: "github", href: getContactUrl("github") },
   { label: "linkedin", href: getContactUrl("linkedin") },
   { label: "instagram", href: getContactUrl("instagram") },
-  { label: "email", href: getMailtoUrl() },
 ];
 
 // Experience
