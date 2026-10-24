@@ -32,7 +32,7 @@ export const formatCredentialReference = (
 ): string =>
   certification.credentialId
     ? `ID ${certification.credentialId.slice(0, 8).toUpperCase()}`
-    : certification.kind === "certificate"
+    : certification.kind !== "badge"
       ? "employer-issued"
       : "no public ID";
 

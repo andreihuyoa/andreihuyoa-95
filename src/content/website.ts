@@ -90,7 +90,7 @@ export const experiences: ExperienceItem[] = [
     tags: ["Next.js", "Go / Echo", "Python", "Azure"],
   },
   {
-    role: "Full Stack Developer Intern",
+    role: "Cloud Full Stack Developer Intern",
     company: "Strastan Solutions Corp.",
     date: "Feb—Jun 2026",
     summary:
@@ -101,6 +101,7 @@ export const experiences: ExperienceItem[] = [
       "Integrated session-based authentication and connected protected user flows to the platform's backend behavior.",
       "Built and tested AWS Lambda CRUD handlers and API Gateway endpoints, with infrastructure defined through AWS CDK.",
       "Traced issues across the interface and serverless services, documenting and testing fixes before they were folded back into the main application.",
+      "Received the Outstanding Intern Award (June 2026) for dedication, reliability and professionalism.",
     ],
     tags: ["Next.js 14", "TypeScript", "AWS Lambda", "AWS CDK"],
   },
@@ -219,7 +220,7 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
         meta: "2025",
       },
       {
-        title: "Full Stack Developer Intern",
+        title: "Cloud Full Stack Developer Intern",
         description: "Strastan Solutions Corp.",
         meta: "2026",
       },

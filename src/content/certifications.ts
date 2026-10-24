@@ -3,9 +3,9 @@ const credlyBadgeUrl = (badgeId: string): string =>
   `https://www.credly.com/badges/${badgeId}`;
 
 export type CertificationGroupId =
-  "experience" | "ai" | "engineering" | "design";
+  "experience" | "ai" | "engineering" | "design" | "awards";
 
-export type CertificationKind = "badge" | "certificate";
+export type CertificationKind = "badge" | "certificate" | "award";
 
 export interface CertificationGroup {
   id: CertificationGroupId;
@@ -60,12 +60,31 @@ export const certificationGroups: CertificationGroup[] = [
   { id: "ai", label: "ai" },
   { id: "engineering", label: "engineering" },
   { id: "design", label: "design" },
+  { id: "awards", label: "awards" },
 ];
 
 export const certifications: Certification[] = [
   {
+    id: "strastan-outstanding-intern-award",
+    group: "awards",
+    kind: "award",
+    title: "Outstanding Intern Award",
+    issuer: "Strastan Solutions Corp.",
+    issuedOn: "2026-06",
+    logo: { src: `${assetRoot}/logos/strastan.jpg`, fit: "cover" },
+    image: {
+      src: `${assetRoot}/outstanding-intern-award.jpeg`,
+      alt: "Outstanding Intern Award from Strastan Solutions Corp. presented to Carl Andrei H. Del Rosario, June 2026.",
+      width: 1600,
+      height: 1130,
+    },
+    summary:
+      "Awarded for outstanding dedication, reliability and professionalism during my internship.",
+    skills: [],
+  },
+  {
     id: "strastan-certificate-of-recognition",
-    group: "experience",
+    group: "awards",
     kind: "certificate",
     title: "Certificate of Recognition",
     issuer: "Strastan Solutions Corp.",
@@ -78,7 +97,7 @@ export const certifications: Certification[] = [
       height: 1357,
     },
     summary:
-      "Awarded for hands-on work with Cognito, Lambda, SQS, SNS, EventBridge, S3, CloudFront, API Gateway, DynamoDB and CloudWatch, plus frontend work in React, Next.js, Tailwind CSS and React Query.",
+      "Recognized for AWS serverless development, including Lambda, API Gateway, Cognito and S3, plus frontend work in React, Next.js, Tailwind CSS and React Query.",
     skills: ["AWS Lambda", "DynamoDB", "API Gateway", "Next.js", "React Query"],
     facts: [
       {

@@ -28,7 +28,10 @@ const workGroups = certificationGroups.filter(
   (group) => group.id === "experience",
 );
 const personalGroups = certificationGroups.filter(
-  (group) => group.id !== "experience",
+  (group) => group.id !== "experience" && group.id !== "awards",
+);
+const awardGroups = certificationGroups.filter(
+  (group) => group.id === "awards",
 );
 
 const divisions: Array<{
@@ -38,6 +41,12 @@ const divisions: Array<{
   /** Show each field group (ai, engineering, ...) as a sub-heading. */
   showGroupHeadings: boolean;
 }> = [
+  {
+    id: "awards",
+    label: "Awards",
+    groups: awardGroups,
+    showGroupHeadings: false,
+  },
   {
     id: "work",
     label: "Work certifications",
