@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, type ReactElement } from "react";
 
 import {
+  DITHERKIT_DONATION_URL,
   DITHERKIT_REPO_URL,
   WORDMARK_FONTS,
   WORDMARK_SOURCES,
@@ -19,7 +20,7 @@ const stageButton =
 
 /**
  * The opening artboard: the dithered 3D knot behind the "ditherkit by
- * andreihuyoa" title, an all-caps lead line, the two calls to action, and
+ * andreihuyoa" title, an all-caps lead line, calls to action, and
  * chips that switch the knot's pattern.
  */
 export const Hero = (): ReactElement => {
@@ -91,6 +92,14 @@ export const Hero = (): ReactElement => {
                   target="_blank"
                 >
                   github
+                </a>
+                <a
+                  className={`${stageButton} border-dk-stage-ink bg-dk-stage text-dk-stage-ink hover:bg-dk-stage-ink hover:text-dk-stage focus-visible:outline-dk-stage-ink focus-visible:outline-2 focus-visible:outline-offset-4`}
+                  href={DITHERKIT_DONATION_URL}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  buy me a coffee
                 </a>
               </div>
             </div>

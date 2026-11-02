@@ -3,6 +3,7 @@ import type { WordmarkSource } from "./components/wordmarkRenderer";
 export const DITHERKIT_REPO_URL =
   "https://github.com/andreihuyoa/rea-photoshop-plugins";
 export const DITHERKIT_RELEASE_URL = `${DITHERKIT_REPO_URL}/releases/latest`;
+export const DITHERKIT_DONATION_URL = "https://buymeacoffee.com/andreihuyoa";
 
 /** Google Fonts used only on the Ditherkit page (Junicode is self-hosted). */
 export const DITHERKIT_FONTS_URL =

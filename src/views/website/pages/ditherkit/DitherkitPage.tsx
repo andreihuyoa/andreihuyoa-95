@@ -12,7 +12,11 @@ import { Hero } from "./components/Hero";
 import { HowItWorks } from "./components/HowItWorks";
 import { Install } from "./components/Install";
 import { TopBar } from "./components/TopBar";
-import { DITHERKIT_FONTS_URL, DITHERKIT_REPO_URL } from "./content";
+import {
+  DITHERKIT_DONATION_URL,
+  DITHERKIT_FONTS_URL,
+  DITHERKIT_REPO_URL,
+} from "./content";
 
 /**
  * The Ditherkit project page at /projects/ditherkit. It renders outside the
@@ -68,6 +72,16 @@ const DitherkitPage = (): ReactElement => {
         >
           github →
         </a>
+        <div className="flex w-full justify-center pt-5">
+          <a
+            className="border-dk-ink text-dk-ink hover:bg-dk-ink hover:text-dk-ground focus-visible:outline-dk-ink inline-flex min-h-10 items-center border px-4 text-xs tracking-[0.08em] no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+            href={DITHERKIT_DONATION_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            buy me a coffee
+          </a>
+        </div>
       </footer>
     </div>
   );
