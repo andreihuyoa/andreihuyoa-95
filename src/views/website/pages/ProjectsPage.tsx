@@ -1,4 +1,4 @@
-import { ArrowRightUpBrokenIcon } from "@solar-icons/react";
+import { ArrowRightUpIcon as ArrowRightUpBrokenIcon } from "@solar-icons/react/broken/arrow-right-up";
 import { Link } from "@tanstack/react-router";
 import type { ReactElement } from "react";
 

@@ -1,5 +1,5 @@
 import { getLatestCertifications } from "../lib/certifications";
-import { getContactUrl } from "../utils/links";
+import { getContactUrl, getMailtoUrl } from "../utils/links";
 
 export const brandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
 export const portrait = "/assets/WebsiteMode/grad-pic-dither.png";
@@ -67,10 +67,40 @@ export interface LandingSectionPreview {
   tagsTo?: `/${WebsiteSectionId}`;
 }
 
+export const landingBlogThumbnails: Record<string, string> = {
+  "i-know-i-had-it-saved-somewhere":
+    "/assets/WebsiteMode/blog-thumbnails/i-know-i-had-it-saved-somewhere.jpg",
+};
+
+export const workflowTools = [
+  { name: "Claude", icon: "claude" },
+  { name: "ChatGPT", icon: "openai", monochrome: true },
+  { name: "Cursor", icon: "cursor", monochrome: true },
+  { name: "n8n", icon: "n8n" },
+  { name: "Zapier", icon: "si-zapier" },
+];
+
 export const socialLinks = [
-  { label: "github", href: getContactUrl("github") },
-  { label: "linkedin", href: getContactUrl("linkedin") },
-  { label: "instagram", href: getContactUrl("instagram") },
+  {
+    label: "GitHub",
+    icon: "github",
+    href: getContactUrl("github"),
+    monochrome: true,
+  },
+  {
+    label: "LinkedIn",
+    icon: "linkedin",
+    href: getContactUrl("linkedin"),
+    monochrome: true,
+  },
+  {
+    label: "Instagram",
+    icon: "instagram",
+    href: "https://www.instagram.com/eeyoreo.fig/",
+    title: "Instagram · @eeyoreo.fig",
+    monochrome: true,
+  },
+  { label: "Email", icon: "ui-mail", href: getMailtoUrl(), monochrome: true },
 ];
 
 // Experience
@@ -209,31 +239,8 @@ export const stack: WebsiteListItem[] = [
 
 export const landingSectionPreviews: LandingSectionPreview[] = [
   {
-    section: "experience",
-    index: "01",
-    actionLabel: "all history",
-    to: "/experience",
-    rows: [
-      {
-        title: "Full Stack Developer",
-        description: "Shinka Studios",
-        meta: "2025",
-      },
-      {
-        title: "Cloud Full Stack Developer Intern",
-        description: "Strastan Solutions Corp.",
-        meta: "2026",
-      },
-      {
-        title: "Frontend Developer",
-        description: "Freelance",
-        meta: "2024",
-      },
-    ],
-  },
-  {
     section: "projects",
-    index: "02",
+    index: "01",
     actionLabel: "all projects",
     to: "/projects",
     rows: [
@@ -260,6 +267,29 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
         meta: "personal",
+      },
+    ],
+  },
+  {
+    section: "experience",
+    index: "02",
+    actionLabel: "all history",
+    to: "/experience",
+    rows: [
+      {
+        title: "Full Stack Developer",
+        description: "Shinka Studios",
+        meta: "2025",
+      },
+      {
+        title: "Cloud Full Stack Developer Intern",
+        description: "Strastan Solutions Corp.",
+        meta: "2026",
+      },
+      {
+        title: "Frontend Developer",
+        description: "Freelance",
+        meta: "2024",
       },
     ],
   },

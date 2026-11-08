@@ -1,4 +1,4 @@
-import { CloseCircleBrokenIcon } from "@solar-icons/react";
+import { CloseCircleIcon as CloseCircleBrokenIcon } from "@solar-icons/react/broken/close-circle";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   useEffect,
@@ -23,7 +23,7 @@ interface EmailModalProps {
 }
 
 const fieldClassName =
-  "border-website-border bg-website-surface text-website-text focus:border-website-interactive w-full rounded-md border px-3 py-2 text-sm outline-none transition-colors";
+  "border-website-border bg-website-surface text-website-text focus:border-website-interactive w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-website-interactive focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors";
 
 /**
  * Compose modal for contacting the site owner. It builds a prefilled draft

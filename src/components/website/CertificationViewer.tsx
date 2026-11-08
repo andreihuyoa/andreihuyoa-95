@@ -1,7 +1,5 @@
-import {
-  ArrowRightUpBrokenIcon,
-  CloseCircleBrokenIcon,
-} from "@solar-icons/react";
+import { ArrowRightUpIcon as ArrowRightUpBrokenIcon } from "@solar-icons/react/broken/arrow-right-up";
+import { CloseCircleIcon as CloseCircleBrokenIcon } from "@solar-icons/react/broken/close-circle";
 import {
   AnimatePresence,
   motion,

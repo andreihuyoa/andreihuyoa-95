@@ -68,6 +68,17 @@ const WebsiteLayout = (): ReactElement => {
   );
 
   useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 761px)");
+    const closeOnDesktop = (event: MediaQueryListEvent): void => {
+      if (event.matches) {
+        setIsSidebarOpen(false);
+      }
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
     if (!isSidebarOpen) {
       return;
     }
@@ -129,8 +140,25 @@ const WebsiteLayout = (): ReactElement => {
     setPendingTheme(null);
   };
 
+  const handleSidebarClose = (): void => {
+    setIsSidebarOpen(false);
+    if (isSidebarOpen) {
+      // Wait for React to remove inert from the navigation toggle's container.
+      window.requestAnimationFrame(() => {
+        document.getElementById("website-navigation-toggle")?.focus();
+      });
+    }
+  };
+
   return (
-    <main className="bg-website-background font-website-sans text-website-text flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:animate-none! motion-reduce:*:scroll-auto! motion-reduce:*:transition-none! max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible">
+    <main className="bg-website-background font-website-sans text-website-text [&_:is(a,button,input,textarea)]:focus-visible:outline-website-interactive flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:animate-none! motion-reduce:*:scroll-auto! motion-reduce:*:transition-none! max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible [&_:is(a,button,input,textarea)]:focus-visible:outline-2 [&_:is(a,button,input,textarea)]:focus-visible:outline-offset-4">
+      <a
+        className="bg-website-background text-website-text sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:rounded-sm focus:px-4 focus:py-3"
+        href="#website-content"
+        inert={isSidebarOpen}
+      >
+        Skip to content
+      </a>
       {pendingTheme && !reduceMotion ? (
         <ThemePixelTransition
           color={transitionColor}
@@ -153,7 +181,7 @@ const WebsiteLayout = (): ReactElement => {
         />
         <WebsiteSidebar
           isMobileOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
+          onClose={handleSidebarClose}
           onOsMode={() => {
             void navigate({ to: "/", search: { mode: "os" } });
           }}
@@ -162,8 +190,11 @@ const WebsiteLayout = (): ReactElement => {
           themeChangeDisabled={pendingTheme !== null}
         />
         <div
-          className="ml-72 h-full min-h-0 min-w-0 flex-1 [scrollbar-gutter:stable] overflow-x-hidden overflow-y-auto overscroll-contain scroll-smooth px-20 *:mx-auto *:w-full *:max-w-5xl max-lg:px-12 max-md:mx-auto max-md:ml-0 max-md:h-auto max-md:w-full max-md:overflow-visible max-md:px-4 max-md:pt-18"
+          className="ml-72 h-full min-h-0 min-w-0 flex-1 [scrollbar-gutter:stable] overflow-x-hidden overflow-y-auto overscroll-contain px-20 *:mx-auto *:w-full *:max-w-5xl max-[760px]:mx-auto max-[760px]:ml-0 max-[760px]:h-auto max-[760px]:w-full max-[760px]:overflow-visible max-[760px]:px-4 max-[760px]:pt-18 min-[761px]:max-lg:px-12"
           data-website-scroll-container
+          inert={isSidebarOpen}
+          id="website-content"
+          tabIndex={-1}
         >
           <Outlet />
         </div>

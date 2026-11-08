@@ -1,0 +1,109 @@
+[
+  {
+    "file": "claude.svg",
+    "icon": "logos:claude-icon",
+    "name": "Claude",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://claude.ai/"
+  },
+  {
+    "file": "cursor.svg",
+    "icon": "logos:cursor-icon",
+    "name": "Cursor",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://cursor.com/"
+  },
+  {
+    "file": "github.svg",
+    "icon": "logos:github-icon",
+    "name": "GitHub",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://github.com/"
+  },
+  {
+    "file": "instagram.svg",
+    "icon": "logos:instagram-icon",
+    "name": "Instagram",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://instagram.com/"
+  },
+  {
+    "file": "linkedin.svg",
+    "icon": "logos:linkedin-icon",
+    "name": "LinkedIn",
+    "kind": "mono",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://www.linkedin.com/"
+  },
+  {
+    "file": "n8n.svg",
+    "icon": "logos:n8n-icon",
+    "name": "n8n",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://n8n.io"
+  },
+  {
+    "file": "openai.svg",
+    "icon": "logos:openai-icon",
+    "name": "OpenAI",
+    "kind": "colour",
+    "source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+    "author": "Gil Barbara",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/gilbarbara/logos",
+    "trademark": true,
+    "markUrl": "https://openai.com/"
+  },
+  {
+    "file": "si-zapier.svg",
+    "icon": "si:zapier",
+    "name": "Zapier",
+    "kind": "mono",
+    "source": "simple-icons@16.30.0",
+    "author": "Simple Icons Collaborators",
+    "licence": "CC0-1.0",
+    "url": "https://github.com/simple-icons/simple-icons",
+    "trademark": true,
+    "colour": "one-colour fallback in the brand hex"
+  },
+  {
+    "file": "ui-mail.svg",
+    "icon": "ui:mail",
+    "name": "Mail",
+    "kind": "line",
+    "source": "@iconify-json/lucide@1.2.100",
+    "author": "Lucide Contributors",
+    "licence": "ISC",
+    "url": "https://github.com/lucide-icons/lucide",
+    "trademark": false
+  }
+]

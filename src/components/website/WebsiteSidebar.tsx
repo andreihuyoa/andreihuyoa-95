@@ -1,16 +1,20 @@
-import {
-  CalculatorBrokenIcon,
-  GlobeBrokenIcon,
-  MailboxBrokenIcon,
-  MonitorBrokenIcon,
-  MoonBrokenIcon,
-  NotebookBrokenIcon,
-  SoundwaveBrokenIcon,
-  SunBrokenIcon,
-} from "@solar-icons/react";
+import { CalculatorIcon as CalculatorBrokenIcon } from "@solar-icons/react/broken/calculator";
+import { GlobeIcon as GlobeBrokenIcon } from "@solar-icons/react/broken/globe";
+import { MailboxIcon as MailboxBrokenIcon } from "@solar-icons/react/broken/mailbox";
+import { MonitorIcon as MonitorBrokenIcon } from "@solar-icons/react/broken/monitor";
+import { MoonIcon as MoonBrokenIcon } from "@solar-icons/react/broken/moon";
+import { NotebookIcon as NotebookBrokenIcon } from "@solar-icons/react/broken/notebook";
+import { SoundwaveIcon as SoundwaveBrokenIcon } from "@solar-icons/react/broken/soundwave";
+import { SunIcon as SunBrokenIcon } from "@solar-icons/react/broken/sun";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { useState, type ReactElement, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 
 import type { WebsiteTheme } from "../../utils/websiteTheme";
 import type { WebsiteSectionId } from "../../content/website";
@@ -18,7 +22,7 @@ import { EmailModal } from "./EmailModal";
 import { Separator } from "./Separator";
 
 const sidebarGroupClass =
-  "flex w-full flex-col items-start gap-4 overflow-hidden";
+  "flex w-full flex-col items-start gap-4 max-[760px]:gap-1";
 
 interface WebsiteSidebarProps {
   isMobileOpen: boolean;
@@ -52,7 +56,7 @@ const SidebarRouteLink = ({
       className:
         "[&_span]:text-website-text [&_span]:underline [&_span]:decoration-dotted [&_span]:underline-offset-4",
     }}
-    className="hover:text-website-interactive inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+    className="hover:text-website-interactive inline-flex min-h-5 w-fit items-center gap-2 text-inherit no-underline transition-colors duration-200 max-[760px]:min-h-11 max-[760px]:min-w-11 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
     onClick={onClick}
     search={{ mode: "website" }}
     to={to}
@@ -63,7 +67,7 @@ const SidebarRouteLink = ({
 );
 
 const displayControlButtonClass = (isActive: boolean): string =>
-  `relative flex size-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 hover:cursor-pointer disabled:cursor-default ${
+  `relative flex size-11 shrink-0 items-center justify-center rounded-full transition-colors duration-200 hover:cursor-pointer disabled:cursor-default ${
     isActive
       ? "text-website-text"
       : "text-website-text-muted hover:text-website-interactive"
@@ -125,11 +129,16 @@ export const HamburgerMenu = ({
   isOpen,
   onOpen,
 }: HamburgerMenuProps): ReactElement => (
-  <div className="absolute top-4 right-4 left-4 z-40 flex items-center justify-between min-[761px]:right-auto min-[761px]:items-start">
+  <div
+    className="absolute top-4 right-4 left-4 z-40 flex items-center justify-between min-[761px]:right-auto min-[761px]:items-start"
+    inert={isOpen}
+  >
     <button
-      className="border-website-border bg-website-surface-muted text-website-text shadow-website flex size-10 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
+      className="border-website-border bg-website-surface-muted text-website-text shadow-website flex size-11 flex-col items-center justify-center gap-1 border min-[761px]:hidden"
       type="button"
+      id="website-navigation-toggle"
       aria-label="Open navigation"
+      aria-controls="website-sidebar"
       aria-expanded={isOpen}
       onClick={onOpen}
     >
@@ -138,7 +147,7 @@ export const HamburgerMenu = ({
       <span className="h-px w-5 bg-current" aria-hidden="true" />
     </button>
     <Link
-      className="text-website-text inline-flex shrink-0 transition-colors duration-300"
+      className="text-website-text inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center transition-colors duration-300"
       aria-label="Andrei Huyo-a, home"
       search={{ mode: "website" }}
       to="/"
@@ -157,6 +166,15 @@ export const WebsiteSidebar = ({
   theme,
 }: WebsiteSidebarProps): ReactElement => {
   const [emailOpen, setEmailOpen] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (isMobileOpen) {
+      sidebarRef.current
+        ?.querySelector<HTMLButtonElement>('[aria-label="Close navigation"]')
+        ?.focus();
+    }
+  }, [isMobileOpen]);
 
   return (
     <>
@@ -170,16 +188,48 @@ export const WebsiteSidebar = ({
         onClick={onClose}
       />
       <aside
+        id="website-sidebar"
+        ref={sidebarRef}
+        role={isMobileOpen ? "dialog" : undefined}
+        aria-modal={isMobileOpen ? true : undefined}
         className={`bg-website-background font-website-display text-website-text-muted border-website-border/20 fixed top-0 left-0 z-50 flex h-dvh max-h-dvh w-72 flex-col justify-start gap-4 overflow-x-visible overflow-y-auto border-r p-5 text-sm tracking-tighter transition-transform duration-200 max-[760px]:shadow-lg min-[761px]:z-30 min-[761px]:translate-x-0 ${
-          isMobileOpen ? "translate-x-0" : "max-[760px]:-translate-x-full"
+          isMobileOpen
+            ? "translate-x-0"
+            : "max-[760px]:invisible max-[760px]:-translate-x-full"
         }`}
         aria-label="Portfolio navigation and contact"
+        onKeyDown={(event) => {
+          if (!isMobileOpen) {
+            return;
+          }
+          if (event.key === "Escape") {
+            event.preventDefault();
+            onClose();
+            return;
+          }
+          if (event.key === "Tab") {
+            const targets = Array.from(
+              event.currentTarget.querySelectorAll<HTMLElement>(
+                "a[href], button:not([disabled])",
+              ),
+            );
+            const first = targets[0];
+            const last = targets[targets.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault();
+              last?.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault();
+              first?.focus();
+            }
+          }
+        }}
       >
-        <div className="flex h-full min-h-0 flex-col items-center justify-between gap-4">
+        <div className="flex min-h-full flex-col items-center justify-between gap-4">
           {/* Navigation Links - Top Container */}
-          <div className="flex min-h-0 w-full shrink flex-col gap-6 overflow-hidden pt-16 max-[760px]:pt-12">
+          <div className="flex w-full shrink-0 flex-col gap-6 pt-16 max-[760px]:pt-12">
             <button
-              className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-9 items-center justify-center border min-[761px]:hidden"
+              className="border-website-border bg-website-surface-muted text-website-text absolute top-4 right-4 z-10 flex size-11 items-center justify-center border min-[761px]:hidden"
               type="button"
               aria-label="Close navigation"
               onClick={onClose}
@@ -187,11 +237,11 @@ export const WebsiteSidebar = ({
               <span aria-hidden="true">×</span>
             </button>
             <nav className={sidebarGroupClass} aria-label="Portfolio sections">
-              <SidebarRouteLink to="/experience" onClick={onClose}>
-                experience
-              </SidebarRouteLink>
               <SidebarRouteLink to="/projects" onClick={onClose}>
                 projects
+              </SidebarRouteLink>
+              <SidebarRouteLink to="/experience" onClick={onClose}>
+                experience
               </SidebarRouteLink>
               <SidebarRouteLink to="/certifications" onClick={onClose}>
                 certifications
@@ -229,10 +279,10 @@ export const WebsiteSidebar = ({
             <Separator />
             <div className="flex flex-col items-start gap-2">
               <div
-                className="flex items-start gap-2 overflow-hidden"
+                className="flex flex-wrap items-start gap-1"
                 aria-label="Display controls"
               >
-                <div className="bg-website-surface-muted flex shrink-0 items-center gap-1 rounded-full border border-black/10 p-1">
+                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center gap-0 rounded-full border p-0.5">
                   <ThemeButton
                     icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
                     isActive={theme === "system"}
@@ -255,7 +305,7 @@ export const WebsiteSidebar = ({
                     onClick={() => onThemeChange("dark")}
                   />
                 </div>
-                <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
+                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
                   <motion.button
                     className={displayControlButtonClass(false)}
                     type="button"
@@ -268,12 +318,13 @@ export const WebsiteSidebar = ({
                     <GlobeBrokenIcon aria-hidden="true" size={16} />
                   </motion.button>
                 </div>
-                <div className="bg-website-surface-muted flex shrink-0 items-center rounded-full border border-black/10 p-1">
+                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
                   <motion.button
                     className={displayControlButtonClass(false)}
                     type="button"
                     aria-label="Sound"
                     title="Sound — coming soon"
+                    disabled
                     whileHover={{ y: -1 }}
                     whileTap={{ scale: 0.78 }}
                   >
@@ -284,7 +335,7 @@ export const WebsiteSidebar = ({
             </div>
             <p>For work, collaborations &amp; everything else, reach me at</p>
             <button
-              className="hover:text-website-interactive flex w-fit cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-left text-inherit transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
+              className="hover:text-website-interactive flex min-h-11 w-fit cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-left text-inherit transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
               type="button"
               aria-haspopup="dialog"
               onClick={() => setEmailOpen(true)}
