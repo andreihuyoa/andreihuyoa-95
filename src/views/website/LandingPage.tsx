@@ -53,12 +53,17 @@ const LandingPreviewSection = ({
       <div className="border-website-border/20 divide-website-border/20 divide-y border-t">
         {rows.map((row) => (
           <Link
-            className="hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group flex items-baseline justify-between gap-6 py-5 text-inherit no-underline max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"
+            className={`hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group gap-6 py-5 text-inherit no-underline ${row.thumbnail || row.thumbnailPlaceholder ? "grid grid-cols-[minmax(0,1fr)_8rem] items-center max-[560px]:grid-cols-[minmax(0,1fr)_5.5rem] max-[560px]:gap-4" : "flex items-baseline justify-between max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"}`}
             key={`${section}-${row.title}`}
             search={{ mode: "website" }}
             to={to}
           >
             <div className="min-w-0 flex-1 max-[760px]:w-full max-[760px]:flex-none">
+              {(row.thumbnail || row.thumbnailPlaceholder) && row.meta ? (
+                <span className="font-website-display text-website-text-muted mb-2 block text-[11px] uppercase">
+                  {row.meta}
+                </span>
+              ) : null}
               <h3 className="group-hover:text-website-interactive m-0 text-[15px] leading-tight font-bold transition-colors duration-200">
                 {row.title}
               </h3>
@@ -66,7 +71,26 @@ const LandingPreviewSection = ({
                 {row.description}
               </p>
             </div>
-            {row.meta ? (
+            {row.thumbnail ? (
+              <span className="bg-website-surface-muted aspect-[3/2] overflow-hidden rounded-sm">
+                <img
+                  src={row.thumbnail}
+                  alt=""
+                  loading="lazy"
+                  width="192"
+                  height="128"
+                  className="h-full w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
+                />
+              </span>
+            ) : row.thumbnailPlaceholder ? (
+              <span
+                className="border-website-border/30 bg-website-surface-muted/10 font-website-display text-website-text-muted flex aspect-[3/2] items-center justify-center rounded-sm border border-dashed text-[10px] tracking-widest"
+                role="img"
+                aria-label={`${row.title} thumbnail placeholder`}
+              >
+                HILOM
+              </span>
+            ) : row.meta ? (
               <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">
                 {row.meta}
               </span>

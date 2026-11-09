@@ -51,6 +51,8 @@ export interface ExperienceItem {
 }
 
 export interface LandingSectionPreviewRow {
+  thumbnail?: string;
+  thumbnailPlaceholder?: boolean;
   title: string;
   description: string;
   meta?: string;
@@ -246,24 +248,28 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
     rows: [
       {
         title: "PH Business Network",
+        thumbnail: "/assets/WebsiteMode/project-thumbnails/phbn.jpg",
         description:
           "Rebuilt the Next.js website frontend for SEO, structure, and maintainable MDX content at Shinka Studios.",
         meta: "work",
       },
       {
         title: "Ditherkit — Photoshop Dithering Plugin",
+        thumbnail: "/assets/WebsiteMode/project-thumbnails/ditherkit.png",
         description:
           "An open source Photoshop plugin with 31 dithering and halftone patterns, palette tools and a live preview.",
         meta: "personal",
       },
       {
         title: "Fig — Personal Link Library",
+        thumbnail: "/assets/WebsiteMode/project-thumbnails/fig.svg",
         description:
           "An iOS-first SwiftUI and SwiftData app for saving, organizing, and returning to links that matter.",
         meta: "personal",
       },
       {
         title: "Hilom — Healthcare Recommendation Model",
+        thumbnailPlaceholder: true,
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
         meta: "personal",
