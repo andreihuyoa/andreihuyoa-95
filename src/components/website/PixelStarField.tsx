@@ -269,16 +269,23 @@ const pixelStars: PixelStar[] = [
   },
 ];
 
+interface PixelStarFieldProps {
+  animated?: boolean;
+}
+
 /**
  * Renders the animated pixel star field behind the website portrait.
  *
  * Each star is composed from simple square spans and animated with Motion
  * keyframes. The hard opacity swaps create a two-frame sprite effect, while
  * scale and drift keyframes add independent twinkling without React state.
+ * The DOM and first sprite frame stay stable when reduced motion is requested.
  */
-export const PixelStarField = (): ReactElement => (
+export const PixelStarField = ({
+  animated = true,
+}: PixelStarFieldProps): ReactElement => (
   <div
-    className="pointer-events-none absolute inset-[-12%] z-0"
+    className="pointer-events-none absolute inset-[-12%] z-0 motion-reduce:hidden"
     aria-hidden="true"
   >
     {pixelStars.map((star, index) => (
@@ -292,63 +299,72 @@ export const PixelStarField = (): ReactElement => (
           width: star.size,
         }}
         animate={{
-          scale: [1, 1 + 3 / star.size, 1],
-          x: [0, star.driftX, 0],
-          y: [0, star.driftY, 0],
+          scale: animated ? [1, 1 + 3 / star.size, 1] : 1,
+          x: animated ? [0, star.driftX, 0] : 0,
+          y: animated ? [0, star.driftY, 0] : 0,
         }}
         transition={{
-          delay: star.delay,
-          duration: star.duration,
+          delay: animated ? star.delay : 0,
+          duration: animated ? star.duration : 0,
           ease: "easeInOut",
-          repeat: Infinity,
+          repeat: animated ? Infinity : 0,
         }}
       >
         <motion.span
           className="bg-website-text-muted absolute top-1/3 left-0 block h-1/3 w-full opacity-35"
           animate={{
-            opacity:
-              star.phase === 0
+            opacity: animated
+              ? star.phase === 0
                 ? [0.35, 0.35, 0, 0, 0.35]
-                : [0, 0, 0.35, 0.35, 0],
+                : [0, 0, 0.35, 0.35, 0]
+              : star.phase === 0
+                ? 0.35
+                : 0,
           }}
           transition={{
-            delay: star.delay,
-            duration: star.duration,
+            delay: animated ? star.delay : 0,
+            duration: animated ? star.duration : 0,
             ease: "linear",
-            repeat: Infinity,
-            times: [0, 0.48, 0.5, 0.98, 1],
+            repeat: animated ? Infinity : 0,
+            times: animated ? [0, 0.48, 0.5, 0.98, 1] : undefined,
           }}
         />
         <motion.span
           className="bg-website-text-muted absolute top-0 left-1/3 block h-full w-1/3 opacity-35"
           animate={{
-            opacity:
-              star.phase === 0
+            opacity: animated
+              ? star.phase === 0
                 ? [0.35, 0.35, 0, 0, 0.35]
-                : [0, 0, 0.35, 0.35, 0],
+                : [0, 0, 0.35, 0.35, 0]
+              : star.phase === 0
+                ? 0.35
+                : 0,
           }}
           transition={{
-            delay: star.delay,
-            duration: star.duration,
+            delay: animated ? star.delay : 0,
+            duration: animated ? star.duration : 0,
             ease: "linear",
-            repeat: Infinity,
-            times: [0, 0.48, 0.5, 0.98, 1],
+            repeat: animated ? Infinity : 0,
+            times: animated ? [0, 0.48, 0.5, 0.98, 1] : undefined,
           }}
         />
         <motion.span
           className="bg-website-text-muted absolute inset-1/3 block opacity-35"
           animate={{
-            opacity:
-              star.phase === 0
+            opacity: animated
+              ? star.phase === 0
                 ? [0, 0, 0.35, 0.35, 0]
-                : [0.35, 0.35, 0, 0, 0.35],
+                : [0.35, 0.35, 0, 0, 0.35]
+              : star.phase === 0
+                ? 0
+                : 0.35,
           }}
           transition={{
-            delay: star.delay,
-            duration: star.duration,
+            delay: animated ? star.delay : 0,
+            duration: animated ? star.duration : 0,
             ease: "linear",
-            repeat: Infinity,
-            times: [0, 0.48, 0.5, 0.98, 1],
+            repeat: animated ? Infinity : 0,
+            times: animated ? [0, 0.48, 0.5, 0.98, 1] : undefined,
           }}
         />
       </motion.span>

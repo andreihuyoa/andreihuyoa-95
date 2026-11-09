@@ -3,6 +3,16 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      animation: {
+        "website-heartbeat": "website-heartbeat 2.4s ease-in-out 1.2s infinite",
+      },
+      keyframes: {
+        "website-heartbeat": {
+          "0%, 20%, 42%, 100%": { transform: "scale(1)" },
+          "10%": { transform: "scale(1.12)" },
+          "30%": { transform: "scale(1.07)" },
+        },
+      },
       colors: {
         //use case, "font-95-gray"
         95: {

@@ -2,6 +2,7 @@ import { getLatestCertifications } from "../lib/certifications";
 import { getContactUrl, getMailtoUrl } from "../utils/links";
 
 export const brandLogo = "/assets/WebsiteMode/andreihuyoa dot.svg";
+export const brandLogoGlyphs = "/assets/WebsiteMode/andreihuyoa-glyphs.svg";
 export const portrait = "/assets/WebsiteMode/grad-pic-dither.png";
 
 export type WebsiteSectionId =

@@ -20,6 +20,8 @@ import type { WebsiteTheme } from "../../utils/websiteTheme";
 import type { WebsiteSectionId } from "../../content/website";
 import { EmailModal } from "./EmailModal";
 import { Separator } from "./Separator";
+import { ComponentReveal } from "./ComponentReveal";
+import { TextReveal } from "./TextReveal";
 
 const sidebarGroupClass =
   "flex w-full flex-col items-start gap-4 max-[760px]:gap-1";
@@ -39,7 +41,8 @@ interface HamburgerMenuProps {
 }
 
 interface SidebarRouteLinkProps {
-  children: ReactNode;
+  children: string;
+  delay?: number;
   icon?: ReactNode;
   onClick: () => void;
   to: `/${WebsiteSectionId}`;
@@ -47,6 +50,7 @@ interface SidebarRouteLinkProps {
 
 const SidebarRouteLink = ({
   children,
+  delay = 0,
   icon,
   onClick,
   to,
@@ -61,8 +65,14 @@ const SidebarRouteLink = ({
     search={{ mode: "website" }}
     to={to}
   >
-    {icon}
-    <span>{children}</span>
+    <ComponentReveal
+      as="span"
+      className="inline-flex items-center gap-2"
+      delay={delay}
+    >
+      {icon}
+      <span>{children}</span>
+    </ComponentReveal>
   </Link>
 );
 
@@ -154,7 +164,9 @@ export const HamburgerMenu = ({
       search={{ mode: "website" }}
       to="/"
     >
-      <WebsiteMonogram />
+      <ComponentReveal as="span" className="inline-flex">
+        <WebsiteMonogram />
+      </ComponentReveal>
     </Link>
   </div>
 );
@@ -242,13 +254,17 @@ export const WebsiteSidebar = ({
               <SidebarRouteLink to="/projects" onClick={onClose}>
                 projects
               </SidebarRouteLink>
-              <SidebarRouteLink to="/experience" onClick={onClose}>
+              <SidebarRouteLink to="/experience" onClick={onClose} delay={0.04}>
                 experience
               </SidebarRouteLink>
-              <SidebarRouteLink to="/certifications" onClick={onClose}>
+              <SidebarRouteLink
+                to="/certifications"
+                onClick={onClose}
+                delay={0.08}
+              >
                 certifications
               </SidebarRouteLink>
-              <SidebarRouteLink to="/stack" onClick={onClose}>
+              <SidebarRouteLink to="/stack" onClick={onClose} delay={0.12}>
                 stack
               </SidebarRouteLink>
             </nav>
@@ -258,6 +274,7 @@ export const WebsiteSidebar = ({
             <div className={sidebarGroupClass}>
               <SidebarRouteLink
                 to="/blogs"
+                delay={0.2}
                 onClick={onClose}
                 icon={<NotebookBrokenIcon aria-hidden="true" size={14} />}
               >
@@ -265,6 +282,7 @@ export const WebsiteSidebar = ({
               </SidebarRouteLink>
               <SidebarRouteLink
                 to="/resources"
+                delay={0.24}
                 onClick={onClose}
                 icon={<CalculatorBrokenIcon aria-hidden="true" size={14} />}
               >
@@ -280,72 +298,84 @@ export const WebsiteSidebar = ({
           >
             <Separator />
             <div className="flex flex-col items-start gap-2">
-              <div
-                className="flex flex-wrap items-start gap-1"
-                aria-label="Display controls"
-              >
-                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center gap-0 rounded-full border p-0.5">
-                  <ThemeButton
-                    icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
-                    isActive={theme === "system"}
-                    isDisabled={themeChangeDisabled}
-                    label="System theme"
-                    onClick={() => onThemeChange("system")}
-                  />
-                  <ThemeButton
-                    icon={<SunBrokenIcon aria-hidden="true" size={16} />}
-                    isActive={theme === "light"}
-                    isDisabled={themeChangeDisabled}
-                    label="Light theme"
-                    onClick={() => onThemeChange("light")}
-                  />
-                  <ThemeButton
-                    icon={<MoonBrokenIcon aria-hidden="true" size={16} />}
-                    isActive={theme === "dark"}
-                    isDisabled={themeChangeDisabled}
-                    label="Dark theme"
-                    onClick={() => onThemeChange("dark")}
-                  />
+              <ComponentReveal className="w-full" delay={0.12}>
+                <div
+                  className="flex flex-wrap items-start gap-1"
+                  aria-label="Display controls"
+                >
+                  <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center gap-0 rounded-full border p-0.5">
+                    <ThemeButton
+                      icon={<MonitorBrokenIcon aria-hidden="true" size={16} />}
+                      isActive={theme === "system"}
+                      isDisabled={themeChangeDisabled}
+                      label="System theme"
+                      onClick={() => onThemeChange("system")}
+                    />
+                    <ThemeButton
+                      icon={<SunBrokenIcon aria-hidden="true" size={16} />}
+                      isActive={theme === "light"}
+                      isDisabled={themeChangeDisabled}
+                      label="Light theme"
+                      onClick={() => onThemeChange("light")}
+                    />
+                    <ThemeButton
+                      icon={<MoonBrokenIcon aria-hidden="true" size={16} />}
+                      isActive={theme === "dark"}
+                      isDisabled={themeChangeDisabled}
+                      label="Dark theme"
+                      onClick={() => onThemeChange("dark")}
+                    />
+                  </div>
+                  <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
+                    <motion.button
+                      className={displayControlButtonClass(false)}
+                      type="button"
+                      aria-label="Windows 95 mode"
+                      title="Windows 95 mode"
+                      whileHover={{ y: -1 }}
+                      whileTap={{ scale: 0.78 }}
+                      onClick={onOsMode}
+                    >
+                      <GlobeBrokenIcon aria-hidden="true" size={16} />
+                    </motion.button>
+                  </div>
+                  <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
+                    <motion.button
+                      className={displayControlButtonClass(false)}
+                      type="button"
+                      aria-label="Sound"
+                      title="Sound — coming soon"
+                      disabled
+                      whileHover={{ y: -1 }}
+                      whileTap={{ scale: 0.78 }}
+                    >
+                      <SoundwaveBrokenIcon aria-hidden="true" size={16} />
+                    </motion.button>
+                  </div>
                 </div>
-                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
-                  <motion.button
-                    className={displayControlButtonClass(false)}
-                    type="button"
-                    aria-label="Windows 95 mode"
-                    title="Windows 95 mode"
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.78 }}
-                    onClick={onOsMode}
-                  >
-                    <GlobeBrokenIcon aria-hidden="true" size={16} />
-                  </motion.button>
-                </div>
-                <div className="bg-website-surface-muted border-website-border/20 flex shrink-0 items-center rounded-full border p-0.5">
-                  <motion.button
-                    className={displayControlButtonClass(false)}
-                    type="button"
-                    aria-label="Sound"
-                    title="Sound — coming soon"
-                    disabled
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.78 }}
-                  >
-                    <SoundwaveBrokenIcon aria-hidden="true" size={16} />
-                  </motion.button>
-                </div>
-              </div>
+              </ComponentReveal>
             </div>
-            <p>For work, collaborations &amp; everything else, reach me at</p>
+            <p>
+              <TextReveal delay={0.18}>
+                For work, collaborations &amp; everything else, reach me at
+              </TextReveal>
+            </p>
             <button
               className="hover:text-website-interactive flex min-h-11 w-fit cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-left text-inherit transition-colors duration-200 hover:[&_span]:underline hover:[&_span]:decoration-dotted hover:[&_span]:underline-offset-4"
               type="button"
               aria-haspopup="dialog"
               onClick={() => setEmailOpen(true)}
             >
-              <MailboxBrokenIcon aria-hidden="true" size={22} />
-              <span className="underline decoration-dotted underline-offset-3">
-                andrei.huyoa.me@gmail.com
-              </span>
+              <ComponentReveal
+                as="span"
+                className="inline-flex items-center gap-1"
+                delay={0.24}
+              >
+                <MailboxBrokenIcon aria-hidden="true" size={22} />
+                <span className="underline decoration-dotted underline-offset-3">
+                  andrei.huyoa.me@gmail.com
+                </span>
+              </ComponentReveal>
             </button>
           </div>
         </div>
