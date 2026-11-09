@@ -18,6 +18,7 @@ import {
   WebsiteProjectsPage,
   WebsiteResourcesPage,
   WebsiteStackPage,
+  WebsiteShopPage,
 } from "./views/website/pages";
 
 interface HomeSearch {
@@ -96,6 +97,12 @@ const resourcesRoute = createRoute({
   component: WebsiteResourcesPage,
 });
 
+const shopRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/shop",
+  component: WebsiteShopPage,
+});
+
 export const routeTree = rootRoute.addChildren([
   landingRoute,
   experienceRoute,
@@ -105,6 +112,7 @@ export const routeTree = rootRoute.addChildren([
   stackRoute,
   blogsLayoutRoute.addChildren([blogsIndexRoute, blogPostRoute]),
   resourcesRoute,
+  shopRoute,
 ]);
 
 /** Creates a browser router or a route-specific memory router for SSG. */

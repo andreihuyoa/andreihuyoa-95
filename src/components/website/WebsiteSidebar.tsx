@@ -267,6 +267,9 @@ export const WebsiteSidebar = ({
               <SidebarRouteLink to="/stack" onClick={onClose} delay={0.12}>
                 stack
               </SidebarRouteLink>
+              <SidebarRouteLink to="/shop" onClick={onClose} delay={0.16}>
+                shop
+              </SidebarRouteLink>
             </nav>
 
             <Separator />

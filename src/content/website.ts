@@ -11,7 +11,8 @@ export type WebsiteSectionId =
   | "certifications"
   | "stack"
   | "blogs"
-  | "resources";
+  | "resources"
+  | "shop";
 
 export interface WebsiteListItem {
   title: string;

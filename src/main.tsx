@@ -16,6 +16,7 @@ const staticRoutes = [
   "/stack",
   "/blogs",
   "/resources",
+  "/shop",
   ...getAllPosts().map((post) => `/blogs/${post.slug}`),
 ];
 
