@@ -59,12 +59,12 @@ const LandingPreviewSection = ({
             delay={Math.min(rowIndex * 0.04, 0.2)}
           >
             <Link
-              className={`hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group gap-6 py-5 text-inherit no-underline ${row.thumbnail || row.thumbnailPlaceholder ? "grid grid-cols-[minmax(0,1fr)_8rem] items-center max-[560px]:grid-cols-[minmax(0,1fr)_5.5rem] max-[560px]:gap-4" : "flex items-baseline justify-between max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"}`}
+              className={`hover:bg-website-surface-soft/80 [[data-theme=dark]_&]:hover:bg-website-surface-soft/20 group gap-6 py-5 text-inherit no-underline ${row.thumbnail ? "grid grid-cols-[minmax(0,1fr)_8rem] items-center max-[560px]:grid-cols-[minmax(0,1fr)_5.5rem] max-[560px]:gap-4" : "flex items-baseline justify-between max-[760px]:flex-col max-[760px]:items-start max-[760px]:gap-2"}`}
               search={{ mode: "website" }}
               to={to}
             >
               <div className="min-w-0 flex-1 max-[760px]:w-full max-[760px]:flex-none">
-                {(row.thumbnail || row.thumbnailPlaceholder) && row.meta ? (
+                {row.thumbnail && row.meta ? (
                   <span className="font-website-display text-website-text-muted mb-2 block text-[11px] uppercase">
                     {row.meta}
                   </span>
@@ -86,14 +86,6 @@ const LandingPreviewSection = ({
                     height="128"
                     className="h-full w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
                   />
-                </span>
-              ) : row.thumbnailPlaceholder ? (
-                <span
-                  className="border-website-border/30 bg-website-surface-muted/10 font-website-display text-website-text-muted flex aspect-[3/2] items-center justify-center rounded-sm border border-dashed text-[10px] tracking-widest"
-                  role="img"
-                  aria-label={`${row.title} thumbnail placeholder`}
-                >
-                  HILOM
                 </span>
               ) : row.meta ? (
                 <span className="font-website-display text-website-text-muted shrink-0 text-xs whitespace-nowrap">

@@ -53,7 +53,6 @@ export interface ExperienceItem {
 
 export interface LandingSectionPreviewRow {
   thumbnail?: string;
-  thumbnailPlaceholder?: boolean;
   title: string;
   description: string;
   meta?: string;
@@ -270,7 +269,7 @@ export const landingSectionPreviews: LandingSectionPreview[] = [
       },
       {
         title: "Hilom — Healthcare Recommendation Model",
-        thumbnailPlaceholder: true,
+        thumbnail: "/assets/WebsiteMode/project-thumbnails/hilom-finder.jpg",
         description:
           "A hybrid healthcare recommendation API using service matching, neural ranking, and Haversine distance.",
         meta: "personal",
