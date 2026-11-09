@@ -88,15 +88,17 @@ const ThemeButton = ({
   label,
   onClick,
 }: ThemeButtonProps): ReactElement => (
-  <motion.button
-    className={displayControlButtonClass(isActive)}
+  <button
+    className={`${displayControlButtonClass(isActive)} motion-safe:transition-[color,translate,scale] ${
+      isActive
+        ? ""
+        : "motion-safe:enabled:hover:-translate-y-px motion-safe:enabled:active:translate-y-0 motion-safe:enabled:active:scale-[0.78]"
+    }`}
     type="button"
     aria-label={label}
     aria-pressed={isActive}
     disabled={isDisabled}
     title={label}
-    whileHover={isDisabled ? undefined : { y: -1 }}
-    whileTap={isDisabled ? undefined : { scale: 0.78 }}
     onClick={onClick}
   >
     {isActive ? (
@@ -109,7 +111,7 @@ const ThemeButton = ({
     <span className="relative z-1 flex items-center justify-center">
       {icon}
     </span>
-  </motion.button>
+  </button>
 );
 
 const WebsiteMonogram = (): ReactElement => (
