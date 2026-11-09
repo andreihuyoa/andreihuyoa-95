@@ -1,16 +1,6 @@
-import {
-  useAnimationControls,
-  useInView,
-  useReducedMotion,
-  motion,
-} from "motion/react";
-import {
-  Fragment,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  type ReactElement,
-} from "react";
+import { motion } from "motion/react";
+import { Fragment, type ReactElement } from "react";
+import { useTextEntrance } from "./useTextEntrance";
 
 interface TextRevealProps {
   children: string;
@@ -18,36 +8,16 @@ interface TextRevealProps {
   delay?: number;
 }
 
-/** Reveals words once; copy stays readable until an observer actually starts its entrance. */
+/** Reveals words when visible while keeping the initial HTML readable. */
 export const TextReveal = ({
   children,
   className,
   delay = 0,
 }: TextRevealProps): ReactElement => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const played = useRef(false);
-  const controls = useAnimationControls();
-  const reduceMotion = useReducedMotion();
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const { ref, controls, reduceMotion } = useTextEntrance<HTMLSpanElement>();
   const parts = children.split(/(\s+)/);
   const count = parts.filter((part) => part.trim()).length;
   let wordIndex = 0;
-
-  useLayoutEffect(() => {
-    controls.set(
-      reduceMotion || played.current || !inView ? "visible" : "hidden",
-    );
-  }, [controls, inView, reduceMotion]);
-
-  useEffect(() => {
-    if (reduceMotion) {
-      played.current = true;
-      controls.set("visible");
-    } else if (inView) {
-      played.current = true;
-      void controls.start("visible");
-    }
-  }, [controls, inView, reduceMotion]);
 
   return (
     <span className={className} ref={ref} data-text-reveal>

@@ -1,12 +1,8 @@
-import {
-  motion,
-  useAnimationControls,
-  useInView,
-  useReducedMotion,
-} from "motion/react";
-import { useEffect, useLayoutEffect, useRef, type ReactElement } from "react";
+import { motion } from "motion/react";
+import type { ReactElement } from "react";
 
 import { brandLogoGlyphs } from "../../content/website";
+import { useTextEntrance } from "./useTextEntrance";
 
 interface AnimatedBrandLogoProps {
   className?: string;
@@ -16,27 +12,7 @@ interface AnimatedBrandLogoProps {
 export const AnimatedBrandLogo = ({
   className,
 }: AnimatedBrandLogoProps): ReactElement => {
-  const ref = useRef<SVGSVGElement>(null);
-  const played = useRef(false);
-  const controls = useAnimationControls();
-  const reduceMotion = useReducedMotion();
-  const inView = useInView(ref, { once: true, amount: 0.2 });
-
-  useLayoutEffect(() => {
-    controls.set(
-      reduceMotion || played.current || !inView ? "visible" : "hidden",
-    );
-  }, [controls, inView, reduceMotion]);
-
-  useEffect(() => {
-    if (reduceMotion) {
-      played.current = true;
-      controls.set("visible");
-    } else if (inView) {
-      played.current = true;
-      void controls.start("visible");
-    }
-  }, [controls, inView, reduceMotion]);
+  const { ref, controls, reduceMotion } = useTextEntrance<SVGSVGElement>();
 
   return (
     <motion.svg

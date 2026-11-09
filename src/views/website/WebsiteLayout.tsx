@@ -7,6 +7,7 @@ import {
   WebsiteSidebar,
 } from "../../components/website/WebsiteSidebar";
 import { ThemePixelTransition } from "../../components/website/ThemePixelTransition";
+import { ThemeTextRevealCycle } from "../../components/website/useTextEntrance";
 import {
   applyWebsiteTheme,
   getSavedWebsiteTheme,
@@ -23,6 +24,7 @@ const WebsiteLayout = (): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [pendingTheme, setPendingTheme] = useState<WebsiteTheme | null>(null);
   const [theme, setTheme] = useState<WebsiteTheme>(getSavedWebsiteTheme);
+  const [textRevealCycle, setTextRevealCycle] = useState(0);
   const [transitionColor, setTransitionColor] = useState("");
   const reduceMotion = useReducedMotion();
   const navigate = useNavigate();
@@ -34,7 +36,10 @@ const WebsiteLayout = (): ReactElement => {
       return;
     }
 
-    return watchSystemTheme(() => applyWebsiteTheme("system"));
+    return watchSystemTheme(() => {
+      applyWebsiteTheme("system");
+      setTextRevealCycle((cycle) => cycle + 1);
+    });
   }, [theme]);
 
   useEffect(
@@ -110,6 +115,7 @@ const WebsiteLayout = (): ReactElement => {
 
     persistWebsiteTheme(pendingTheme);
     setTheme(pendingTheme);
+    setTextRevealCycle((cycle) => cycle + 1);
   };
 
   const handleThemeTransitionComplete = (): void => {
@@ -127,7 +133,7 @@ const WebsiteLayout = (): ReactElement => {
     }
   };
 
-  return (
+  const layout = (
     <main className="bg-website-background font-website-sans text-website-text [&_:is(a,button,input,textarea)]:focus-visible:outline-website-interactive flex h-dvh max-h-dvh flex-col overflow-hidden text-[15px] tracking-[-0.03em] motion-reduce:*:animate-none! motion-reduce:*:scroll-auto! motion-reduce:*:transition-none! max-[760px]:h-auto max-[760px]:max-h-none max-[760px]:min-h-dvh max-[760px]:overflow-visible [&_:is(a,button,input,textarea)]:focus-visible:outline-2 [&_:is(a,button,input,textarea)]:focus-visible:outline-offset-4">
       <a
         className="bg-website-background text-website-text sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:rounded-sm focus:px-4 focus:py-3"
@@ -169,6 +175,12 @@ const WebsiteLayout = (): ReactElement => {
         </div>
       </div>
     </main>
+  );
+
+  return (
+    <ThemeTextRevealCycle value={textRevealCycle}>
+      {layout}
+    </ThemeTextRevealCycle>
   );
 };
 
