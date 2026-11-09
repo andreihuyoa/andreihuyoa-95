@@ -7,7 +7,6 @@ const ig = "/assets/StartMenu/Instagram.svg";
 const git = "/assets/StartMenu/Github.svg";
 const linkedin = "/assets/StartMenu/Linkedin.svg";
 const website = "/assets/WinIcons/switch.png";
-// const project1 = "/assets/StartMenu/Lokalista.svg";
 
 interface StartMenuProps {
   isOpen: boolean;
@@ -68,7 +67,6 @@ const StartMenu = ({
           />
           <span className="first-letter:underline">Website</span>
         </button>
-        {/* <SocialsButton icon={project1} link="" text="Lokalista" /> */}
       </div>
     </div>
   );

@@ -35,7 +35,6 @@ export default {
           border: "var(--website-border)",
           "border-strong": "var(--website-border-strong)",
           green: "var(--website-green)",
-          "green-dot": "var(--website-green-dot)",
           "green-soft": "var(--website-green-soft)",
         },
         // Ditherkit project page only (docs/ditherkit-design-system.md)
@@ -60,7 +59,6 @@ export default {
       },
       fontFamily: {
         MS95: ["msw", "sans-serif"],
-        msdonchia: ["msdon", "sans-serif"],
         "website-sans": [
           '"Instrument Sans"',
           "ui-sans-serif",
